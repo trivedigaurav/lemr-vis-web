@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>LEMR NLP Web</title>
+
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
+  <link rel="stylesheet" href="css/app.css"/>
+  <link rel="stylesheet" type="text/css" href="css/wordtree-style.css">
+  
+  <style type="text/css">
+    /**
+     * Hide when Angular is not yet loaded and initialized
+     */
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+      display: none !important;
+    }
+  </style>
+
+</head>
+
+<body class="ng-cloak" ng-controller="appCtrl" ui-keypress="{'right':'keypressCallback($event, false)', 'left':'keypressCallback($event, true)'}">
+
+<!--   <div ng-show="appDisabled" class="coverall">
+  </div> -->
+
+  <!-- <div ng-if="!active.username" class="coverall" id="login">
+    <div class="col-md-4 col-md-offset-4" id="login-box-container">
+      <div class="panel panel-default" id="login-box">
+        <div class="panel-heading"><h3 class="panel-title"><strong>Sign In </strong></h3></div>
+        <div class="panel-body">
+          <form role="form" ng-submit="doLogin()">
+            <div class="form-group">
+              <label for="input-username">Username</label>
+              <input type="text" class="form-control" placeholder="Enter username" id="input-username" required>
+            </div>
+            <div class="form-group">
+              <label for="input-password">Password</label>
+              <input type="password" class="form-control" placeholder="Password" id="input-password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  
+  <div ng-show="loaderCount > 0" id="appLoading" class="alert alert-warning appNotice">
+    <strong>Loading!</strong> Please wait.
+  </div>
+
+  <header class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar-header">
+      <a class="navbar-brand visible-xs">EMR VisWeb</a>
+    </div>
+    <nav class="hidden-xs">
+      <ul class="nav navbar-nav" id="main-menu">
+        <a href="#top" role="button" class="navbar-brand" ng-click="modal.toggle()">
+          EMR VisWeb
+        </a>
+        <li ng-click="modal.toggle()">
+          <a class="dropdown-toggle">DATASET <i class="glyphicon glyphicon-chevron-down"></i></a> 
+          <span class="animated">{{active.dataset | truncate:15}}</span> 
+        </li>
+        <li ng-click="modal.toggle()">
+          <a class="dropdown-toggle">MODEL <i class="glyphicon glyphicon-chevron-down"></i></a> 
+          <span>{{active.model | truncate:15}}</span>
+        </li>
+        <li>
+            <form class="navbar-form navbar-left input-group filter-docs" role="search">
+                <span class="input-group-addon">Doc #</span>
+                <input class="form-control search-input" 
+                      ng-class="{'search-input-active': searchQuery}"
+                      placeholder="Filter docs&hellip;" type="search" 
+                      ng-model="searchQuery" ng-blur="loadVarStats(active.variable)"/>
+                <span ng-class="{'search-input-active': searchQuery}" class="input-group-addon search-clear-addon">
+                  <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="setSearchFilter(null)"></i>
+                </span>
+            </form>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a ng-click="doLogout()" ng-disabled="loaderCount != 0"><i class="glyphicon glyphicon-log-out ng-scope"></i> Logout &nbsp;</a>
+        </li>
+      </ul>
+
+      <div collapse="modal.isCollapsed" id="modal">
+        <div class="list">
+          <h5>Select Dataset</h5>
+          <p ng-hide="datasetList.length" class="empty-list">None</p>
+          <ul>
+            <li ng-repeat="dataset in datasetList" 
+                ng-class="{selected: modal.selectedDataset == dataset.name}" 
+                ng-click="modal.selectedDataset = dataset.name">
+                {{dataset.name | truncate:20}}
+            </li>
+          </ul>
+        </div>
+        <div class="list">
+          <h5>Select Model</h5>
+          <p ng-hide="modelList.length" class="empty-list">None</p>
+          <ul>
+            <li ng-repeat="model in modelList" 
+                ng-class="{selected: modal.selectedModel == model.name}" 
+                ng-click="modal.selectedModel = model.name">
+                {{model.name | truncate:20}}
+            </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+            <!-- <p class="small pull-left text-left">
+              <a href="#resetDB" confirm-click="This will reset all models. This action doesn't have any undo. Do you wish to continue?" on-confirm-click="resetDB()">Restart with initial training</a> <br />
+              <a href="#resetDBEmpty" confirm-click="This will reset all models. This action doesn't have any undo. Do you wish to continue?" on-confirm-click="resetDB(true)">Restart with zero training</a>
+            </p> -->
+            <button class="btn btn-default" ng-click="modal.toggle()">Cancel</button>
+            <button class="btn btn-primary" ng-click="modal.confirm()">Load</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+<!-- Main container starts here. -->
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- Sidebar -->
+
+      <div class="sidebar">
+        <div id="sidebar-resize-indicator"></div>
+
+        <!-- Grid -->
+        <div id="sidebar-top" class="unselectable">
+          <div id="tablecontainer">
+            <div id="topbar">
+              <div tooltip-placement="right" tooltip-animation="false" tooltip="document identifier" class="colname cellwidth_id">
+                <div class="progress">
+                </div>
+                <a ng-show="active.sort.variable == 'id' && !active.sort.reverse" href="#sort" class="glyphicon glyphicon-arrow-up grid-sort" ng-click="sortGridObject(null, true)"></a>
+                <a ng-show="active.sort.variable == 'id' && active.sort.reverse" href="#sort" class="glyphicon glyphicon-arrow-down grid-sort" ng-click="sortGridObject(null, false)"></a>
+                <a class="rotate" href="#sort"
+                sglclick="sortGridObject()" ng-dblclick="sortGridObject(null, true)"><div>doc #</div></a>
+              </div>
+              <div class="colname cellwidth_var" 
+                  ng-repeat="var in $root.config.variables" 
+                  tooltip="{{feedbackStats[var].length / gridData.length * 100 | number:2}}% labeled for {{$root.config.variableMapping[var]}}" 
+                  tooltip-placement="{{$index > 6 ? 'left' : 'right'}}"
+                  tooltip-animation="false">
+                    <div class="progress">
+                      <div class="progress-bar feedback-progress" style="width: {{feedbackStats[var].length / gridData.length * 100}}%"></div>
+                      <!-- <div class="progress-bar negative" style="width: {{variableData[var]['percNegative']}}%"></div> -->
+                    </div>
+                    <a ng-show="active.sort.variable == var && !active.sort.reverse" href="#sort" class="glyphicon glyphicon-arrow-up grid-sort" ng-click="sortGridObject(var, true)"></a>
+                    <a ng-show="active.sort.variable == var && active.sort.reverse" href="#sort" class="glyphicon glyphicon-arrow-down grid-sort" ng-click="sortGridObject(var, false)"></a>
+                    <a class="rotate" href="#sort" sglclick= "sortGridObject(var)" ng-dblclick="sortGridObject(var, true)"><div>{{$root.config.variableMapping[var]}}</div></a>
+              </div>
+            </div>
+            <div class="sidebar-separator breakline resizable" horizontal-splitter>
+              <div class="handle"></div>
+            </div>
+            <div id="grid-table">
+              <div class="divrow ng-cloak" 
+                  ng-repeat="doc in gridData track by doc.id" 
+                  ng-if="checkFilter($index, doc.id)"
+                  >
+                    <div class="divcell cellwidth_id">{{doc.id}}</div>
+                    <div class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}} custom-tooltip-bottom"  
+                        ng-repeat="var in $root.config.variables" 
+                        ng-click="updateGrid(var, $parent.$index)" 
+                        ng-class="{selected: $parent.$index==active.docIndex && var==active.variable}" 
+                        data-custom-tooltip="{{doc[var].confidence}}" 
+                        cell-modified="doc[var].classification"
+                        >
+                      
+                      <div class="cell-feedback" ng-if="trackFeedback[doc.id][var]"></div>
+                      
+                      {{$root.config.classificationName[ doc[var].classification ]}}
+
+                      <span class="cell-visited glyphicon glyphicon-asterisk" ng-class="{hidden: trackVisited[doc.id][var] != true}"></span>
+                      <!-- <span class="cellfeedback glyphicon glyphicon-pencil" ng-class="{hidden: trackFeedback[$parent.$index][var] != true}"></span> -->
+                    </div>
+              </div>
+            </div>
+          </div>
+          <div ng-show="searchQuery" id="grid-filter-info">
+            Showing {{active.gridCount}} of {{gridData.length}} documents. <span ng-click="setSearchFilter(null)" id="grid-filter-clear"> Clear filter</span>
+          </div>
+        </div>  
+
+        <div class="sidebar-separator resizable" horizontal-splitter>
+          <div class="handle"></div>
+        </div>
+
+        <div id="sidebar-bottom">
+
+          <div class="row" id="sidebar-bottom-top">
+            <!-- WordTree view -->
+            <div class="col-md-4" id="wordtree-search">
+              <form class="input-group form-group" id="wordtree-search" ng-submit="loadWordTree()">
+                
+                <!-- <span class="input-group-addon">
+                  Variable &nbsp;
+                  <select ng-model="active.variable"
+                  ng-options="$root.config.variableMapping[var] for var in $root.config.variables"
+                  ng-change="updateWordTreeClass()"
+                  ></select>
+                </span> -->
+
+                <input type="text" id="wordtree-input" class="search-input form-control " placeholder="WordTree search&hellip;" required>
+
+                <span class="input-group-addon search-clear-addon">
+                  <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="clearWordTree()"></i>
+                </span>
+
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-default">Show</button>
+                </span>
+
+
+              </form>
+
+            </div>
+
+            <div class="col-md-8">
+                <!-- Wordtree Feedback -->
+                <div ng-if="tabs.wordTreeView && wordTreeData.feedbackText" class="alert alert-warning wordtree-feedback">
+                  <span>
+                    <strong tooltip-placement="bottom" tooltip="{{wordTreeData.feedbackText}}">"{{wordTreeData.feedbackText|truncate:12}}"</strong> indicates 
+                    <select ng-model="active.variable" 
+                            ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
+                            ng-change="updateWordTreeClass()"></select> 
+                    to be: 
+                      <a href="#" ng-click="addWordTreeFeedback('positive')">{{$root.config.classificationName['positive']}}</a> | 
+                      <a href="#" ng-click="addWordTreeFeedback('negative')">{{$root.config.classificationName['negative']}}</a>
+                      &nbsp; <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="clearWordTree()"></i>
+                  </span>
+                </div>
+                <alert ng-if="!tabs.wordTreeView && !wordTreeData.feedbackText" type="default" class="alert alert-info wordtree-feedback">
+                    <span class="glyphicon glyphicon-arrow-left"></span> &nbsp;
+                    <em>Tip:</em> Use WordTree to explore common phrases and give feedback. 
+                </alert>
+            </div>
+
+          </div>
+
+          <!-- Variable details -->
+          <div id="wordtree-popup" ng-class="{'wordtree-popup-overlay': wordTreeFullscreenButton}">
+          </div>
+          <div ng-if="tabs.wordTreeView" id="wordtree-view" 
+            ng-class="{'wordtree-view-overlay': wordTreeFullscreenButton}">
+              <div id="wordtree-container" class="wordtree-container-class">
+                <p id="wordtree-empty">
+                  Loading wordtree&hellip;
+                </p>
+              </div>
+          </div>
+          <div id="wordtree-about"
+                ng-show="wordTreeData.matches && tabs.wordTreeView" 
+                ng-class="{'wordtree-about-overlay': wordTreeFullscreenButton}">
+                <button id="wordtree-fullscreen-button" type="button" class="btn btn-xs btn-default" btn-checkbox
+                        ng-model="singleModel"  
+                        ng-click="toggleWordTreeFullscreen()" 
+                        ng-class="{'wordtree-fullscreen-button-overlay': wordTreeFullscreenButton}">
+                        <span class="glyphicon glyphicon-fullscreen"></span>
+                </button>
+                <span id="wordtree-about-info">
+                  <!-- Documents: <strong>{{wordTreeData.percentage}}% ({{wordTreeData.matches}} of {{wordTreeData.total}}) </strong> -->
+                </span>
+          </div>
+
+          <div ng-if="!tabs.wordTreeView" id="sidebar-bottom-left">
+
+            <div class="about unselectable">Variable: <strong>{{$root.config.variableMapping[active.variable]}}</strong></div>
+            <div class="content">
+              <div id="keywords">
+                <h6>{{$root.config.classificationName["positive"]}} indicators</h6>
+                <p ng-hide="varStats.topPositive.length" class="empty-list">None</p>
+                <ol>
+                  <li class="positive clickable" style="width:{{keyword.weight*100}}%;" 
+                      ng-repeat="keyword in varStats.topPositive | limitTo: 5" 
+                      scroll-to-bookmark="{{keyword.term}}">
+                      {{keyword.term}}&nbsp; <span class="d3-tip">({{keyword.weight}})</span>
+                  </li>
+                </ol>
+
+                <h6>{{$root.config.classificationName["negative"]}} indicators</h6>
+                <p ng-hide="varStats.topNegative.length" class="empty-list">None</p>
+                <ol>
+                  <li class="negative clickable" style="width:{{keyword.weight*100}}%;" 
+                      ng-repeat="keyword in varStats.topNegative | limitTo: 5" 
+                      scroll-to-bookmark="{{keyword.term}}">
+                      {{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span>
+                  </li>
+                </ol>
+              </div>
+              <div id="distribution">
+                <h6>Distribution</h6>
+                <p ng-hide="distData" class="empty-list">None</p>
+                <d3-distchart ng-show="distData" data='distData'></d3-distchart>
+              </div>
+            </div>
+          </div>
+
+          <!-- Report details -->
+          <div ng-if="!tabs.wordTreeView" id="sidebar-bottom-right">
+            <div class="about unselectable">Doc: <strong>#{{gridData[active.docIndex].id}}</strong></div>
+            <div class="content">
+              <h6>{{$root.config.classificationName["positive"]}} indicators</h6>
+              <p ng-hide="gridData[active.docIndex][active.variable].topPositive.length" class="empty-list">None</p>
+              <ol>
+                <li class="positive clickable" style="width:{{keyword.weight*100}}%;" 
+                    ng-repeat="keyword in gridData[active.docIndex][active.variable].topPositive"  
+                    scroll-to-bookmark="{{keyword.term}}">
+                    {{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span>
+                </li>
+              </ol>
+
+              <h6>{{$root.config.classificationName["negative"]}} indicators</h6>
+              <p ng-hide="gridData[active.docIndex][active.variable].topNegative.length" class="empty-list">None</p>
+              <ol>
+                <li class="negative clickable" style="width:{{keyword.weight*100}}%;" 
+                    ng-repeat="keyword in gridData[active.docIndex][active.variable].topNegative" 
+                    scroll-to-bookmark="{{keyword.term}}" >
+                    {{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Document views -->
+      <div class="main">
+        <div id="doc-navigator">
+          <a tooltip-placement="bottom" tooltip-animation="false" tooltip="Previous" href="#prev" class="glyphicon glyphicon-chevron-left" ng-click="gotoNextDoc(true)"></a>
+          <a tooltip-placement="bottom" tooltip-animation="false" tooltip="Next" href="#next" class="glyphicon glyphicon-chevron-right" ng-click="gotoNextDoc()"></a>
+        </div>
+        <!-- Feedback -->
+        <div ng-if="tabs.docView && records.report.exists" class="alert alert-warning report-feedback">
+          <span ng-if="appInfo">
+            {{appInfo}}
+          </span>
+          <span ng-if="!appInfo">
+            <span ng-if="feedbackText">
+              <strong tooltip-placement="bottom" tooltip="{{feedbackText}}">"{{feedbackText|truncate:20}}"</strong> indicates 
+              <select ng-model="active.variable" 
+                      ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
+                      ng-change="updateGrid(active.variable, active.docIndex)">
+              </select> 
+              to be: 
+                <a ng-click="addFeedbackText('positive')">{{$root.config.classificationName['positive']}}</a> | 
+                <a ng-click="addFeedbackText('negative')">{{$root.config.classificationName['negative']}}</a>
+            </span>
+            <span ng-if="!feedbackText">
+              <select ng-model="active.variable" 
+                      ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
+                      ng-change="updateGrid(active.variable, active.docIndex)"></select> 
+              is marked as <strong>{{$root.config.classificationName[ gridData[active.docIndex][active.variable].classification ] | lowercase}}</strong> 
+              for #{{gridData[active.docIndex].id}}. 
+              Label it: 
+                <a ng-click="addFeedbackDoc('positive')">{{$root.config.classificationName['positive']}}</a> | 
+                <a ng-click="addFeedbackDoc('negative')">{{$root.config.classificationName['negative']}}</a></span>
+          </span>
+        </div>
+        <tabset>
+
+          <!-- Report view -->
+          <tab active="tabs.docView" heading="Document View">
+            <div class="tab-inner-content">
+              <div ng-show="records.pathology.exists" class="pagerview">
+                <div class="pagerview-row">
+                    <div class="pagerview-step">
+                        <button type="button" scroll-to-bookmark="records.report.text" class="btn btn-default btn-circle">1</button>
+                        <p class="clickable" scroll-to-bookmark="records.report.text">Report</p>
+                    </div>
+                    <div class="pagerview-step">
+                        <button type="button" scroll-to-bookmark="records.pathology.text" class="btn btn-default btn-circle">2</button>
+                        <p class="clickable" scroll-to-bookmark="records.pathology.text">Pathology</p>
+                    </div>
+                </div>
+              </div>
+              
+              <div scroll-bookmark="records.report.text" ng-mouseup="setFeedbackText()" ng-if="records.report.exists" id="emr-report" class="report">
+                <div class="info unselectable">
+                  <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
+                  <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[active.docIndex].id}}/report.txt">
+                    <strong class="file-name js-selectable-text">Report: #{{gridData[active.docIndex].id}}</strong>
+                  </a>
+                  <!-- <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a> -->
+                  <span class="pull-right">
+                      Variable&nbsp;
+                      <select ng-model="active.variable" ng-options="$root.config.variableMapping[var] for var in $root.config.variables"></select> 
+                  </span>
+                </div>
+                <span ng-context-menu="documentContextMenu">
+                  <pre>
+                    
+                      <highlighted-report data='records.report.text' 
+                                        pos-terms='gridData[active.docIndex][active.variable].topPositive' 
+                                        neg-terms='gridData[active.docIndex][active.variable].topNegative'>
+                      </highlighted-report>
+                  </pre>
+                </span>
+              </div>
+            </div>
+            <div scroll-bookmark="records.pathology.text" ng-mouseup="setFeedbackText()" ng-if="records.pathology.exists" id="emr-pathology" class="report">
+              <div class="info unselectable">
+                <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
+                <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[active.docIndex].id}}/pathology.txt"> 
+                  <strong class="file-name js-selectable-text">Pathology: #{{gridData[active.docIndex].id}}</strong>
+                </a>
+                <!-- <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a> -->
+                <!-- <span class="pull-right">
+                  Variable 
+                  <select ng-model="active.variable" ng-options="$root.config.variableMapping[var] for var in $root.config.variables"></select> 
+                </span> -->
+              </div>
+              <span ng-context-menu="documentContextMenu">
+                <pre>
+                  <highlighted-report data='records.pathology.text' 
+                                    pos-terms='gridData[active.docIndex][active.variable].topPositive' 
+                                    neg-terms='gridData[active.docIndex][active.variable].topNegative'>
+                  </highlighted-report>
+                </pre>
+              </span>
+            </div>
+          </tab>
+
+          <!-- Retrain view -->
+          <tab>
+            <tab-heading>
+              <i class="glyphicon glyphicon-refresh"></i> Re-Train &nbsp;<span ng-if="feedbackList.length > 0" class="badge alert-info pull-right animated bounceIn"> {{feedbackList.length}} </span>
+            </tab-heading>
+            <div class="tab-inner-content">
+              <!-- <span class="pull-right">
+                <a href="#clear-tracks" on-confirm-click="clearVisited()" confirm-click="Do you wish to remove all document visited markers (*) from the grid?">Mark all documents as unread</a> | 
+                <a href="#clear-modified" on-confirm-click="clearModified()" confirm-click="Do you wish to clear all bolded change markers from the grid?">Remove bolded change markers</a>
+              </span> -->
+
+              <h4>Feedback List</h4>
+              <div id="feedbackList">
+                <p ng-hide="feedbackList.length">Feedback list is empty.</p>
+                
+                <alert ng-repeat="feedback in feedbackList" type="default" close="removeFeedback($index)">
+                  <span ng-class="{'danger-text': feedback.conflictList.length, 'warning-text': feedback.status == 'Warning'}">
+                    <strong>{{$index + 1}}.</strong>
+                    <span ng-if="feedback.kind == 'TYPE_DOC'">
+                      <a href="#" ng-click="updateGridId(feedback.variable, feedback.docList)">#{{feedback.docList}}</a> should have 
+                      <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> 
+                      marked as <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong>.
+                    </span>
+                    <span ng-if="feedback.kind == 'TYPE_TEXT'">
+                      "<em>{{feedback.selected}}</em>" indicates 
+                      <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> 
+                      to be <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong> in <a href="#" ng-click="updateGridId(feedback.variable, feedback.docList)">#{{feedback.docList}}</a>.
+                    </span>
+                    <span ng-if="feedback.kind == 'TYPE_WORDTREE'">
+                      "<em>{{feedback.selected}}</em>" indicates 
+                      <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> 
+                      to be <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong> (<a href="#" ng-click="searchWordTree(feedback.span)">{{feedback.docList.length}}</a> doc).
+                    </span>
+                  </span>
+                </alert>
+                
+                <div class="form-horizontal" ng-show="feedbackList.length">
+                  <button class="btn btn-default"
+                          on-confirm-click="clearFeedback()" confirm-click="Do you wish to clear all feedback?">
+                    <i class="glyphicon glyphicon-trash"> </i> Clear All
+                  </button>
+                  <button class="btn btn-primary" 
+                          ng-click="confirmFeedback(false)" >
+                          <i class="glyphicon glyphicon-refresh"> </i> Re-Train
+                  </button>
+                </div>
+              </div>
+
+              <div ng-show="retrainData.message || retrainData.loading">
+                <hr />
+                <h4>Training Results</h4>
+                <p ng-show="retrainData.loading">
+                  <span><i class='glyphicon glyphicon-refresh spin'></i></span> 
+                  Re-training models. Please wait.
+                </p>
+                <div ng-hide="retrainData.loading">
+                    
+                  <span ng-show="retrainData.status=='OK'">
+                    <p class="bs-callout bs-callout-success">
+                      <span class="glyphicon glyphicon-ok"></span>
+                      Retraining successful! Now using <strong>{{retrainData.message}}</strong>
+                    </p>
+                    <p>It includes the following feedback:</p>
+                    <ol>
+                      <li ng-repeat="feedback in retrainData.feedbackList">
+                        <span ng-if="feedback.kind == 'TYPE_DOC'">
+                          #{{feedback.docList}} should have 
+                          <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> 
+                          marked as <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong>.</span>
+                        <span ng-if="feedback.kind == 'TYPE_TEXT' || feedback.kind == 'TYPE_WORDTREE'">
+                          "<em>{{feedback.selected}}</em>" indicates 
+                          <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> 
+                          to be <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong>.
+                        </span>
+                      </li>
+                    </ol>
+                  </span>
+
+                  <span ng-show="retrainData.status=='Error'">
+                  
+                    <p>
+                      <span class="glyphicon glyphicon-remove" ></span>
+                      You have conflicting labels in your current set of feedback:
+                    </p>
+
+                    <p ng-repeat="error in retrainData.message" class="bs-callout bs-callout-danger">
+                      <span ng-if="error.type == 'errorDoc'">
+                        Cannot set <em>{{$root.config.variableMapping[error.variable]}}</em> to be both true and false in Doc <strong>#{{error.docId}}</strong>!
+                      </span>
+                      <span ng-if="error.type == 'errorDocSpan'">
+                        Cannot set <em>{{$root.config.variableMapping[error.variable]}}</em> to be both true and false (using "<span tooltip="{{error.span1}}">{{error.span1 | truncate:15}}</span>") in Doc <strong>#{{error.docId}}</strong>!
+                      </span>
+                      <span ng-if="error.type == 'errorSpanSpan'">
+                        Cannot set <em>{{$root.config.variableMapping[error.variable]}}</em> to be both true and false (using "<span tooltip="{{error.span1}}">{{error.span1 | truncate:15}}" and "{{error.span2 | truncate:15}}</span>") in Doc <strong>#{{error.docId}}</strong>!
+                      </span>
+                    </p>
+                    
+
+                    <p>Try re-training after making the feedback list consistent. Use the <strong>&times;</strong> button next to a feedback to remove it.</p>
+
+                  </span>
+
+                  <span ng-show="retrainData.status=='Fail'">
+                  
+                    <p>
+                      <span class="glyphicon glyphicon-remove" ></span>
+                      Couldn't complete retraining!
+                    </p>
+
+                  </span>
+
+                  <span ng-show="retrainData.status=='Warning'">
+                    <p>
+                      <span class="glyphicon glyphicon-remove"></span>
+                      Your feedback contradicts your previously submitted labels:
+                    </p>
+
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                        <th>#</th>
+                        <th>Doc #</th>
+                        <th>Variable</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="warning in retrainData.message" class="bs-callout bs-callout-warning">
+                          <td>{{$index+1}}.</td>
+                          <td><a href="#" ng-click="updateGridId(warning.variable, warning.docId)">{{warning.docId}}</a></td>
+                          <td><em>{{$root.config.variableMapping[warning.variable]}}</em></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <p>You may use the <strong>×</strong> button next to a feedback to remove it and fix the feedback list before re-training. Otherwise, you may also choose to override them with your new feedback:</p>
+
+                    <div class="form-horizontal">
+                      <button class="btn btn-danger" 
+                              ng-click="confirmFeedback(true)"> 
+                              <i class="glyphicon glyphicon-exclamation-sign"> </i> Override 
+                      </button>
+                    </div>
+                  
+                  </span>
+
+                </div>
+              </div>
+
+            </div>
+          </tab>
+        </tabset>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <!-- Do not change the order -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/d3/d3.min.js"></script>
+  <script src="bower_components/jquery.scrollTo/jquery.scrollTo.min.js"></script>
+  <script src="bower_components/rangy-official/rangy-core.min.js"></script>
+  <script src="bower_components/rangy-official/rangy-textrange.min.js"></script>
+  <script src="bower_components/rangy-official/rangy-classapplier.min.js"></script>
+  <script src="bower_components/angular-ui-utils/keypress.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+  <script src="js/report-highlight.js"></script>
+  <script src="js/jquery-routines.js"></script>
+  <!-- After angular controllers -->
+  <script src="js/wordtree-controller.js"></script> 
+  <script src="js/wordtree-layout.js"></script> 
+</body>
+</html>
+  

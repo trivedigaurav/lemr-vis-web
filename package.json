@@ -1,0 +1,21 @@
+{
+  "name": "lemr-vis-web",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Web port of emr-vis-nlp",
+  "devDependencies": {
+    "bower": "^1.3.1",
+    "grunt": "~0.4.5",
+    "grunt-cli": "~0.1.13",
+    "grunt-replace": "^0.7.8"
+  },
+  "config": {
+    "backend": "",
+    "appFolder": "app"
+  },
+  "scripts": {
+    "postinstall": "bower install && npm start",
+    "start": "grunt",
+    "poststart": "echo \"App ready for deployment!\"",
+  }
+}
