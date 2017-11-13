@@ -10,7 +10,7 @@ module.exports = function (grunt) {
           patterns: [
             {
               match: 'backEndApp',
-              replacement: backend + "/rest/server"
+              replacement: backend + "http://localhost:10000"
             }
           ]
         },
