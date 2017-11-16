@@ -31,17 +31,11 @@ To get started, install the pre-requisites and then clone emr-vis-web as describ
 
 1. Make sure you have [node.js][node] installed. 
 
-2. We have preconfigured `npm` to automatically run `bower` and `grunt`. So all you need to do is:
+2. Run the install script:
 
     ```
-    npm install
+    yarn install
     ```
-    
-    This would run the following steps:
-    
-    * Get the tools we depend upon via `npm` - the [node package manager][npm].
-    * Download the angular code and javascript dependencies via `bower` - a [client-side code package manager][bower].
-    * And set the config variables using `grunt` - a [javascript task runner][grunt].
 
 3. (Skip this step to leave default settings as it is.) 
    In case you need to change the backend service's path, edit the `config.backend` variable in _package.json_ **or**  use the following commands:

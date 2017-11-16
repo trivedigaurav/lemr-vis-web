@@ -581,7 +581,7 @@ body {
 }
 
 .report pre {
-    height: calc(100vh - 135px);
+    height: calc(100vh - 160px);
     overflow: scroll;
     border: 0;
     background-color: white;
@@ -603,7 +603,7 @@ body {
   padding: 0 .5em;
   margin-right: .5em;
   color: #888;
-  width: 35px;
+  width: 56px;
   text-align: right;
 }
 
@@ -872,4 +872,8 @@ body {
 
 #doc-navigator a:hover{
     text-decoration: none;
+}
+
+.annotator-controls{
+  line-height: 0;
 }

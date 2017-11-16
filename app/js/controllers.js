@@ -78,7 +78,7 @@ angular.module('myApp.controllers', [])
             }
         }
 
-        backend.getReport("1").then(function(data) {
+        backend.getReport("317642").then(function(data) {
             $scope.records.report.text = data.reportText;
             $scope.records.report.exists = true;
         }, function() {
@@ -97,41 +97,41 @@ angular.module('myApp.controllers', [])
          * Feedback Context Menu
          */
 
-        $scope.setFeedbackText = function(){
-            var selection = rangy.getSelection();
+        // $scope.setFeedbackText = function(){
+        //     var selection = rangy.getSelection();
 
-            if(!selection.isCollapsed) {
-                    selection.expand("word");
+        //     if(!selection.isCollapsed) {
+        //             selection.expand("word");
 
-                    var text = selection.toString().trim();
+        //             var text = selection.toString().trim();
 
-                    if (text) {
-                        $scope.feedbackText = text;
-                        return;
-                    }
-            }
-            else{
-                $scope.feedbackText = null;
-            }
-        };
+        //             if (text) {
+        //                 $scope.feedbackText = text;
+        //                 return;
+        //             }
+        //     }
+        //     else{
+        //         $scope.feedbackText = null;
+        //     }
+        // };
 
-        $scope.documentContextMenu = function() {
-            var options = []
+        // $scope.documentContextMenu = function() {
+        //     var options = []
 
-            if($scope.feedbackText){
-                options = [
-                    ["Important", function () {
-                        feedbackFunction('positive');
-                    }],
-                    null,
-                    ["Not important", function () {
-                        feedbackFunction('negative');
-                    }]
-                ];
-            }
+        //     if($scope.feedbackText){
+        //         options = [
+        //             ["Important", function () {
+        //                 feedbackFunction('positive');
+        //             }],
+        //             null,
+        //             ["Not important", function () {
+        //                 feedbackFunction('negative');
+        //             }]
+        //         ];
+        //     }
 
-            return options;
-        };
+        //     return options;
+        // };
 
 
         /*

@@ -79,6 +79,9 @@ angular.module('myApp.directives', [])
         link: function (scope, element, attrs) {
 
                 scope.highlightTerms = function() {
+
+                    if(!scope.data)
+                        return
                 
                     element.text(scope.data.replace(/</g,' &lt; ')
                                     .replace(/>/g,' &gt; '));
@@ -99,6 +102,53 @@ angular.module('myApp.directives', [])
                     element.html('<code> ' + element.html()
                                     .split('\n')
                                     .join(' </code>\n<code> ') + ' </code>');
+
+                    //Initialize annotator
+                    var options = {};
+                    
+                    var annotator = angular.element(element).annotator(options).data('annotator');
+                    // annotator.addPlugin('Unsupported');
+
+                    // annotator.addPlugin('Tags');
+                        
+                    // annotator.addPlugin('Permissions', permissionsOptions);
+                
+                    // var storeOptions = scope.$eval(attrs.annotatorStore);
+                    // annotator.addPlugin('Store', storeOptions);
+                    // var filterOptions = scope.$eval(attrs.annotatorFilter);
+                    // annotator.addPlugin('Filter', filterOptions);
+                    // var authOptions = scope.$eval(attrs.annotatorAuth);
+                    // annotator.addPlugin('Auth', authOptions);
+
+                    // annotator.addPlugin('Markdown');
+
+                    if(attrs.annotatorPlugins){
+                        var pluginList = scope.$eval(attrs.annotatorPlugins);
+                        if(pluginList instanceof Array){
+                            for(var i=0; i<pluginList.length; i++){
+                                var plugin = pluginList[i];
+
+
+                                var pluginName = null;
+                                var pluginOptions = null;
+                                if(typeof plugin === 'object'){
+                                    pluginName = plugin.name;
+                                    pluginOptions = plugin.options;
+                                }else if(typeof plugin === 'string'){
+                                    pluginName = plugin;
+                                }
+                                if(pluginName){
+                                    if(!pluginOptions){
+                                        annotator.addPlugin(pluginName)
+                                    }else{
+                                        annotator.addPlugin(pluginName, pluginOptions);
+                                    }
+
+                                }
+
+                            }
+                        }
+                    }
 
                 };
         
