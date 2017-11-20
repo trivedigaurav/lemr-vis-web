@@ -589,6 +589,7 @@ body {
     line-height: 0rem;
     font-family: monospace;
     counter-reset: line;
+    font-size: 12px;
 }
 
 .report pre code {
