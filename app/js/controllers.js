@@ -78,7 +78,7 @@ angular.module('myApp.controllers', [])
             }
         }
 
-        backend.getReport("317642").then(function(data) {
+        backend.getReport("301").then(function(data) {
             $scope.records.report.text = data.reportText;
             $scope.records.report.exists = true;
         }, function() {

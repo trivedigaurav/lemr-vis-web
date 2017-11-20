@@ -101,12 +101,20 @@ angular.module('myApp.directives', [])
                     //For line numbers
                     element.html('<code> ' + element.html()
                                     .split('\n')
-                                    .join(' </code>\n<code> ') + ' </code>');
+                                    .join(' </code>\n<code>') + '</code>');
 
                     //Initialize annotator
                     var options = {};
                     
                     var annotator = angular.element(element).annotator(options).data('annotator');
+
+                    annotator.addPlugin('Categories', {
+                        mechanism: 'annotator-hl-green',
+                        toDo: 'annotator-hl-red',
+                        problems: 'annotator-hl-yellow',
+                        intervention: 'annotator-hl-blue' 
+                    });
+
                     // annotator.addPlugin('Unsupported');
 
                     // annotator.addPlugin('Tags');
@@ -121,6 +129,23 @@ angular.module('myApp.directives', [])
                     // annotator.addPlugin('Auth', authOptions);
 
                     // annotator.addPlugin('Markdown');
+
+                    //               annotator.annotator('addPlugin', 'Store', {
+                    //                   // The endpoint of the store on your server.
+                    //                   prefix: '/store/endpoint',
+
+                    //                   // Attach the uri of the current page to all annotations to allow search.
+                    //       annotationData: {
+                    //   'uri': 'http://this/document/only'
+                    // },
+
+                    // // This will perform a "search" action when the plugin loads. Will
+                    // // request the last 20 annotations for the current url.
+                    // // eg. /store/endpoint/search?limit=20&uri=http://this/document/only
+                    // loadFromSearch: {
+                    //   'limit': 20,
+                    //   'uri': 'http://this/document/only'
+                    // }
 
                     if(attrs.annotatorPlugins){
                         var pluginList = scope.$eval(attrs.annotatorPlugins);
