@@ -45,6 +45,9 @@ angular.module('myApp.services', [])
                 this.reportCanceler.resolve();
 
             this.reportCanceler = $q.defer();
+            var url = "@@backEndApp/getReport/" + report;
+            console.log(url);
+
             return $http.get("@@backEndApp/getReport/" + report, 
                             {timeout: this.reportCanceler.promise})
                         .then(function(result) {
@@ -123,9 +126,12 @@ angular.module('myApp.services', [])
             );
         },
         putLogEvent: function(event_name, message){
-            var uri = "/emr-nlp-server/rest/server/logEvent/";
+            var uri = "@@backEndApp/logEvent/";
             return $http.put(uri + event_name, message);
         },
+        getAnnotationStore: function() {
+            return  "@@backEndApp/annotation";
+        }
     };
 }])
 

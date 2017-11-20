@@ -68,13 +68,13 @@ angular.module('myApp.directives', [])
     };
 }])
 
-.directive('highlightedReport', [ function() {
+
+.directive('highlightedReport', ['backend', function(backend) {
     return {
         restrict: 'E',
         scope: {
             data: '=',
-            posTerms: '=',
-            negTerms: '=',
+            recordId: '='
         },
         link: function (scope, element, attrs) {
 
@@ -115,65 +115,25 @@ angular.module('myApp.directives', [])
                         intervention: 'annotator-hl-blue' 
                     });
 
-                    // annotator.addPlugin('Unsupported');
+                    // console.log(scope.recordId);
+                    // console.log(backend.getServerPrefix());
 
-                    // annotator.addPlugin('Tags');
-                        
-                    // annotator.addPlugin('Permissions', permissionsOptions);
-                
-                    // var storeOptions = scope.$eval(attrs.annotatorStore);
-                    // annotator.addPlugin('Store', storeOptions);
-                    // var filterOptions = scope.$eval(attrs.annotatorFilter);
-                    // annotator.addPlugin('Filter', filterOptions);
-                    // var authOptions = scope.$eval(attrs.annotatorAuth);
-                    // annotator.addPlugin('Auth', authOptions);
+                    annotator.addPlugin('Store', {
+                        // The endpoint of the store on your server.
+                        prefix: backend.getAnnotationStore(),
 
-                    // annotator.addPlugin('Markdown');
+                        // Attach the uri of the current page to all annotations to allow search.
+                        annotationData: {
+                            'uri': scope.recordId
+                        },
 
-                    //               annotator.annotator('addPlugin', 'Store', {
-                    //                   // The endpoint of the store on your server.
-                    //                   prefix: '/store/endpoint',
-
-                    //                   // Attach the uri of the current page to all annotations to allow search.
-                    //       annotationData: {
-                    //   'uri': 'http://this/document/only'
-                    // },
-
-                    // // This will perform a "search" action when the plugin loads. Will
-                    // // request the last 20 annotations for the current url.
-                    // // eg. /store/endpoint/search?limit=20&uri=http://this/document/only
-                    // loadFromSearch: {
-                    //   'limit': 20,
-                    //   'uri': 'http://this/document/only'
-                    // }
-
-                    if(attrs.annotatorPlugins){
-                        var pluginList = scope.$eval(attrs.annotatorPlugins);
-                        if(pluginList instanceof Array){
-                            for(var i=0; i<pluginList.length; i++){
-                                var plugin = pluginList[i];
-
-
-                                var pluginName = null;
-                                var pluginOptions = null;
-                                if(typeof plugin === 'object'){
-                                    pluginName = plugin.name;
-                                    pluginOptions = plugin.options;
-                                }else if(typeof plugin === 'string'){
-                                    pluginName = plugin;
-                                }
-                                if(pluginName){
-                                    if(!pluginOptions){
-                                        annotator.addPlugin(pluginName)
-                                    }else{
-                                        annotator.addPlugin(pluginName, pluginOptions);
-                                    }
-
-                                }
-
-                            }
+                        // This will perform a "search" action when the plugin loads. Will
+                        // request the last 20 annotations for the current url.
+                        // eg. /store/endpoint/search?limit=20&uri=http://this/document/only
+                        loadFromSearch: {
+                            'uri': scope.recordId
                         }
-                    }
+                    });
 
                 };
         

@@ -140,7 +140,7 @@
                 <div class="info unselectable">
                   <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
                   <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[active.docIndex].id}}/report.txt">
-                    <strong class="file-name js-selectable-text">Report: #{{gridData[active.docIndex].id}}</strong>
+                    <strong class="file-name js-selectable-text">Report: #{{records.report.id}}</strong>
                   </a>
                   
                   <!-- <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a> -->
@@ -151,7 +151,7 @@
                   </span> -->
                 </div>
                   <pre>
-                      <highlighted-report data='records.report.text' annotator-plugins="[]">
+                      <highlighted-report data='records.report.text' record-id='records.report.id'>
                         <span></span>
                      </highlighted-report>
                   </pre>

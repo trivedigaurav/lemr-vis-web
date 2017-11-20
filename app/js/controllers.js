@@ -70,7 +70,8 @@ angular.module('myApp.controllers', [])
         $scope.records = {
             "report": {
                 exists: true,
-                text: null
+                text: null,
+                id: null
             },
             "pathology": {
                 exists: false,
@@ -78,7 +79,9 @@ angular.module('myApp.controllers', [])
             }
         }
 
-        backend.getReport("301").then(function(data) {
+        $scope.records.report.id = "301";
+
+        backend.getReport($scope.records.report.id).then(function(data) {
             $scope.records.report.text = data.reportText;
             $scope.records.report.exists = true;
         }, function() {
