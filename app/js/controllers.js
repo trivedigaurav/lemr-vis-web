@@ -79,7 +79,7 @@ angular.module('myApp.controllers', [])
             }
         }
 
-        $scope.records.report.id = "301";
+        $scope.records.report.id = "302";
 
         backend.getReport($scope.records.report.id).then(function(data) {
             $scope.records.report.text = data.reportText;
