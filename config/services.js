@@ -46,7 +46,6 @@ angular.module('myApp.services', [])
 
             this.reportCanceler = $q.defer();
             var url = "@@backEndApp/getReport/" + report;
-            console.log(url);
 
             return $http.get("@@backEndApp/getReport/" + report, 
                             {timeout: this.reportCanceler.promise})
@@ -129,8 +128,13 @@ angular.module('myApp.services', [])
             var uri = "@@backEndApp/logEvent/";
             return $http.put(uri + event_name, message);
         },
-        getAnnotationStore: function() {
-            return  "@@backEndApp/annotation";
+        getAnnotationUrls: function(report) {
+            return {
+                create: "@@backEndApp/annotator/create/" + report,
+                update: "@@backEndApp/annotator/update/:id",
+                destroy: "@@backEndApp/annotator/destroy/:id",
+                search: "@@backEndApp/annotator/search/" + report
+            }
         }
     };
 }])

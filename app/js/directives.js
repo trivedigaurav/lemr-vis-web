@@ -99,7 +99,7 @@ angular.module('myApp.directives', [])
 
 
                     //For line numbers
-                    element.html('<code> ' + element.html()
+                    element.html('<code>' + element.html()
                                     .split('\n')
                                     .join(' </code>\n<code>') + '</code>');
 
@@ -111,28 +111,17 @@ angular.module('myApp.directives', [])
                     annotator.addPlugin('Categories', {
                         mechanism: 'annotator-hl-green',
                         toDo: 'annotator-hl-red',
-                        problems: 'annotator-hl-yellow',
+                        problem: 'annotator-hl-yellow',
                         intervention: 'annotator-hl-blue' 
                     });
 
-                    // console.log(scope.recordId);
-                    // console.log(backend.getServerPrefix());
+                    // console.log(backend.getAnnotationBackend());
 
                     annotator.addPlugin('Store', {
                         // The endpoint of the store on your server.
-                        prefix: backend.getAnnotationStore(),
-
-                        // Attach the uri of the current page to all annotations to allow search.
-                        annotationData: {
-                            'uri': scope.recordId
-                        },
-
-                        // This will perform a "search" action when the plugin loads. Will
-                        // request the last 20 annotations for the current url.
-                        // eg. /store/endpoint/search?limit=20&uri=http://this/document/only
-                        loadFromSearch: {
-                            'uri': scope.recordId
-                        }
+                        prefix: "",
+                        urls: backend.getAnnotationUrls(scope.recordId),
+                        loadFromSearch: {}
                     });
 
                 };
