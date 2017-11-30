@@ -133,6 +133,7 @@ angular.module('myApp.services', [])
                 create: "@@backEndApp/annotator/create/" + report,
                 update: "@@backEndApp/annotator/update/:id",
                 destroy: "@@backEndApp/annotator/destroy/:id",
+                read: "@@backEndApp/annotator/search/" + report,
                 search: "@@backEndApp/annotator/search/" + report
             }
         }

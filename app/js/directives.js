@@ -120,8 +120,7 @@ angular.module('myApp.directives', [])
                     annotator.addPlugin('Store', {
                         // The endpoint of the store on your server.
                         prefix: "",
-                        urls: backend.getAnnotationUrls(scope.recordId),
-                        loadFromSearch: {}
+                        urls: backend.getAnnotationUrls(scope.recordId)
                     });
 
                 };
