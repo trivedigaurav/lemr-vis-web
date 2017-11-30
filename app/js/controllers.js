@@ -6,6 +6,13 @@ angular.module('myApp.controllers', [])
   .controller('appCtrl', ['$scope', '$window', '$document', '$rootScope', 'backend', 'truncateFilter',
     function($scope, $window, $document, $rootScope, backend, truncateFilter) {
         /*
+         * Debug
+         */
+
+        $window.appCtrl = $scope;
+        $window.appBackend = backend;
+
+        /*
          * App config
          */
 
