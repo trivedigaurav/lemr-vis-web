@@ -1,0 +1,7 @@
+<a tooltip-placement="bottom" tooltip-animation="false" tooltip="First" href="#first" class="glyphicon glyphicon-step-backward" scroll-to-bookmark="{{active.encounterData.reports[0].id}}"></a>
+<a tooltip-placement="bottom" tooltip-animation="false" tooltip="Previous" href="#prev" class="glyphicon glyphicon-chevron-left" scroll-to-bookmark="{{active.encounterData.reports[$index-1].id}}"></a>
+
+<a href="#{{report.id}}">{{$index + 1}} of {{active.encounterData.reports.length}}</a>
+
+<a tooltip-placement="bottom" tooltip-animation="false" tooltip="Next" href="#next" class="glyphicon glyphicon-chevron-right" scroll-to-bookmark="{{active.encounterData.reports[$index+1].id}}"></a>
+<a tooltip-placement="bottom" tooltip-animation="false" tooltip="Last" href="#last" class="glyphicon glyphicon-step-forward" scroll-to-bookmark="{{active.encounterData.reports[active.encounterData.reports.length - 1].id}}"></a>

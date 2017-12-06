@@ -548,10 +548,6 @@ body {
   margin: 10px 0px 10px 0px;
 }
 
-#encounter-display input{
-  width: 100%;
-}
-
 #lemr-suggest{
   /*margin: 10px 0px 10px 0px;*/
 }
@@ -586,6 +582,8 @@ body {
 
 .report .info .btn{
     width: 50px;
+    margin-top: -2px;
+    margin-left: 5px;
 }
 
 .report pre {

@@ -95,17 +95,10 @@
 
           <div id="encounter-display" class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Find encounter</h3>
+              <h3 class="panel-title">Select encounter</h3>
             </div>
             <div class="panel-body">
-
-              <div class="input-group">
-                <input type="text" class="form-control" value="{{active.encounterId}}" id="findEncounterInput">
-                <span class="input-group-btn">
-                  <button ng-click="findEncounter()" class="btn btn-default" type="button">Search</button>
-                </span>
-              </div><!-- /input-group -->
-
+              <div class="input-group" ng-include src="'partials/encounter-select.html?v=' + cacheBust"></div>
             </div>
           </div>
 
@@ -166,22 +159,17 @@
                 </div>
               </div> -->
               
-              <div ng-repeat="report in active.encounterData.reports track by $index" id="emr-report" class="report">
+              <div ng-repeat="report in active.encounterData.reports track by $index" id="emr-report-{{report.id}}" class="report">
                 <div class="info unselectable" scroll-bookmark='{{report.id}}'>
                   <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
                   <a tooltip-placement="bottom" tooltip-animation="false" tooltip='{{report.id}}'>
                     <strong class="file-name js-selectable-text">{{ report.date | myDate }}</strong>
                   </a>
                   
-                  <!-- <a class="btn bthttp://localhost:8000/app/#lastn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a> -->
+                  <a class="btn btn-xs btn-default pull-right" ng-click="popReport(report.id)" href="#{{report.id}}"><i class="glyphicon glyphicon-new-window"></i></a>
 
-                  <span class="pull-right">
-                    <a tooltip-placement="bottom" tooltip-animation="false" tooltip="First" href="#first" class="glyphicon glyphicon-step-backward" scroll-to-bookmark="{{active.encounterData.reports[0].id}}"></a>
-                    <a tooltip-placement="bottom" tooltip-animation="false" tooltip="Previous" href="#prev" class="glyphicon glyphicon-chevron-left" scroll-to-bookmark="{{active.encounterData.reports[$index-1].id}}"></a>
-                    <a href="#{{report.id}}">{{$index + 1}} of {{active.encounterData.reports.length}}</a>
-                    <a tooltip-placement="bottom" tooltip-animation="false" tooltip="Next" href="#next" class="glyphicon glyphicon-chevron-right" scroll-to-bookmark="{{active.encounterData.reports[$index+1].id}}"></a>
-                    <a tooltip-placement="bottom" tooltip-animation="false" tooltip="last" href="#last" class="glyphicon glyphicon-step-forward" scroll-to-bookmark="{{active.encounterData.reports[active.encounterData.reports.length - 1].id}}"></a>
-                  </span>
+                  <span class="pull-right" ng-include src="'partials/report-paginate.html?v=' + cacheBust"></span>
+
                 </div>
                 <pre>
                     <highlighted-report data='report.text' record-id='report.id'>

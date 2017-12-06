@@ -22,29 +22,21 @@ ambi@^2.2.0:
     editions "^1.1.1"
     typechecker "^4.3.0"
 
-amdefine@>=0.0.4:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
-
-angular-annotator@mwasiluk/angular-annotator#^0.1.0:
-  version "0.0.0"
-  resolved "https://codeload.github.com/mwasiluk/angular-annotator/tar.gz/f56d8866f4a30cfd8026885d516cae8d0e098af4"
-
 angular-bootstrap@angular-ui/bootstrap-bower#~0.11.0:
   version "0.0.0"
   resolved "https://codeload.github.com/angular-ui/bootstrap-bower/tar.gz/49aa07315b44783d22270a39bfa13e9f5abcab3b"
 
-angular-cookies@angular/bower-angular-cookies#~1.2.23:
-  version "1.2.32"
-  resolved "https://codeload.github.com/angular/bower-angular-cookies/tar.gz/584d13caf89a0ed4e080ceb6ed2201d7061546a0"
+angular-cookies@angular/bower-angular-cookies#~1.4.0:
+  version "1.4.14"
+  resolved "https://codeload.github.com/angular/bower-angular-cookies/tar.gz/2de9bf5ebbf9b2ff4c3842204c2381b6311d4a80"
 
 angular-ui-utils@angular-ui/ui-utils#bower-keypress:
   version "0.0.0"
   resolved "https://codeload.github.com/angular-ui/ui-utils/tar.gz/93556693900c937150bee9fd67c8a4c95d5cd3db"
 
-angular@angular/bower-angular#1.2.x:
-  version "1.2.32"
-  resolved "https://codeload.github.com/angular/bower-angular/tar.gz/03da9924cb2717a4bbe575241cc66f5e2ebbf54f"
+angular@angular/bower-angular#1.6.6:
+  version "1.6.6"
+  resolved "https://codeload.github.com/angular/bower-angular/tar.gz/928fe478bd68d049ff9863dc51814eac24d33b9a"
 
 animate.css@daneden/animate.css#3.2.0:
   version "3.2.0"
@@ -53,18 +45,6 @@ animate.css@daneden/animate.css#3.2.0:
 annotator-validation-plugin@mwasiluk/annotator-validation-plugin:
   version "0.0.0"
   resolved "https://codeload.github.com/mwasiluk/annotator-validation-plugin/tar.gz/e57d4186502ce425e91841d65d92d7c608411d1a"
-
-annotator@openannotation/annotator:
-  version "2.0.0-alpha.3"
-  resolved "https://codeload.github.com/openannotation/annotator/tar.gz/5ef5edf157fe728b2d6d95d01e26a55c508c0c44"
-  dependencies:
-    backbone-extend-standalone "^0.1.2"
-    clean-css "^3.4.4"
-    enhance-css "^1.1.0"
-    es6-promise "^3.0.2"
-    insert-css "^0.2.0"
-    jquery "^1.11.3"
-    xpath-range "0.0.5"
 
 ansi-styles@~1.0.0:
   version "1.0.0"
@@ -115,10 +95,6 @@ aws4@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
 
-backbone-extend-standalone@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/backbone-extend-standalone/-/backbone-extend-standalone-0.1.2.tgz#2476cba773f67cf2a9dca388bfa2df8d73fe7edf"
-
 bcrypt-pbkdf@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.1.tgz#63bc5dcb61331b92bc05fd528953c33462a06f8d"
@@ -157,13 +133,6 @@ chalk@^0.4.0:
     has-color "~0.1.0"
     strip-ansi "~0.1.0"
 
-clean-css@^3.4.4:
-  version "3.4.28"
-  resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-3.4.28.tgz#bf1945e82fc808f55695e6ddeaec01400efd03ff"
-  dependencies:
-    commander "2.8.x"
-    source-map "0.4.x"
-
 co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
@@ -193,16 +162,6 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.5.tgz#938370a57b4a51dea2c77c15d5c5fdf895164009"
   dependencies:
     delayed-stream "~1.0.0"
-
-commander@2.1.x:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.1.0.tgz#d121bbae860d9992a3d517ba96f56588e47c6781"
-
-commander@2.8.x:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.8.1.tgz#06be367febfda0c330aa1e2a072d3dc9762425d4"
-  dependencies:
-    graceful-readlink ">= 1.0.0"
 
 contextify@0.1.x:
   version "0.1.15"
@@ -274,16 +233,6 @@ ecc-jsbn@~0.1.1:
 editions@^1.1.1, editions@^1.3.3:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/editions/-/editions-1.3.3.tgz#0907101bdda20fac3cbe334c27cbd0688dc99a5b"
-
-enhance-css@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/enhance-css/-/enhance-css-1.1.0.tgz#518edad3d96fca18dff60eaf43b188d4b395c211"
-  dependencies:
-    commander "2.1.x"
-
-es6-promise@^3.0.2:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-3.3.1.tgz#a08cdde84ccdbf34d027a1451bc91d4bcd28a613"
 
 esprima@^4.0.0:
   version "4.0.0"
@@ -374,10 +323,6 @@ glob@~3.2.9:
 graceful-fs@~1.2.0:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-1.2.3.tgz#15a4806a57547cb2d2dbf27f42e89a8c3451b364"
-
-"graceful-readlink@>= 1.0.0":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
 grunt-cli@~0.1.13:
   version "0.1.13"
@@ -509,10 +454,6 @@ inherits@2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
 
-insert-css@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/insert-css/-/insert-css-0.2.0.tgz#d15789971662d9899c28977fb6220d5381d2451a"
-
 is-typedarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-typedarray/-/is-typedarray-1.0.0.tgz#e479c80858df0c1b11ddda6940f96011fcda4a9a"
@@ -525,17 +466,9 @@ jquery.scrollTo@flesler/jquery.scrollTo#1.4.12:
   version "0.0.0"
   resolved "https://codeload.github.com/flesler/jquery.scrollTo/tar.gz/cb88f0b9ca64d806957139df93934b2f3ff6417f"
 
-jquery@^1.11.3:
-  version "1.12.4"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-1.12.4.tgz#01e1dfba290fe73deba77ceeacb0f9ba2fec9e0c"
-
 jquery@jquery/jquery-dist#~2.1.1:
   version "2.1.4"
   resolved "https://codeload.github.com/jquery/jquery-dist/tar.gz/7751e69b615c6eca6f783a81e292a55725af6b85"
-
-jquery@~1.11.0:
-  version "1.11.3"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-1.11.3.tgz#dd8b74278b27102d29df63eae28308a8cfa1b583"
 
 js-yaml@^3.0.0:
   version "3.10.0"
@@ -730,12 +663,6 @@ sntp@2.x.x:
   dependencies:
     hoek "4.x.x"
 
-source-map@0.4.x:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.4.4.tgz#eba4f5da9c0dc999de68032d8b4f76173652036b"
-  dependencies:
-    amdefine ">=0.0.4"
-
 sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
@@ -823,12 +750,6 @@ verror@1.10.0:
 which@~1.0.5:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/which/-/which-1.0.9.tgz#460c1da0f810103d0321a9b633af9e575e64486f"
-
-xpath-range@0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/xpath-range/-/xpath-range-0.0.5.tgz#45d3379555c72c2f218abb8ba424d42e0665d911"
-  dependencies:
-    jquery "~1.11.0"
 
 yarn@^1.2.1:
   version "1.3.2"

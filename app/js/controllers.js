@@ -10,6 +10,7 @@ angular.module('myApp.controllers', [])
          */
 
         $window.appCtrl = $scope;
+        $scope.cacheBust = Date.now('U');
 
         /*
          * App config
@@ -24,7 +25,7 @@ angular.module('myApp.controllers', [])
         };
 
         $scope.active = {
-            encounterId: "230870632",
+            encounterId: "225481446",
             encounterData: null, 
             username: null
         };
@@ -149,6 +150,20 @@ angular.module('myApp.controllers', [])
               $scope.appInfo = false;
               $scope.$digest();
             }, 1500);
+        }
+
+        $scope.popReport = function(reportid) {
+            //http://stackoverflow.com/questions/2255291/print-the-contents-of-a-div
+            var mywindow = $window.open('', reportid, "location=no, toolbar=no, scrollbars=yes, width=800");
+            mywindow.document.write('<html><head><title>Report #'+ reportid +'</title>');
+            mywindow.document.write('</head><body><pre>');
+
+            //Hide annotator classes
+            var tree = $("<div" + $("#emr-report-" + reportid + " pre").html() + "</div>");
+            tree.find(".annotator-hide").remove()
+            mywindow.document.write(tree.html());
+
+            mywindow.document.write('</pre></body></html>');
         }
 
         // Loading
