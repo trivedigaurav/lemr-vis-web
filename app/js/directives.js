@@ -109,10 +109,12 @@ angular.module('myApp.directives', [])
                     var annotator = angular.element(element).annotator(options).data('annotator');
 
                     annotator.addPlugin('Categories', {
+                        incidental: 'annotator-hl-yellow',
                         mechanism: 'annotator-hl-green',
-                        toDo: 'annotator-hl-red',
-                        problem: 'annotator-hl-yellow',
-                        intervention: 'annotator-hl-blue' 
+                        "To Do List": 'annotator-hl-red',
+                        "Injuries and Problem": 'annotator-hl-blue',
+                        operative: 'annotator-hl-purple',
+                        "RADS/Intervention": 'annotator-hl-orange'
                     });
 
                     // console.log(backend.getAnnotationBackend());

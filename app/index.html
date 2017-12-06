@@ -66,7 +66,12 @@
       <ul class="nav navbar-nav" id="main-menu">
         <a href="#top" role="button" class="navbar-brand">
           <img alt="Brand" src="favicon.png">&nbsp;
-          <small>Patient #</small>1234
+          <small>Patient #</small>{{active.encounterId}}
+
+          <span ng-if="active.encounterData">
+            <small>Admit:</small> {{active.encounterData.admit | myDate}}          
+            <small>Discharge:</small> {{active.encounterData.discharge | myDate}}
+          </span>
         </a>
       </ul>
 
@@ -87,7 +92,24 @@
 
       <!-- sidebar -->
       <div class="column col-xs-3" id="sidebar">
-          <div id="lemr-suggest" class="panel panel-default">
+
+          <div id="encounter-display" class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Find encounter</h3>
+            </div>
+            <div class="panel-body">
+
+              <div class="input-group">
+                <input type="text" class="form-control" value="{{active.encounterId}}" id="findEncounterInput">
+                <span class="input-group-btn">
+                  <button ng-click="findEncounter()" class="btn btn-default" type="button">Search</button>
+                </span>
+              </div><!-- /input-group -->
+
+            </div>
+          </div>
+
+          <!-- <div id="lemr-suggest" class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">LEMR Suggestions</h3>
             </div>
@@ -108,6 +130,15 @@
                   <a class="btn btn-default btn-block" href="#">View Signout Note</a>
               </div>
             </div>
+          </div> -->
+
+          <div id="signout-display" class="panel panel-default" ng-if="active.encounterData">
+            <div class="panel-heading">
+              <h3 class="panel-title">Incidental Finding</h3>
+            </div>
+            <div class="panel-body">
+              {{active.encounterData.incidental}}
+            </div>
           </div>
       </div>
 
@@ -124,58 +155,39 @@
 
           <!-- Report view -->
           <tab active="tabs.docView" heading="Report">
-            <div class="tab-inner-content">
-              <div ng-show="records.pathology.exists" class="pagerview">
+            <div class="tab-inner-content" ng-if="active.encounterData.reports">
+
+              <!-- <div class="pagerview">
                 <div class="pagerview-row">
-                    <div class="pagerview-step">
-                        <button type="button" scroll-to-bookmark="records.report.text" class="btn btn-default btn-circle">1</button>
-                        <p class="clickable" scroll-to-bookmark="records.report.text">Report</p>
-                    </div>
-                    <div class="pagerview-step">
-                        <button type="button" scroll-to-bookmark="records.pathology.text" class="btn btn-default btn-circle">2</button>
-                        <p class="clickable" scroll-to-bookmark="records.pathology.text">Pathology</p>
+                    <div ng-repeat="report in active.encounterData.reports track by $index" class="pagerview-step">
+                        <button type="button" scroll-to-bookmark='{{report.id}}' class="btn btn-default btn-circle">{{$index + 1}}</button>
+                        <p class="clickable" scroll-to-bookmark='{{report.id}}'> {{report.date | myDate}} </p>
                     </div>
                 </div>
-              </div>
+              </div> -->
               
-              <div scroll-bookmark="records.report.text" ng-if="records.report.exists" id="emr-report" class="report">
-                <div class="info unselectable">
+              <div ng-repeat="report in active.encounterData.reports track by $index" id="emr-report" class="report">
+                <div class="info unselectable" scroll-bookmark='{{report.id}}'>
                   <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
-                  <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[active.docIndex].id}}/report.txt">
-                    <strong class="file-name js-selectable-text">Report: #{{records.report.id}}</strong>
+                  <a tooltip-placement="bottom" tooltip-animation="false" tooltip='{{report.id}}'>
+                    <strong class="file-name js-selectable-text">{{ report.date | myDate }}</strong>
                   </a>
                   
-                  <!-- <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a> -->
+                  <!-- <a class="btn bthttp://localhost:8000/app/#lastn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a> -->
 
-                  <!-- <span class="pull-right">
-                      Variable&nbsp;
-                      <select ng-model="active.variable" ng-options="$root.config.variableMapping[var] for var in $root.config.variables"></select> 
-                  </span> -->
+                  <span class="pull-right">
+                    <a tooltip-placement="bottom" tooltip-animation="false" tooltip="First" href="#first" class="glyphicon glyphicon-step-backward" scroll-to-bookmark="{{active.encounterData.reports[0].id}}"></a>
+                    <a tooltip-placement="bottom" tooltip-animation="false" tooltip="Previous" href="#prev" class="glyphicon glyphicon-chevron-left" scroll-to-bookmark="{{active.encounterData.reports[$index-1].id}}"></a>
+                    <a href="#{{report.id}}">{{$index + 1}} of {{active.encounterData.reports.length}}</a>
+                    <a tooltip-placement="bottom" tooltip-animation="false" tooltip="Next" href="#next" class="glyphicon glyphicon-chevron-right" scroll-to-bookmark="{{active.encounterData.reports[$index+1].id}}"></a>
+                    <a tooltip-placement="bottom" tooltip-animation="false" tooltip="last" href="#last" class="glyphicon glyphicon-step-forward" scroll-to-bookmark="{{active.encounterData.reports[active.encounterData.reports.length - 1].id}}"></a>
+                  </span>
                 </div>
-                  <pre>
-                      <highlighted-report data='records.report.text' record-id='records.report.id'>
-                     </highlighted-report>
-                  </pre>
-              </div>
-            </div>
-            <div scroll-bookmark="records.pathology.text" ng-mouseup="setFeedbackText()" ng-if="records.pathology.exists" id="emr-pathology" class="report">
-              <div class="info unselectable">
-                <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
-                <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[active.docIndex].id}}/pathology.txt"> 
-                  <strong class="file-name js-selectable-text">Pathology: #{{gridData[active.docIndex].id}}</strong>
-                </a>
-                <!-- <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a> -->
-                <!-- <span class="pull-right">
-                  Variable 
-                  <select ng-model="active.variable" ng-options="$root.config.variableMapping[var] for var in $root.config.variables"></select> 
-                </span> -->
-              </div>
-              <span ng-context-menu="documentContextMenu">
                 <pre>
-                  <!-- <highlighted-report> -->     
-                  <!-- </highlighted-report> -->
+                    <highlighted-report data='report.text' record-id='report.id'>
+                   </highlighted-report>
                 </pre>
-              </span>
+              </div>
             </div>
           </tab>
 

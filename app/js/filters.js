@@ -25,3 +25,21 @@ angular.module('myApp.filters', [])
 
         };
     })
+   .filter('myDate', function () {
+        // jsfiddle.net/tUyyx/
+        return function (string) {
+
+            if(!string)
+                return;
+
+            string=String(string);
+
+            if (string.length != 8) {
+                return string;
+            }
+            else {
+                return string.substring(4, 6) + "/" + string.substring(6,8);
+            }
+
+        };
+    })

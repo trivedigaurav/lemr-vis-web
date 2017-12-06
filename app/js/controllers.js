@@ -10,7 +10,6 @@ angular.module('myApp.controllers', [])
          */
 
         $window.appCtrl = $scope;
-        $window.appBackend = backend;
 
         /*
          * App config
@@ -25,7 +24,10 @@ angular.module('myApp.controllers', [])
         };
 
         $scope.active = {
-        }
+            encounterId: "230870632",
+            encounterData: null, 
+            username: null
+        };
 
         checkLogin();
 
@@ -56,11 +58,7 @@ angular.module('myApp.controllers', [])
             }
 
             if(confirm) {
-                backend.putLogEvent("trackVisited", JSON.stringify($scope.trackVisited));
-                backend.putLogEvent("trackFeedback", JSON.stringify($scope.trackFeedback));
-                backend.putLogEvent("gridData", JSON.stringify($scope.gridData));
-
-                $scope.clearFeedback();
+                backend.putLogEvent("endSession", "OK");
                 backend.logout();
                 $scope.active.username = null;
             }
@@ -68,33 +66,29 @@ angular.module('myApp.controllers', [])
 
         function startSession(){
             backend.putLogEvent("startSession", "OK");
+            loadEncounter();
         }
 
         /*
          * Load reports
          */
 
-        $scope.records = {
-            "report": {
-                exists: true,
-                text: null,
-                id: null
-            },
-            "pathology": {
-                exists: false,
-                text: null
-            }
+        function loadEncounter(){
+            startLoading();
+            backend.getEncounter($scope.active.encounterId).then(function(data) {
+                $scope.active.encounterData = data;
+                stopLoading();
+            }, function() {
+                showInfo("Unable to load reports");
+                stopLoading();
+            });
         }
 
-        $scope.records.report.id = "302";
-
-        backend.getReport($scope.records.report.id).then(function(data) {
-            $scope.records.report.text = data.reportText;
-            $scope.records.report.exists = true;
-        }, function() {
-            $scope.records.report.text = "Unable to fetch report";
-            stopLoading();
-        });
+        $scope.findEncounter = function(){
+            $scope.active.encounterId = $("#findEncounterInput").val();
+            $scope.active.encounterData = null;
+            loadEncounter();
+        }
 
         /*
          * Tabs

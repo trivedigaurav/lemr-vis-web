@@ -38,16 +38,7 @@ To get started, install the pre-requisites and then clone emr-vis-web as describ
     ```
 
 3. (Skip this step to leave default settings as it is.) 
-   In case you need to change the backend service's path, edit the `config.backend` variable in _package.json_ **or**  use the following commands:
-
-    ```
-    npm config set emr-vis-web:backend <relative/path/to/backend/service>
-    npm start
-    ```
-    
-    Valid examples of this path include _"http://localhost:9090/backEndService"_, _"/backEndService"_ etc.
-    
-    Editing package.json would be a permanent solution while using the `npm config` lets you include the config settings for the current terminal session.
+   In case you need to change the backend service's path, edit the `SERVER_URL` variable in _app/js/services.js_.
 
 ### Run the Application
 The project does not come with a pre-configured websever. You may use [http-server][http-server] to start serving the app.

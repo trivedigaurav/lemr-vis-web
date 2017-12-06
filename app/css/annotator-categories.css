@@ -3,27 +3,37 @@
  */
 
 .annotator-hl-red {
-    background:  #ffcfbf;
+    background: #fbb4ae;
     cursor:pointer;
 }
 
 .annotator-hl-green {
-    background:  #dfffbf;
+    background: #ccebc5;
     cursor:pointer;
 }
 
 .annotator-hl-yellow {
-    background: rgba(255, 255, 10, 1);
+    background: #fffc00;
     cursor:pointer;
 }
 
 .annotator-hl-blue {
-    background: rgba(163, 250, 255, 1);
+    background: #b3d2e3;
+    cursor:pointer;
+}
+
+.annotator-hl-purple {
+    background: #decbe4;
+    cursor:pointer;
+}
+
+.annotator-hl-orange {
+    background: #fed9a6;
     cursor:pointer;
 }
 
 .highlight {
-    background: #dfffbf;
+    background: #fffc00;
     border: 1px solid #b3b3b3;
     height:20px;
 }
