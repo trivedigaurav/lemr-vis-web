@@ -64,7 +64,7 @@
   <header class="navbar navbar-inverse navbar-fixed-top">
     <nav class="hidden-xs">
       <ul class="nav navbar-nav" id="main-menu">
-        <a href="#top" role="button" class="navbar-brand">
+        <span role="button" class="navbar-brand">
           <img alt="Brand" src="favicon.png">&nbsp;
           <small>Patient #</small>{{active.encounterId}}
 
@@ -72,7 +72,7 @@
             <small>Admit:</small> {{active.encounterData.admit | myDate}}          
             <small>Discharge:</small> {{active.encounterData.discharge | myDate}}
           </span>
-        </a>
+        </span>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
@@ -150,14 +150,14 @@
           <tab active="tabs.docView" heading="Report">
             <div class="tab-inner-content" ng-if="active.encounterData.reports">
 
-              <!-- <div class="pagerview">
+              <div class="pagerview">
                 <div class="pagerview-row">
                     <div ng-repeat="report in active.encounterData.reports track by $index" class="pagerview-step">
                         <button type="button" scroll-to-bookmark='{{report.id}}' class="btn btn-default btn-circle">{{$index + 1}}</button>
                         <p class="clickable" scroll-to-bookmark='{{report.id}}'> {{report.date | myDate}} </p>
                     </div>
                 </div>
-              </div> -->
+              </div>
               
               <div ng-repeat="report in active.encounterData.reports track by $index" id="emr-report-{{report.id}}" class="report">
                 <div class="info unselectable" scroll-bookmark='{{report.id}}'>

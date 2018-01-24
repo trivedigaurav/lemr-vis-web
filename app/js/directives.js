@@ -125,6 +125,12 @@ angular.module('myApp.directives', [])
                         urls: backend.getAnnotationUrls(scope.recordId)
                     });
 
+                    annotator.addPlugin('Tags', {
+                        // // The endpoint of the store on your server.
+                        // prefix: "",
+                        // urls: backend.getAnnotationUrls(scope.recordId)
+                    });
+
                 };
         
                 scope.$watch('data', function(){
