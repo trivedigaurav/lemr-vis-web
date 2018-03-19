@@ -25,6 +25,8 @@ To get started, install the pre-requisites and then clone lemr-vis-web as descri
 3. (Skip this step to leave default settings as it is.) 
    In case you need to change the backend service's path, edit the `SERVER_URL` variable in _app/js/services.js_.
 
+   [comment]: <> (Add details on how to get this working...)
+
 ### Run the Application
 The project does not come with a pre-configured websever. You may use [http-server][http-server] to start serving the app.
 
