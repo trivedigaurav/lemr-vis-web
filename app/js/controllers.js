@@ -54,9 +54,9 @@ angular.module('myApp.controllers', [])
         $scope.doLogout = function() {
             var confirm = true;
 
-            if($scope.feedbackList.length > 0){
-                confirm = $window.confirm("You have made unsaved changes. Would you still like to leave this page?");
-            }
+            // if($scope.feedbackList.length > 0){
+            //     confirm = $window.confirm("You have made unsaved changes. Would you still like to leave this page?");
+            // }
 
             if(confirm) {
                 backend.putLogEvent("endSession", "OK");
