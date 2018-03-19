@@ -18,11 +18,9 @@ To get started, install the pre-requisites and then clone lemr-vis-web as descri
 
 1. Make sure you have [node.js][node] installed. 
 
-2. Run the install script:
+2. Install yarn: `(sudo) npm install -g yarn` 
 
-    ```
-    yarn install
-    ```
+2. Run the install script: `yarn install`
 
 3. (Skip this step to leave default settings as it is.) 
    In case you need to change the backend service's path, edit the `SERVER_URL` variable in _app/js/services.js_.
