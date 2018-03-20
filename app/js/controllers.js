@@ -62,6 +62,8 @@ angular.module('myApp.controllers', [])
                 backend.putLogEvent("endSession", "OK");
                 backend.logout();
                 $scope.active.username = null;
+
+                $window.location.reload(true);
             }
         }
 
@@ -168,7 +170,7 @@ angular.module('myApp.controllers', [])
 
         // Loading
         $scope.loaderCount = 0;
-        $scope.appDisabled = false;
+        // $scope.appDisabled = true;
 
         function startLoading() {
             $scope.loaderCount += 1;
@@ -182,10 +184,10 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.keypressCallback = function($event, reverse) {
-            if (! $($event.explicitOriginalTarget).is("input")){
-                $scope.gotoNextDoc(reverse);
-                $event.preventDefault();
-            }
+            // if (! $($event.explicitOriginalTarget).is("input")){
+            //     $scope.gotoNextDoc(reverse);
+            //     $event.preventDefault();
+            // }
         };
 
 
