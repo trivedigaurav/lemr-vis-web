@@ -31,6 +31,7 @@ angular.module('myApp.controllers', [])
         };
 
         checkLogin();
+        var initMap = '<canvas id="map"></canvas>';
 
         function checkLogin(manual) {
             backend.checkLogin()
@@ -78,13 +79,18 @@ angular.module('myApp.controllers', [])
 
         function loadEncounter(){
             startLoading();
+
+            $("#map").off();
+            $('#map').remove();
+
             backend.getEncounter($scope.active.encounterId).then(function(data) {
                 $scope.active.encounterData = data;
                 stopLoading();
 
                 //TODO: HACK: Load pagemap after a delay
+                $('body').append(initMap);
                 setTimeout(function(){
-                    pagemap(document.querySelector('#map'), {
+                    pagemap(document.querySelector("#map"), {
                         styles: {
                             '.info': 'rgba(0,0,0,0.08)',
                             '.annotator-hl': '#fffc00'
@@ -100,7 +106,7 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.findEncounter = function(){
-            $scope.active.encounterId = $("#findEncounterInput").val();
+            $scope.active.encounterId = document.querySelector("#findEncounterInput").value;
             $scope.active.encounterData = null;
             loadEncounter();
         }
