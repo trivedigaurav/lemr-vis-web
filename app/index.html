@@ -32,6 +32,7 @@
 </head>
 
 <body class="ng-cloak" ng-controller="appCtrl" ui-keypress="{'right':'keypressCallback($event, false)', 'left':'keypressCallback($event, true)'}">
+  <canvas id="map"></canvas>
 
 <!-- <div ng-show="appDisabled" class="coverall"></div> -->
 
@@ -214,6 +215,7 @@
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
   <script src="../node_modules/d3/d3.min.js"></script>
   <script src="../node_modules/jquery.scrollTo/jquery.scrollTo.min.js"></script>
+  <script src="../node_modules/pagemap/dist/pagemap.min.js"></script>
 
   <script src="js/annotator-full.min.js"></script>
   <script src="js/annotator-categories.js"></script>

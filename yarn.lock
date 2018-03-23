@@ -594,6 +594,10 @@ oauth-sign@~0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
 
+pagemap@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/pagemap/-/pagemap-0.4.0.tgz#b20adc1c1ce36000f56e59bbab9a5dbd06f020a5"
+
 performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"

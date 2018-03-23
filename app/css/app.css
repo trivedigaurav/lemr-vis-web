@@ -12,6 +12,21 @@ body {
     box-shadow: none;
 }
 
+
+/*
+ * PageMap
+ */
+#map {
+    position: fixed;
+    top: 52px;
+    right: 320px;
+    width: 120px;
+    height: 100%;
+    z-index: 999;
+    box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.54);
+}
+
+
 /*
  * Global add-ons
  */
@@ -81,7 +96,7 @@ body {
     padding-top: 10px;
     position: fixed;
     top: 51px;
-    width: calc(100% - 360px);
+    width: calc(100% - 480px);
     z-index: 998;
 }
 
@@ -268,7 +283,7 @@ body {
 
 .main {
   padding: 20px;
-  width: calc(100% - 320px);
+  width: calc(100% - 440px);
 }
 
 .main .page-header { margin-top: 0; }

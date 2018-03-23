@@ -81,6 +81,18 @@ angular.module('myApp.controllers', [])
             backend.getEncounter($scope.active.encounterId).then(function(data) {
                 $scope.active.encounterData = data;
                 stopLoading();
+
+                //TODO: HACK: Load pagemap after a delay
+                setTimeout(function(){
+                    pagemap(document.querySelector('#map'), {
+                        styles: {
+                            '.info': 'rgba(0,0,0,0.08)',
+                            '.annotator-hl': '#fffc00'
+                        },
+                    });
+                }, 500, false);
+                
+                
             }, function() {
                 showInfo("Unable to load reports");
                 stopLoading();
