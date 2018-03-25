@@ -22,7 +22,6 @@ body {
     right: 320px;
     width: 130px;
     height: calc(90%);
-    z-index: 999;
     box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.54);
 }
 
