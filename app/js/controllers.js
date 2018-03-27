@@ -91,9 +91,11 @@ angular.module('myApp.controllers', [])
                 $('body').append(initMap);
                 setTimeout(function(){
                     pagemap(document.querySelector("#map"), {
+                        // viewport: document.querySelector("#viewport"),
                         styles: {
                             '.info': 'rgba(0,0,0,0.08)',
-                            '.annotator-hl': '#fffc00'
+                            'highlighted-report': '#ffffff',
+                            '.annotator-hl-yellow': '#fffc00'
                         },
                     });
                 }, 500, false);
