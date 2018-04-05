@@ -1,3 +1,9 @@
+.annotation-helper {
+    background-image: linear-gradient(to bottom right,rgb(249, 73, 182) 0%,rgb(255, 139, 139) 100%);
+    box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.75);
+    padding: 1px;
+}
+
 /* 
  * Categories
  */
@@ -38,6 +44,10 @@
     height:20px;
 }
 
+.highlight-flash {
+    box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.75)!important;
+    transition: box-shadow 100ms ease-out;
+}
 /*
     General Adjustments
   =============================================

@@ -97,11 +97,19 @@ angular.module('myApp.directives', [])
                     $(element).highlight(/[a-zA-Z\-\ #]*\:/g, "bold") //Colon fields
                             .highlight(/\*\*[a-zA-Z\ ,-\[\]\.]*/g, "dim"); //DE-IDed Names
 
+                    //annotation-helper
+                    helper_list = ["tumor", "mass", "incidental", "nodule", "noted", "note"];
+                    helper_list.forEach( function(keyword) {
+                        // console.log(new RegExp("\\b"+keyword+"\\b","gi"))
+                        $(element).highlight(new RegExp("\\b"+keyword+"\\b","gi"), "annotation-helper", "annotation-helper-" + keyword);
+                    });
+
 
                     //For line numbers
                     element.html('<code>' + element.html()
                                     .split('\n')
                                     .join(' </code>\n<code>') + '</code>');
+
 
                     //Initialize annotator
                     var options = {};

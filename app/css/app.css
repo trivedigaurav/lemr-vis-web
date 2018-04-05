@@ -173,11 +173,6 @@ body {
 
 .clickable { cursor: pointer; }
 
-.highlight-flash {
-    background-color: yellow!important;
-    transition: background-color 100ms ease-out;
-}
-
 .empty-list { 
     padding: 2px;
     font-weight: bold;

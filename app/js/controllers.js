@@ -27,7 +27,8 @@ angular.module('myApp.controllers', [])
         $scope.active = {
             encounterId: "225481446",
             encounterData: null, 
-            username: null
+            username: null,
+            hl_index: 0
         };
 
         checkLogin();
@@ -85,6 +86,7 @@ angular.module('myApp.controllers', [])
 
             backend.getEncounter($scope.active.encounterId).then(function(data) {
                 $scope.active.encounterData = data;
+                $scope.active.hl_index = 0;
                 stopLoading();
 
                 //TODO: HACK: Load pagemap after a delay
@@ -95,7 +97,9 @@ angular.module('myApp.controllers', [])
                         styles: {
                             '.info': 'rgba(0,0,0,0.08)',
                             'highlighted-report': '#ffffff',
-                            '.annotator-hl-yellow': '#fffc00'
+                            '.annotator-hl-yellow': '#fffc00',
+                            '.annotation-helper': 'rgb(255, 139, 139)',
+                            '.highlight-flash': '#000000'
                         },
                     });
                 }, 500, false);
@@ -162,6 +166,44 @@ angular.module('myApp.controllers', [])
 
 
         /*
+         * Keypress
+         */
+        $scope.keypressCallback = function($event, reverse) {
+            if (! $($event.explicitOriginalTarget).is("input")){
+                $event.preventDefault();
+                
+                var hl_elements = $("[scroll-bookmark^='annotation-helper']");
+
+                if(hl_element.length){
+                    if(reverse){
+                        $scope.active.hl_index  = $scope.active.hl_index  - 1;
+
+                        if($scope.active.hl_index  < 0)
+                            $scope.active.hl_index  = hl_elements.length - 1;                    
+
+                    }
+                    else{
+                        $scope.active.hl_index  = $scope.active.hl_index  + 1;
+
+                        if($scope.active.hl_index  == hl_elements.length)
+                            $scope.active.hl_index  = 0;
+
+                    }
+
+                    var found = hl_elements[$scope.active.hl_index ];
+                    $('html, body').animate({scrollTop: $(found).offset().top - 200}, 1000); //ScrollTo doesn't work here :(
+                    $(found).addClass("highlight-flash");
+                    setTimeout(function () { 
+                        $(found).removeClass('highlight-flash');
+                    }, 2000);
+                }
+
+
+            }
+        };
+
+
+        /*
          * Misc.
          */
 
@@ -202,13 +244,6 @@ angular.module('myApp.controllers', [])
             else
                 $scope.loaderCount = 0;
         }
-
-        $scope.keypressCallback = function($event, reverse) {
-            // if (! $($event.explicitOriginalTarget).is("input")){
-            //     $scope.gotoNextDoc(reverse);
-            //     $event.preventDefault();
-            // }
-        };
 
 
         /*
