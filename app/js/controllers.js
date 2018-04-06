@@ -28,7 +28,7 @@ angular.module('myApp.controllers', [])
             encounterId: "225481446",
             encounterData: null, 
             username: null,
-            hl_index: 0
+            hl_index: -1
         };
 
         checkLogin();
@@ -86,7 +86,7 @@ angular.module('myApp.controllers', [])
 
             backend.getEncounter($scope.active.encounterId).then(function(data) {
                 $scope.active.encounterData = data;
-                $scope.active.hl_index = 0;
+                $scope.active.hl_index = -1;
                 stopLoading();
 
                 //TODO: HACK: Load pagemap after a delay
@@ -174,20 +174,18 @@ angular.module('myApp.controllers', [])
                 
                 var hl_elements = $("[scroll-bookmark^='annotation-helper']");
 
-                if(hl_element.length){
+                if(hl_elements.length){
                     if(reverse){
-                        $scope.active.hl_index  = $scope.active.hl_index  - 1;
-
-                        if($scope.active.hl_index  < 0)
-                            $scope.active.hl_index  = hl_elements.length - 1;                    
-
+                        if($scope.active.hl_index <= 0)
+                            $scope.active.hl_index  = hl_elements.length - 1;
+                        else
+                            $scope.active.hl_index  = $scope.active.hl_index - 1;
                     }
                     else{
-                        $scope.active.hl_index  = $scope.active.hl_index  + 1;
-
-                        if($scope.active.hl_index  == hl_elements.length)
-                            $scope.active.hl_index  = 0;
-
+                        if($scope.active.hl_index >= hl_elements.length - 1)
+                            $scope.active.hl_index = 0;
+                        else
+                            $scope.active.hl_index = $scope.active.hl_index + 1;
                     }
 
                     var found = hl_elements[$scope.active.hl_index ];
