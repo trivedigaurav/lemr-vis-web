@@ -160,7 +160,7 @@
                 </div>
               </div>
               
-              <div ng-repeat="report in active.encounterData.reports track by $index" id="emr-report-{{report.id}}" class="report">
+              <div ng-repeat="report in active.encounterData.reports track by $index" id="emr-report-{{report.id}}" class="report" ng-mouseup="expandSelectionText()">
                 <div class="info unselectable" scroll-bookmark='{{report.id}}'>
                   <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
                   <a tooltip-placement="bottom" tooltip-animation="false" tooltip='{{report.id}}'>
@@ -226,10 +226,10 @@
   <script src="../node_modules/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
   <script src="../node_modules/angular-cookies/angular-cookies.min.js"></script>
 
-<!--   <script src="../node_modules/rangy-official/rangy-core.min.js"></script>
+  <script src="../node_modules/rangy-official/rangy-core.min.js"></script>
   <script src="../node_modules/rangy-official/rangy-textrange.min.js"></script>
-  <script src="../node_modules/rangy-official/rangy-classapplier.min.js"></script>
- -->
+  <!-- <script src="../node_modules/rangy-official/rangy-classapplier.min.js"></script> -->
+
 
   <script src="../node_modules/angular-ui-utils/keypress.min.js"></script>
   

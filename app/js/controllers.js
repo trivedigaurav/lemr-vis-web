@@ -128,23 +128,22 @@ angular.module('myApp.controllers', [])
          * Feedback Context Menu
          */
 
-        // $scope.setFeedbackText = function(){
-        //     var selection = rangy.getSelection();
+        $scope.expandSelectionText = function(){
+            var selection = rangy.getSelection();
 
-        //     if(!selection.isCollapsed) {
-        //             selection.expand("word");
+            if(!selection.isCollapsed) {
+                    selection.expand("word");
+                    // var text = selection.toString().trim();
 
-        //             var text = selection.toString().trim();
-
-        //             if (text) {
-        //                 $scope.feedbackText = text;
-        //                 return;
-        //             }
-        //     }
-        //     else{
-        //         $scope.feedbackText = null;
-        //     }
-        // };
+                    // if (text) {
+                    //     $scope.feedbackText = text;
+                    //     return;
+                    // }
+            }
+            // else{
+            //     $scope.feedbackText = null;
+            // }
+        };
 
         // $scope.documentContextMenu = function() {
         //     var options = []
