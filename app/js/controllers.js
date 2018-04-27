@@ -25,7 +25,7 @@ angular.module('myApp.controllers', [])
         };
 
         $scope.active = {
-            encounterId: "225481446",
+            encounterId: localStorage.getItem('activeEncounter') || "232369324",
             encounterData: null, 
             username: null,
             hl_index: -1
@@ -115,6 +115,8 @@ angular.module('myApp.controllers', [])
             $scope.active.encounterId = document.querySelector("#findEncounterInput").value;
             $scope.active.encounterData = null;
             loadEncounter();
+
+            localStorage.setItem('activeEncounter', $scope.active.encounterId);
         }
 
         /*
