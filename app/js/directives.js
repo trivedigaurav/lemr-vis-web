@@ -98,10 +98,12 @@ angular.module('myApp.directives', [])
                             .highlight(/\*\*[a-zA-Z\ ,-\[\]\.]*/g, "dim"); //DE-IDed Names
 
                     //annotation-helper
-                    helper_list = ["tumor", "mass", "incidental", "nodule", "noted", "note"];
+                    helper_list = ["tumor", "mass", "incidental", 
+                                    "nodule", "note", "adenoma",
+                                    "cyst", "lesion", "aneurysm"];
                     helper_list.forEach( function(keyword) {
                         // console.log(new RegExp("\\b"+keyword+"\\b","gi"))
-                        $(element).highlight(new RegExp("\\b"+keyword+"\\b","gi"), "annotation-helper", "annotation-helper-" + keyword);
+                        $(element).highlight(new RegExp(keyword,"gi"), "annotation-helper", "annotation-helper-" + keyword);
                     });
 
 
@@ -119,10 +121,10 @@ angular.module('myApp.directives', [])
                     annotator.addPlugin('Categories', {
                         incidental: 'annotator-hl-yellow',
                         mechanism: 'annotator-hl-green',
-                        "To Do List": 'annotator-hl-red',
-                        "Injuries and Problem": 'annotator-hl-blue',
+                        todo: 'annotator-hl-red',
+                        injuries: 'annotator-hl-blue',
                         operative: 'annotator-hl-purple',
-                        "RADS/Intervention": 'annotator-hl-orange'
+                        intervention: 'annotator-hl-orange'
                     });
 
                     // console.log(backend.getAnnotationBackend());
@@ -133,11 +135,11 @@ angular.module('myApp.directives', [])
                         urls: backend.getAnnotationUrls(scope.recordId)
                     });
 
-                    annotator.addPlugin('Tags', {
-                        // // The endpoint of the store on your server.
-                        // prefix: "",
-                        // urls: backend.getAnnotationUrls(scope.recordId)
-                    });
+                    // annotator.addPlugin('Tags', {
+                    //     // // The endpoint of the store on your server.
+                    //     // prefix: "",
+                    //     // urls: backend.getAnnotationUrls(scope.recordId)
+                    // });
 
                 };
         
