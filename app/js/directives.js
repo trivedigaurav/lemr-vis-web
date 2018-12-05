@@ -74,7 +74,8 @@ angular.module('myApp.directives', [])
         restrict: 'E',
         scope: {
             data: '=',
-            recordId: '='
+            recordId: '=',
+            helperTerms: '='
         },
         link: function (scope, element, attrs) {
 
@@ -98,10 +99,7 @@ angular.module('myApp.directives', [])
                             .highlight(/\*\*[a-zA-Z\ ,-\[\]\.]*/g, "dim"); //DE-IDed Names
 
                     //annotation-helper
-                    helper_list = ["tumor", "mass", "incidental", 
-                                    "nodule", "note", "adenoma",
-                                    "cyst", "lesion", "aneurysm"];
-                    helper_list.forEach( function(keyword) {
+                    scope.helperTerms.forEach( function(keyword) {
                         // console.log(new RegExp("\\b"+keyword+"\\b","gi"))
                         $(element).highlight(new RegExp(keyword,"gi"), "annotation-helper", "annotation-helper-" + keyword);
                     });
@@ -143,7 +141,7 @@ angular.module('myApp.directives', [])
 
                 };
         
-                scope.$watch('data', function(){
+                scope.$watchGroup(['data', 'helperTerms'], function(){
                     scope.highlightTerms();
                 }, true);
         }
