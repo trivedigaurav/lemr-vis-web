@@ -553,13 +553,10 @@ body {
   width:320px;
 }
 
-#encounter-display{
+.panel{
   margin: 10px 0px 10px 0px;
 }
 
-#lemr-suggest{
-  /*margin: 10px 0px 10px 0px;*/
-}
 
 /*
  * Document View
