@@ -51,20 +51,19 @@ angular.module('myApp.controllers', [])
             }
         }
 
-        $scope.startSession = function(){
-            backend.putLogEvent("startSession", "OK");
-            loadEncounter();
-        }
-
         /*
          * Load reports
          */
 
-        function loadEncounter(){
+        $scope.loadEncounter = function(){
             startLoading();
 
             $("#map").off();
             $('#map').remove();
+
+            $scope.active.encounterData = null;
+
+            backend.putLogEvent("loadEncounter", $scope.active.encounterId);
 
             backend.getEncounter($scope.active.encounterId).then(function(data) {
                 $scope.active.encounterData = data;
@@ -87,14 +86,10 @@ angular.module('myApp.controllers', [])
                 
                 
             }, function() {
+                backend.putLogEvent("loadEncounterFailed", "$scope.active.encounterId");
                 showInfo("Unable to load reports");
                 stopLoading();
             });
-        }
-
-        $scope.findEncounter = function(){
-            $scope.active.encounterData = null;
-            loadEncounter();
         }
 
 

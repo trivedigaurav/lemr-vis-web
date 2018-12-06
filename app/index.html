@@ -39,7 +39,7 @@
 
   <div ng-if="!active.username" class="coverall" id="login">
     <!-- TODO: Proper login -->
-    <login user="active.username" session="startSession()"></login>
+    <login user="active.username" load="loadEncounter()"></login>
   </div>
   
   <div ng-show="loaderCount > 0" id="appLoading" class="alert alert-warning appNotice">
@@ -83,7 +83,7 @@
               <h3 class="panel-title">Select encounter</h3>
             </div>
             <div class="panel-body">
-              <encounter-select find="findEncounter(encounterId)" active="active.encounterId"></encounter-select>
+              <encounter-select load="loadEncounter()" active="active.encounterId"></encounter-select>
             </div>
           </div>
 
@@ -258,6 +258,7 @@
   <script src="js/search.tags.module.js"></script>
   <script src="js/encounter.select.module.js"></script>
   <script src="js/login.module.js"></script>
+  <!-- <script src="js/highlighted.report.directive.js"></script> -->
   
   <!-- <script src="../node_modules/angular-annotator/src/angular-annotator.js"></script> -->
   <!-- <script src="../node_modules/annotator-validation-plugin/src/annotator-validation-plugin.js"></script> -->

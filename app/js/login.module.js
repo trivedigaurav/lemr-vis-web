@@ -11,7 +11,7 @@
       restrict: 'E',
       bindings: {
         user: '=',
-        session: '&'
+        load: '&'
       },
       templateUrl: _template,
       controller: ['backend', LoginController],
@@ -30,7 +30,8 @@
         backend.checkLogin()
             .then(function () {
                 self.user = backend.getUserName();
-                self.session();
+                backend.putLogEvent("startSession", self.user);
+                self.load();
             }, function() {
                 if(manual) {
                     $("#login-box").addClass('has-error animated shake');

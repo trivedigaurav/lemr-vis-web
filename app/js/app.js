@@ -11,5 +11,5 @@ var app = angular.module('myApp', [
   'ui.keypress',
   'search.tags',
   'encounter.select',
-  'login'
+  'login',
 ]);

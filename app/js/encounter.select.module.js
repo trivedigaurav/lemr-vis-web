@@ -10,7 +10,7 @@
       
       restrict: 'E',
       bindings: {
-        find: '&',
+        load: '&',
         active: '='
       },
       templateUrl: _template,
@@ -28,7 +28,8 @@
     }
 
     self.changeEncounter = function(){
-      self.find();
+      console.log("changeEncounter called!")
+      self.load();
       localStorage.setItem('activeEncounter', self.active);
     }
     
