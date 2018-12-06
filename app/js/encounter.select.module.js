@@ -28,10 +28,8 @@
 
     self.changeEncounter = function(){
       // console.log("changeEncounter", self.eid);
-
       self.load({encounter: self.eid});
-
-      localStorage.setItem('activeEncounter', self.active);
+      localStorage.setItem('activeEncounter', self.eid);
     }
     
   }
