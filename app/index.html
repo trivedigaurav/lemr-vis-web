@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="css/app.css"/>
   <link rel="stylesheet" href="css/annotator.min.css"/>
   <link rel="stylesheet" href="css/annotator-categories.css"/>
+  <link rel="stylesheet" href="css/login.css"/>
 
   <link rel="icon" href="favicon.png">
   
@@ -38,24 +39,7 @@
 
 <!-- TODO: Fix login -->
   <div ng-if="!active.username" class="coverall" id="login">
-    <div class="col-md-4 col-md-offset-4" id="login-box-container">
-      <div class="panel panel-default" id="login-box">
-        <div class="panel-heading"><h3 class="panel-title"><strong>Sign In </strong></h3></div>
-        <div class="panel-body">
-          <form role="form" ng-submit="doLogin()">
-            <div class="form-group">
-              <label for="input-username">Username</label>
-              <input type="text" class="form-control" placeholder="Enter username" id="input-username" required>
-            </div>
-            <div class="form-group">
-              <label for="input-password">Password</label>
-              <input type="password" class="form-control" placeholder="Password" id="input-password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
-          </form>
-        </div>
-      </div>
-    </div>
+    <login user="active.username" submit="doLogin()"></login>
   </div>
   
   <div ng-show="loaderCount > 0" id="appLoading" class="alert alert-warning appNotice">
@@ -273,6 +257,7 @@
   <script src="js/directives.js"></script>
   <script src="js/search.tags.module.js"></script>
   <script src="js/encounter.select.module.js"></script>
+  <script src="js/login.module.js"></script>
   
   <!-- <script src="../node_modules/angular-annotator/src/angular-annotator.js"></script> -->
   <!-- <script src="../node_modules/annotator-validation-plugin/src/annotator-validation-plugin.js"></script> -->
