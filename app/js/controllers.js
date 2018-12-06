@@ -46,7 +46,7 @@ angular.module('myApp.controllers', [])
                 backend.putLogEvent("endSession", "OK");
                 backend.logout();
                 $scope.active.username = null;
-
+                localStorage.clear();
                 $window.location.reload(true);
             }
         }
@@ -55,11 +55,14 @@ angular.module('myApp.controllers', [])
          * Load reports
          */
 
-        $scope.loadEncounter = function(){
+        $scope.loadEncounter = function(encounter){
             startLoading();
 
             $("#map").off();
             $('#map').remove();
+
+            if(encounter)
+                $scope.active.encounterId = encounter;
 
             $scope.active.encounterData = null;
 
