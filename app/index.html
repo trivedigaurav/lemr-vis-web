@@ -99,7 +99,7 @@
               <h3 class="panel-title">Select encounter</h3>
             </div>
             <div class="panel-body">
-              <div class="input-group" ng-include src="'partials/encounter-select.html?v=' + cacheBust"></div>
+              <encounter-select find="findEncounter(encounterId)" active="active.encounterId"></encounter-select>
             </div>
           </div>
 
@@ -271,7 +271,8 @@
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
-  <script src="js/tags.module.js"></script>
+  <script src="js/search.tags.module.js"></script>
+  <script src="js/encounter.select.module.js"></script>
   
   <!-- <script src="../node_modules/angular-annotator/src/angular-annotator.js"></script> -->
   <!-- <script src="../node_modules/annotator-validation-plugin/src/annotator-validation-plugin.js"></script> -->
