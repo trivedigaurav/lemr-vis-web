@@ -8,5 +8,6 @@ var app = angular.module('myApp', [
   'myApp.filters',
   'ui.bootstrap',
   'ngCookies',
-  'ui.keypress'
+  'ui.keypress',
+  'tags',
 ]);

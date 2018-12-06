@@ -3,8 +3,10 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('appCtrl', ['$scope', '$window', '$document', '$rootScope', 'backend', 'truncateFilter',
-    function($scope, $window, $document, $rootScope, backend, truncateFilter) {
+  .controller('appCtrl', ['$scope', '$window', '$document', 
+    '$rootScope', 'backend', 'truncateFilter', '$filter',
+    function($scope, $window, $document,
+        $rootScope, backend, truncateFilter, $filter) {
         /*
          * Debug
          */
@@ -118,6 +120,33 @@ angular.module('myApp.controllers', [])
 
             localStorage.setItem('activeEncounter', $scope.active.encounterId);
         }
+
+
+        /*
+         * Helper Terms
+         */
+        $scope.search_list = ["tumor", "mass", "incidental", 
+                        "nodule", "note", "adenoma",
+                        "cyst", "lesion", "aneurysm"];
+
+        $scope.addTag = function(){
+           if( $scope.insertTag !== ''){
+                //check if not already there
+                if($scope.search_list.indexOf($scope.insertTag) === -1){
+                    $scope.search_list.push($scope.insertTag);
+                    $scope.insertTag = '';
+                }
+            }
+        }
+        
+        $scope.closeTag = function(text){
+            $scope.search_list = $filter('filter')($scope.search_list, function(value){
+            return value != text;
+            });
+        }
+
+        $scope.isNavCollapsed = true;
+                    
 
         /*
          * Tabs

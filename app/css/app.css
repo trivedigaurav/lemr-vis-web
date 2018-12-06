@@ -222,6 +222,10 @@ body {
     margin: 10px;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 /* Side notes for calling out things
 -------------------------------------------------- */
  
@@ -553,10 +557,33 @@ body {
   width:320px;
 }
 
-.panel{
+.panel {
   margin: 10px 0px 10px 0px;
 }
 
+.panel ul {
+  margin: 0;
+}
+
+.tags{
+  border-radius: 15px !important;
+  width: auto;
+  padding: 1px 6px 2px 6px;
+  vertical-align: baseline;
+  white-space: nowrap;
+  box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.75);
+  background-image: linear-gradient(to bottom right,rgb(249, 73, 182) 0%,rgb(255, 139, 139) 100%);
+}
+
+.tagsContainer{
+  margin-top: 10px;
+}
+
+.annotation-helper {
+    background-image: linear-gradient(to bottom right,rgb(249, 73, 182) 0%,rgb(255, 139, 139) 100%);
+    box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.75);
+    padding: 1px;
+}
 
 /*
  * Document View

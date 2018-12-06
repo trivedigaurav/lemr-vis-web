@@ -103,7 +103,7 @@
             </div>
           </div>
 
-          <!-- <div id="lemr-suggest" class="panel panel-default">
+<!--           <div id="lemr-suggest" class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">LEMR Suggestions</h3>
             </div>
@@ -126,14 +126,46 @@
             </div>
           </div> -->
 
-          <div id="signout-display" class="panel panel-default" ng-if="active.encounterData">
+<!--           <div id="signout-display" class="panel panel-default" ng-if="active.encounterData">
             <div class="panel-heading">
               <h3 class="panel-title">Incidental Finding</h3>
             </div>
             <div class="panel-body">
               {{active.encounterData.incidental}}
             </div>
+          </div> -->
+
+          <div id="search-terms" class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Search Terms
+              <span class="pull-right clickable" ng-click="isNavCollapsed = !isNavCollapsed">
+                <span class="glyphicon glyphicon-chevron-up" ng-if="!isNavCollapsed"></span>
+                <span class="glyphicon glyphicon-chevron-down" ng-if="isNavCollapsed"></span>
+              </span>
+              </h3>
+            </div>
+            <div class="panel-body" ng-if="!isNavCollapsed">
+              <!-- Highlights input -->
+              <form ng-submit="addTag()">
+                <div class="input-group">
+                  <input type="text" 
+                         class="form-control" 
+                         id="exampleInputName2" 
+                         placeholder="Add term..."
+                         ng-model="insertTag"">
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default" ng-click="addTag()">Add</button>
+                  </span>
+                </div>
+              </form>
+              <ul class="list-inline" >
+                <li class="listItem" ng-repeat="elem in search_list">
+                  <search-tag text="{{elem}}" close="closeTag(text)"></search-tag>
+                </li>
+              </ul>
+            </div>
           </div>
+
       </div>
 
       <!-- Document views -->
@@ -173,7 +205,7 @@
 
                 </div>
                 <pre>
-                    <highlighted-report data='report.text' record-id='report.id'>
+                    <highlighted-report data='report.text' record-id='report.id' helper-terms="search_list">
                    </highlighted-report>
                 </pre>
               </div>
@@ -238,6 +270,7 @@
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
+  <script src="js/tags.module.js"></script>
   
   <!-- <script src="../node_modules/angular-annotator/src/angular-annotator.js"></script> -->
   <!-- <script src="../node_modules/annotator-validation-plugin/src/annotator-validation-plugin.js"></script> -->

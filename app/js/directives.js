@@ -114,9 +114,9 @@ angular.module('myApp.directives', [])
                     //Initialize annotator
                     var options = {};
                     
-                    var annotator = angular.element(element).annotator(options).data('annotator');
+                    scope.annotator = angular.element(element).annotator(options).data('annotator');
 
-                    annotator.addPlugin('Categories', {
+                    scope.annotator.addPlugin('Categories', {
                         incidental: 'annotator-hl-yellow',
                         mechanism: 'annotator-hl-green',
                         todo: 'annotator-hl-red',
@@ -127,7 +127,7 @@ angular.module('myApp.directives', [])
 
                     // console.log(backend.getAnnotationBackend());
 
-                    annotator.addPlugin('Store', {
+                    scope.annotator.addPlugin('Store', {
                         // The endpoint of the store on your server.
                         prefix: "",
                         urls: backend.getAnnotationUrls(scope.recordId)
@@ -141,8 +141,11 @@ angular.module('myApp.directives', [])
 
                 };
         
-                scope.$watchGroup(['data', 'helperTerms'], function(){
+                scope.$watchGroup(['data', 'helperTerms.length'], function(){
+                    if(scope.annotator)
+                        scope.annotator.destroy();
                     scope.highlightTerms();
+                    // console.log("Directive redrawn!");
                 }, true);
         }
     };
