@@ -94,7 +94,7 @@ angular.module('myApp.controllers', [])
                 //TODO: HACK: Load pagemap after a delay
                 $('body').append(initMap);
                 setTimeout(function(){
-                    pagemap(document.querySelector("#map"), {
+                    $scope.pagemap = pagemap(document.querySelector("#map"), {
                         // viewport: document.querySelector("#viewport"),
                         styles: {
                             '.info': 'rgba(0,0,0,0.08)',
@@ -129,11 +129,11 @@ angular.module('myApp.controllers', [])
                         "nodule", "note", "adenoma",
                         "cyst", "lesion", "aneurysm"];
 
-        $scope.addTag = function(){
-           if( $scope.insertTag !== ''){
+        $scope.addTag = function(input){
+           if(input !== ''){
                 //check if not already there
-                if($scope.search_list.indexOf($scope.insertTag) === -1){
-                    $scope.search_list.push($scope.insertTag);
+                if($scope.search_list.indexOf(input) === -1){
+                    $scope.search_list.push(input);
                     $scope.insertTag = '';
                 }
             }

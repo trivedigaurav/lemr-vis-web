@@ -146,15 +146,15 @@
             </div>
             <div class="panel-body" ng-if="!isNavCollapsed">
               <!-- Highlights input -->
-              <form ng-submit="addTag()">
+              <form ng-submit="addTag(insertTag)">
                 <div class="input-group">
                   <input type="text" 
                          class="form-control" 
                          id="exampleInputName2" 
                          placeholder="Add term..."
-                         ng-model="insertTag"">
+                         ng-model="insertTag">
                   <span class="input-group-btn">
-                    <button type="submit" class="btn btn-default" ng-click="addTag()">Add</button>
+                    <button type="submit" class="btn btn-default" ng-click="addTag(insertTag)">Add</button>
                   </span>
                 </div>
               </form>
