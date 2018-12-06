@@ -92,8 +92,10 @@ angular.module('myApp.controllers', [])
                 stopLoading();
 
                 $('body').append(initMap);
-                $scope.pagemapCtrl = pagemap(document.querySelector("#map"), {
+                pagemap(document.querySelector("#map"), {
                         // viewport: document.querySelector("#viewport"),
+                        //HACK: We don't know when the annotations finish loading
+                        interval: 50,
                         styles: {
                             '.info': 'rgba(0,0,0,0.08)',
                             'highlighted-report': '#ffffff',
@@ -141,8 +143,6 @@ angular.module('myApp.controllers', [])
             return value != text;
             });
         }
-
-        $scope.isNavCollapsed = true;
                     
 
         /*
@@ -150,6 +150,7 @@ angular.module('myApp.controllers', [])
          */
 
         $scope.tabs = {docView: true};
+        $scope.isNavCollapsed = false;
 
 
         /*

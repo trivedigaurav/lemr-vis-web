@@ -76,7 +76,7 @@ angular.module('myApp.directives', [])
             data: '=',
             recordId: '=',
             helperTerms: '=',
-            redrawMap: '='
+            // redrawMap: '='
         },
         link: function (scope, element, attrs) {
 
@@ -140,7 +140,12 @@ angular.module('myApp.directives', [])
                     //     // urls: backend.getAnnotationUrls(scope.recordId)
                     // });
 
-                    scope.redrawMap();
+                    //HACK: We don't know when the annotations finish loading
+                    // setTimeout(function(){
+                    //     scope.redrawMap();
+                    // }, 5000)
+
+                    // scope.redrawMap();
 
                 };
         
