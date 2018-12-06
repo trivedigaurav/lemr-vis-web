@@ -166,35 +166,7 @@
 
           <!-- Report view -->
           <tab active="tabs.docView" heading="Report">
-            <div class="tab-inner-content" ng-if="active.encounterData.reports">
-
-              <div class="pagerview">
-                <div class="pagerview-row">
-                    <div ng-repeat="report in active.encounterData.reports track by $index" class="pagerview-step">
-                        <button type="button" scroll-to-bookmark='{{report.id}}' class="btn btn-default btn-circle">{{$index + 1}}</button>
-                        <p class="clickable" scroll-to-bookmark='{{report.id}}'> {{report.date | myDate}} </p>
-                    </div>
-                </div>
-              </div>
-              
-              <div ng-repeat="report in active.encounterData.reports track by $index" id="emr-report-{{report.id}}" class="report" ng-mouseup="expandSelectionText()">
-                <div class="info unselectable" scroll-bookmark='{{report.id}}'>
-                  <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
-                  <a tooltip-placement="bottom" tooltip-animation="false" tooltip='{{report.id}}'>
-                    <strong class="file-name js-selectable-text">{{ report.date | myDate }}</strong>
-                  </a>
-                  
-                  <a class="btn btn-xs btn-default pull-right" ng-click="popReport(report.id)" href="#{{report.id}}"><i class="glyphicon glyphicon-new-window"></i></a>
-
-                  <span class="pull-right" ng-include src="'partials/report-paginate.html?v=' + cacheBust"></span>
-
-                </div>
-                <pre>
-                    <highlighted-report data='report.text' record-id='report.id' helper-terms="search_list" >
-                    <!-- redraw-map='pagemapCtrl.redraw'> -->
-                   </highlighted-report>
-                </pre>
-              </div>
+            <div class="tab-inner-content" ng-if="active.encounterData.reports" ng-include src="'partials/reports.html?v=' + cacheBust">
             </div>
           </tab>
 

@@ -216,19 +216,19 @@ angular.module('myApp.controllers', [])
             }, 1500);
         }
 
-        $scope.popReport = function(reportid) {
-            //http://stackoverflow.com/questions/2255291/print-the-contents-of-a-div
-            var mywindow = $window.open('', reportid, "location=no, toolbar=no, scrollbars=yes, width=800");
-            mywindow.document.write('<html><head><title>Report #'+ reportid +'</title>');
-            mywindow.document.write('</head><body><pre>');
+        // $scope.popReport = function(reportid) {
+        //     //http://stackoverflow.com/questions/2255291/print-the-contents-of-a-div
+        //     var mywindow = $window.open('', reportid, "location=no, toolbar=no, scrollbars=yes, width=800");
+        //     mywindow.document.write('<html><head><title>Report #'+ reportid +'</title>');
+        //     mywindow.document.write('</head><body><pre>');
 
-            //Hide annotator classes
-            var tree = $("<div" + $("#emr-report-" + reportid + " pre").html() + "</div>");
-            tree.find(".annotator-hide").remove()
-            mywindow.document.write(tree.html());
+        //     //Hide annotator classes
+        //     var tree = $("<div" + $("#emr-report-" + reportid + " pre").html() + "</div>");
+        //     tree.find(".annotator-hide").remove()
+        //     mywindow.document.write(tree.html());
 
-            mywindow.document.write('</pre></body></html>');
-        }
+        //     mywindow.document.write('</pre></body></html>');
+        // }
 
         // Loading
         $scope.loaderCount = 0;
