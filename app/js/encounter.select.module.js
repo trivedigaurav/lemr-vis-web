@@ -27,7 +27,7 @@
     }
 
     self.changeEncounter = function(){
-      console.log("changeEncounter", self.eid);
+      // console.log("changeEncounter", self.eid);
 
       self.load({encounter: self.eid});
 

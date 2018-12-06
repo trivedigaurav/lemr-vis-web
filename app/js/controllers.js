@@ -46,7 +46,6 @@ angular.module('myApp.controllers', [])
                 backend.putLogEvent("endSession", "OK");
                 backend.logout();
                 $scope.active.username = null;
-                localStorage.clear();
                 $window.location.reload(true);
             }
         }
