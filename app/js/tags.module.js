@@ -2,7 +2,7 @@
 
 (function(angular){
 
-  var _template =  'tags.html';
+  var _template =  'templates/tags.html';
 
   var app = angular.module('tags', ['ui.bootstrap']);
   
