@@ -9,5 +9,6 @@ var app = angular.module('myApp', [
   'ui.bootstrap',
   'ngCookies',
   'ui.keypress',
-  'tags',
+  'search.tags',
+  'encounter.select',
 ]);

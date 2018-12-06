@@ -2,9 +2,9 @@
 
 (function(angular){
 
-  var _template =  'templates/tags.html';
+  var _template =  'templates/search-tags.html';
 
-  var app = angular.module('tags', ['ui.bootstrap']);
+  var app = angular.module('search.tags', ['ui.bootstrap']);
   
   app.component('searchTag',{
       
@@ -19,11 +19,8 @@
     });
   
   
-  function TagController(){
-    var self = this;
-    
-    self.$onInit = function(){}
-    
+  function TagController(){    
+    this.$onInit = function(){}
   }
   
 })(window.angular);
