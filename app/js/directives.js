@@ -75,7 +75,8 @@ angular.module('myApp.directives', [])
         scope: {
             data: '=',
             recordId: '=',
-            helperTerms: '='
+            helperTerms: '=',
+            redrawMap: '='
         },
         link: function (scope, element, attrs) {
 
@@ -138,6 +139,8 @@ angular.module('myApp.directives', [])
                     //     // prefix: "",
                     //     // urls: backend.getAnnotationUrls(scope.recordId)
                     // });
+
+                    scope.redrawMap();
 
                 };
         

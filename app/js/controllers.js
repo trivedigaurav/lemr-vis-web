@@ -91,10 +91,8 @@ angular.module('myApp.controllers', [])
                 $scope.active.hl_index = -1;
                 stopLoading();
 
-                //TODO: HACK: Load pagemap after a delay
                 $('body').append(initMap);
-                setTimeout(function(){
-                    $scope.pagemap = pagemap(document.querySelector("#map"), {
+                $scope.pagemapCtrl = pagemap(document.querySelector("#map"), {
                         // viewport: document.querySelector("#viewport"),
                         styles: {
                             '.info': 'rgba(0,0,0,0.08)',
@@ -104,7 +102,6 @@ angular.module('myApp.controllers', [])
                             '.highlight-flash': '#000000'
                         },
                     });
-                }, 500, false);
                 
                 
             }, function() {
@@ -272,7 +269,6 @@ angular.module('myApp.controllers', [])
             else
                 $scope.loaderCount = 0;
         }
-
 
         /*
          * Sorting
