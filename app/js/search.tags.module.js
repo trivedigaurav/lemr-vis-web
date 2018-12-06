@@ -19,8 +19,9 @@
     });
   
   
-  function TagController(){    
-    this.$onInit = function(){}
+  function TagController(){ 
+    var self = this;
+    self.$onInit = function(){}
   }
   
 })(window.angular);

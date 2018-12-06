@@ -33,27 +33,7 @@ angular.module('myApp.controllers', [])
             hl_index: -1
         };
 
-        checkLogin();
         var initMap = '<canvas id="map"></canvas>';
-
-        function checkLogin(manual) {
-            backend.checkLogin()
-                .then(function () {
-                    $scope.active.username = backend.getUserName();
-                    startSession();
-                }, function() {
-                    if(manual) {
-                        $("#login-box").addClass('has-error animated shake');
-                    }
-                    $scope.active.username = null;
-                });
-        }
-
-        $scope.doLogin = function() {
-            $("#login-box").removeClass('has-error animated shake');
-            backend.login($("#input-username").val(), $("#input-password").val());
-            checkLogin(true);
-        }
 
         $scope.doLogout = function() {
             var confirm = true;
@@ -71,7 +51,7 @@ angular.module('myApp.controllers', [])
             }
         }
 
-        function startSession(){
+        $scope.startSession = function(){
             backend.putLogEvent("startSession", "OK");
             loadEncounter();
         }

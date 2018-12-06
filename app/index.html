@@ -39,7 +39,7 @@
 
 <!-- TODO: Fix login -->
   <div ng-if="!active.username" class="coverall" id="login">
-    <login user="active.username" submit="doLogin()"></login>
+    <login user="active.username" session="startSession()"></login>
   </div>
   
   <div ng-show="loaderCount > 0" id="appLoading" class="alert alert-warning appNotice">
