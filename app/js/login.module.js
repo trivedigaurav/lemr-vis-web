@@ -11,21 +11,41 @@
       restrict: 'E',
       bindings: {
         user: '=',
-        submit: '&'
+        start: '&'
       },
       templateUrl: _template,
-      controller: LoginController,
+      controller: ['backend', LoginController],
       controllerAs: 'login'
     });
   
   
-  function LoginController(){
-    
-    this.$onInit = function(){
-      // this.active = localStorage.getItem('activeEncounter') || "232369324";
-      // this.changeEncounter();
+  function LoginController(backend){
+    var self = this;
+
+    self.$onInit = function(){
+         self.checkLogin();
+    }
+
+    self.checkLogin = function(manual) {
+        backend.checkLogin()
+            .then(function () {
+                self.user = backend.getUserName();
+                self.start();
+            }, function() {
+                if(manual) {
+                    $("#login-box").addClass('has-error animated shake');
+                }
+                self.user = null;
+            });
+    }
+
+    self.submit = function() {
+          $("#login-box").removeClass('has-error animated shake');
+          backend.login(self.username, self.password);
+          self.checkLogin(true);
     }
     
   }
-  
+
+
 })(window.angular);

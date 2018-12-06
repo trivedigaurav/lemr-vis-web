@@ -20,15 +20,16 @@
   
   
   function SelectController(){
+    var self = this;
     
-    this.$onInit = function(){
-      this.active = localStorage.getItem('activeEncounter') || "232369324";
-      this.changeEncounter();
+    self.$onInit = function(){
+      self.active = localStorage.getItem('activeEncounter') || "232369324";
+      self.changeEncounter();
     }
 
-    this.changeEncounter = function(){
-      this.find();
-      localStorage.setItem('activeEncounter', this.active);
+    self.changeEncounter = function(){
+      self.find();
+      localStorage.setItem('activeEncounter', self.active);
     }
     
   }
