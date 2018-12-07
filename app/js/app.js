@@ -12,5 +12,6 @@ var app = angular.module('myApp', [
   'search.tags',
   'encounter.select',
   'login',
-  'highlightedReport.directive'
+  'highlightedReport.directive',
+  'pagemap.directive'
 ]);

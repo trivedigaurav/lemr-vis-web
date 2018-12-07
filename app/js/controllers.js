@@ -33,8 +33,6 @@ angular.module('myApp.controllers', [])
             hl_index: -1
         };
 
-        var initMap = '<canvas id="map"></canvas>';
-
         $scope.doLogout = function() {
             var confirm = true;
 
@@ -57,9 +55,6 @@ angular.module('myApp.controllers', [])
         $scope.loadEncounter = function(encounter){
             startLoading();
 
-            $("#map").off();
-            $('#map').remove();
-
             if(encounter)
                 $scope.active.encounterId = encounter;
 
@@ -70,23 +65,7 @@ angular.module('myApp.controllers', [])
             backend.getEncounter($scope.active.encounterId).then(function(data) {
                 $scope.active.encounterData = data;
                 $scope.active.hl_index = -1;
-                stopLoading();
-
-                $('body').append(initMap);
-                pagemap(document.querySelector("#map"), {
-                        // viewport: document.querySelector("#viewport"),
-                        //HACK: We don't know when the annotations finish loading
-                        interval: 50,
-                        styles: {
-                            '.info': 'rgba(0,0,0,0.08)',
-                            'highlighted-report': '#ffffff',
-                            '.annotator-hl-yellow': '#fffc00',
-                            '.annotation-helper': 'rgb(255, 139, 139)',
-                            '.highlight-flash': '#000000'
-                        },
-                    });
-                
-                
+                stopLoading();                
             }, function() {
                 backend.putLogEvent("loadEncounterFailed", "$scope.active.encounterId");
                 showInfo("Unable to load reports");
