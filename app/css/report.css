@@ -75,7 +75,7 @@
 .pagerview {
     display: table;
     position: relative;
-    margin-top: 30px;
+    margin-top: 70px;
     width: -moz-available;          /* WebKit-based browsers will ignore this. */
     width: -webkit-fill-available;
 }
