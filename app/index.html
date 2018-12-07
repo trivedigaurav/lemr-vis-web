@@ -19,6 +19,9 @@
   <link rel="stylesheet" href="css/annotator-categories.css"/>
   <link rel="stylesheet" href="css/login.css"/>
   <link rel="stylesheet" href="css/report.css"/>
+  <link rel="stylesheet" href="css/pagemap.css"/>
+
+  <!-- TODO: add a routine to merge all sources for production -->
 
   <link rel="icon" href="favicon.png">
   
@@ -111,16 +114,16 @@
             </div>
           </div> -->
 
-<!--           <div id="signout-display" class="panel panel-default" ng-if="active.encounterData">
+          <div class="panel panel-default" ng-include src="'partials/search-terms.html?v=' + cacheBust">
+          </div>
+
+          <div id="signout-display" class="panel panel-default" ng-if="active.encounterData">
             <div class="panel-heading">
               <h3 class="panel-title">Incidental Finding</h3>
             </div>
             <div class="panel-body">
               {{active.encounterData.incidental}}
             </div>
-          </div> -->
-
-          <div class="panel panel-default" ng-include src="'partials/search-terms.html?v=' + cacheBust">
           </div>
 
       </div>

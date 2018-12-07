@@ -1,0 +1,11 @@
+/*
+ * PageMap
+ */
+#map {
+    position: fixed;
+    top: 52px;
+    right: 320px;
+    width: 130px;
+    height: calc(90%);
+    box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.54);
+}

@@ -14,19 +14,6 @@ body {
 
 
 /*
- * PageMap
- */
-#map {
-    position: fixed;
-    top: 52px;
-    right: 320px;
-    width: 130px;
-    height: calc(90%);
-    box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.54);
-}
-
-
-/*
  * Global add-ons
  */
 
@@ -570,67 +557,6 @@ body {
     padding: 1px;
 }
 
-
-/*
- * Feedback
- */
-
-
-.report-feedback {
-    z-index: 1510;
-    
-    display: block;
-    position: fixed;
-
-    top: -6px;
-    left: 701px;
-
-    padding: 5px;
-    padding-top: 15px;
-    margin-top: 4px;
-    /*box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.31);*/
-}
-
-.wordtree-feedback {
-    display: block;
-    font-size: 13px;
-    left: 0;
-    margin-top: 4px;
-    padding: 6px;
-    position: absolute;
-    top: -4px;
-    width: calc(100% - 15px);
-    z-index: 1510;
-}
-
-.report-feedback select{
-    width:120px;
-}
-
-.report-feedback a{
-    cursor: pointer;
-}
-
-.tab-inner-content {
-    padding-top: 35px;
-}
-
-.tab-inner-content h4{
-    margin-bottom: 20px;
-}
-
-#feedbackList .alert-default{
-    background-color: #eee;
-    padding: 2px;
-}
-
-@media all and (max-width: 1180px) {
-    .report-feedback {
-      display: none;
-    }
-}
-
-
 /*
  * Spinning animation
  */
@@ -648,85 +574,6 @@ body {
 @-webkit-keyframes spin {
     from {-webkit-transform: rotate(0deg);}
     to {-webkit-transform: rotate(359deg);}
-}
-
-
-/*
- * WordTree
- */
-
-.wordtree-search-control { height: 36px;}
-
-#wordtree-view {
-    background-color: white;
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    overflow: scroll;
-    height: calc(100% - 58px);
-}
-
-#wordtree-empty {
-    padding: 10px;
-    color: #999;
-}
-
-#wordtree-about {
-    cursor: default;
-    height: 35px;
-    margin-top: -35px;
-    overflow: hidden;
-    padding: 6px;
-    position: absolute;
-    z-index: 1050;
-}
-
-#wordtree-popup {
-    background-color: #eee;
-    border-top-right-radius: 4px;
-    color: #888;
-    cursor: default;
-    font-size: 12px;
-    height: 22px;
-    margin-top: 1px;
-    overflow: hidden;
-    padding: 3px;
-    position: absolute;
-    right: 1px;
-    z-index: 3050;
-    display: none;
-}
-
-.wordtree-view-overlay {  
-    position:fixed;
-    top:48px;
-    left:0;
-    width:100%;
-    z-index:3010;
-    border: none!important;
-    margin-top: 0!important;
-    height: 100%!important;
-}
-
-.wordtree-about-overlay {  
-    position:absolute;
-    bottom:0;
-    left:0;
-    z-index:3010!important;
-}
-
-.wordtree-popup-overlay {
-    position:fixed!important;
-    margin: 0!important;
-    top:48px!important;
-    right:0!important;
-    border-radius: 0;
-    z-index:3010;
-}
-
-#wordtree-about-info {
-    display: inline-block;
-    margin-left: 5px; 
 }
 
 
