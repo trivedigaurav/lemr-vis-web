@@ -150,7 +150,7 @@ angular.module('myApp.controllers', [])
          * Keypress
          */
         $scope.keypressCallback = function($event, reverse) {
-            if (! $($event.explicitOriginalTarget).is("input")){
+            if (! $($event.target.nodeName).is("input")){
                 $event.preventDefault();
                 
                 var hl_elements = $("[scroll-bookmark^='annotation-helper']");
