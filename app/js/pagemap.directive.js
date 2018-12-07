@@ -2,6 +2,9 @@ angular.module('pagemap.directive', [])
 .directive('pagemap', [function() {
     return {
         restrict: 'E',
+        // scope: {
+        //     dirty: '=',
+        // },
         link: function (scope, element, attrs) {
                 scope.redrawMap = function() {
 
@@ -12,7 +15,7 @@ angular.module('pagemap.directive', [])
                     pagemap(document.querySelector("#map"), {
                         // viewport: document.querySelector("#viewport"),
                         //HACK: We don't know when the annotations finish loading
-                        interval: 50,
+                        interval: 500,
                         styles: {
                             '.info': 'rgba(0,0,0,0.08)',
                             'highlighted-report': '#ffffff',
@@ -25,9 +28,13 @@ angular.module('pagemap.directive', [])
 
                 scope.redrawMap();
         
-                // scope.$watchGroup(['dirty'], function(){
-                //     scope.redrawMap();
-                //     scope.dirty = false;
+                // scope.$watch('dirty', function(){
+                    
+                //     if(scope.dirty){
+                //         scope.redrawMap();
+                //         scope.dirty = false;
+                //     }
+                    
                 //     // console.log("Directive redrawn!");
                 // }, true);
         }
