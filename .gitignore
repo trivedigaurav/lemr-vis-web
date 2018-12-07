@@ -57,3 +57,4 @@ app/dummy-variable.json
 app/js/services.js
 app/bower_components/
 node_modules/
+app/bower_components
