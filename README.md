@@ -1,4 +1,4 @@
-# lemr-vis-web
+<img src="https://github.com/trivedigaurav/lemr-vis-web/raw/master/logo.png" alt="logo" width="200"/>
 
 ## Getting Started
 
