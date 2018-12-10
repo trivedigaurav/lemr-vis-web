@@ -2,7 +2,7 @@
 
 (function(angular){
 
-  var _template =  'encounter-select/template.html';
+  var _template =  'encounter-select/encounter-select.template.html';
 
   var app = angular.module('encounter.select', []);
   
