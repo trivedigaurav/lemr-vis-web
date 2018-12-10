@@ -115,7 +115,7 @@
             </div>
           </div> -->
 
-          <div class="panel panel-default" ng-include src="'partials/search-terms.html?v=' + cacheBust">
+          <div class="panel panel-default" ng-include src="'partials/search-terms.partial.html?v=' + cacheBust">
           </div>
 
           <div id="signout-display" class="panel panel-default" ng-if="active.encounterData">
@@ -142,7 +142,7 @@
 
           <!-- Report view -->
           <tab active="tabs.docView" heading="Report">
-            <div class="tab-inner-content" ng-if="active.encounterData.reports" ng-include src="'partials/reports.html?v=' + cacheBust">
+            <div class="tab-inner-content" ng-if="active.encounterData.reports" ng-include src="'partials/reports.partial.html?v=' + cacheBust">
             </div>
           </tab>
 
