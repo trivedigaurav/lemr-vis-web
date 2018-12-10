@@ -2,7 +2,7 @@
 
 (function(angular){
 
-  var _template =  'templates/login.html';
+  var _template =  'login/template.html';
 
   var app = angular.module('login', []);
   

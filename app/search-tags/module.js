@@ -2,7 +2,7 @@
 
 (function(angular){
 
-  var _template =  'templates/search-tags.html';
+  var _template =  'search-tags/template.html';
 
   var app = angular.module('search.tags', ['ui.bootstrap']);
   

@@ -15,11 +15,12 @@
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="../node_modules/animate.css/animate.min.css">
   <link rel="stylesheet" href="css/app.css"/>
-  <link rel="stylesheet" href="css/annotator.min.css"/>
-  <link rel="stylesheet" href="css/annotator-categories.css"/>
-  <link rel="stylesheet" href="css/login.css"/>
-  <link rel="stylesheet" href="css/report.css"/>
-  <link rel="stylesheet" href="css/pagemap.css"/>
+  
+  <link rel="stylesheet" href="annotator/annotator.min.css"/>
+  <link rel="stylesheet" href="annotator/annotator-categories.css"/>
+  <link rel="stylesheet" href="login/login.css"/>
+  <link rel="stylesheet" href="report/report.css"/>
+  <link rel="stylesheet" href="pagemap/pagemap.css"/>
 
   <!-- TODO: add a routine to merge all sources for production -->
 
@@ -176,41 +177,41 @@
 
     </div>
   </div>
-  
+
   <!-- <pagemap dirty="pagemapDirty"></pagemap> -->
   <pagemap></pagemap>
 
+  <!-- plugins -->
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
   <!-- <script src="../node_modules/d3/d3.min.js"></script> -->
   <script src="../node_modules/jquery.scrollTo/jquery.scrollTo.min.js"></script>
   <script src="../node_modules/pagemap/dist/pagemap.min.js"></script>
-
-  <script src="js/annotator-full.min.js"></script>
-  <script src="js/annotator-categories.js"></script>
-  <script src="js/report-highlight.js"></script>
-  <script src="js/jquery-routines.js"></script>
-
   <script src="../node_modules/angular/angular.js"></script>
   <script src="../node_modules/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
   <script src="../node_modules/angular-cookies/angular-cookies.min.js"></script>
-
   <script src="../node_modules/rangy-official/rangy-core.min.js"></script>
   <script src="../node_modules/rangy-official/rangy-textrange.min.js"></script>
   <!-- <script src="../node_modules/rangy-official/rangy-classapplier.min.js"></script> -->
-
-
   <script src="../node_modules/angular-ui-utils/keypress.min.js"></script>
+
+  <script src="annotator/annotator-full.min.js"></script>
+  <script src="annotator/annotator-categories.js"></script>
   
+  <!--Main app -->
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
-  <script src="js/search.tags.module.js"></script>
-  <script src="js/encounter.select.module.js"></script>
-  <script src="js/login.module.js"></script>
-  <script src="js/highlighted.report.directive.js"></script>
-  <script src="js/pagemap.directive.js"></script>
+  <script src="js/jquery-routines.js"></script> <!-- TODO: Get rid of this! -->
+
+  <!-- components -->
+  <script src="search-tags/module.js"></script>
+  <script src="encounter-select/module.js"></script>
+  <script src="login/module.js"></script>
+  <script src="report/directive.js"></script>
+  <script src="pagemap/directive.js"></script>
+  <script src="report/report-highlight.js"></script>
   
   <!-- <script src="../node_modules/angular-annotator/src/angular-annotator.js"></script> -->
   <!-- <script src="../node_modules/annotator-validation-plugin/src/annotator-validation-plugin.js"></script> -->
