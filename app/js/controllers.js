@@ -68,7 +68,7 @@ angular.module('myApp.controllers', [])
                 stopLoading();                
             }, function() {
                 backend.putLogEvent("loadEncounterFailed", $scope.active.encounterId);
-                showInfo("Unable to load reports");
+                showError("Unable to load reports");
                 stopLoading();
             });
         }
@@ -170,6 +170,9 @@ angular.module('myApp.controllers', [])
                     }
 
                     var found = hl_elements[$scope.active.hl_index ];
+
+                    $('html, body').clearQueue();
+                    
                     $('html, body').animate({scrollTop: $(found).offset().top - 200}, 1000); //ScrollTo doesn't work here :(
                     $(found).addClass("highlight-flash");
                     setTimeout(function () { 
@@ -186,13 +189,8 @@ angular.module('myApp.controllers', [])
          * Misc.
          */
 
-        function showInfo (notice){
-            $scope.appInfo = notice;
-
-            setTimeout(function() {
-              $scope.appInfo = false;
-              $scope.$digest();
-            }, 1500);
+        function showError (notice){
+            $window.alert(notice)
         }
 
         // $scope.popReport = function(reportid) {

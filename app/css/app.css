@@ -181,18 +181,19 @@ body {
     height: 100%;
 }
 
-.appNotice {
+#appLoading {
     z-index: 2001;
     
     display: block;
     position: fixed;
 
+    padding: 10px;
+
     bottom: 0;
     right: 0;
-
-    padding: 10px;
     margin: 10px;
 }
+
 
 .pointer {
     cursor: pointer;
