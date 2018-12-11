@@ -67,7 +67,7 @@ angular.module('myApp.controllers', [])
                 $scope.active.hl_index = -1;
                 stopLoading();                
             }, function() {
-                backend.putLogEvent("loadEncounterFailed", "$scope.active.encounterId");
+                backend.putLogEvent("loadEncounterFailed", $scope.active.encounterId);
                 showInfo("Unable to load reports");
                 stopLoading();
             });
