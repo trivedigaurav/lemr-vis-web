@@ -153,7 +153,13 @@ angular.module('myApp.controllers', [])
             if (! $($event.target.nodeName).is("input")){
                 $event.preventDefault();
                 
-                var hl_elements = $("[scroll-bookmark^='annotation-helper']");
+                let hl_elements = $("[scroll-bookmark^='annotation-helper']");
+
+                if(hl_elements != -1){
+                    //Remove prior annimations
+                    $('html, body').clearQueue();
+                    $(hl_elements[$scope.active.hl_index]).removeClass('highlight-flash');
+                }
 
                 if(hl_elements.length){
                     if(reverse){
@@ -169,9 +175,8 @@ angular.module('myApp.controllers', [])
                             $scope.active.hl_index = $scope.active.hl_index + 1;
                     }
 
-                    var found = hl_elements[$scope.active.hl_index ];
+                    let found = hl_elements[$scope.active.hl_index];
 
-                    $('html, body').clearQueue();
                     $('html, body').animate({scrollTop: $(found).offset().top - 200}, 1000); //ScrollTo doesn't work here :(
                     $(found).addClass("highlight-flash");
                     setTimeout(function () { 
