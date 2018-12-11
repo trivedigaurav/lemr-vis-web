@@ -142,7 +142,7 @@
 
           <!-- Report view -->
           <tab active="tabs.docView" heading="Report">
-            <div class="tab-inner-content" ng-if="active.encounterData.reports" ng-include src="'report/reports.partial.html?v=' + cacheBust">
+            <div class="tab-inner-content" ng-if="active.encounterData" ng-include src="'report/reports.partial.html?v=' + cacheBust">
             </div>
           </tab>
 
