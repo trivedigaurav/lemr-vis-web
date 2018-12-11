@@ -172,7 +172,6 @@ angular.module('myApp.controllers', [])
                     var found = hl_elements[$scope.active.hl_index ];
 
                     $('html, body').clearQueue();
-                    
                     $('html, body').animate({scrollTop: $(found).offset().top - 200}, 1000); //ScrollTo doesn't work here :(
                     $(found).addClass("highlight-flash");
                     setTimeout(function () { 
