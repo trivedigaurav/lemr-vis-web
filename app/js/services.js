@@ -7,7 +7,7 @@ angular.module('myApp.services', [])
 
     $http.defaults.headers.common['Authorization'] = 'Basic ' + $cookieStore.get('authdata');
 
-    var SERVER_URL = "http://localhost:10000/";
+    var SERVER_URL = "http://localhost:10000";
 
     function checkResponse(response) {
         if(response.status == 401)
@@ -23,22 +23,13 @@ angular.module('myApp.services', [])
     }
 
     return {
-        getVarDatasetList: function() {
-            return $http.get(SERVER_URL + 'getVarDatasetList/')
-                       .then(function(result) {
-                            return result.data;
-                        }, function(response){
-                            checkResponse(response);
-                            return $q.reject(response);
-                        }
-            );
-        },
         getReport: function(report) {
             if(typeof this.reportCanceler != 'undefined')
                 this.reportCanceler.resolve();
 
             this.reportCanceler = $q.defer();
-            var url = SERVER_URL + "getReport/" + report;
+
+            let url = `${SERVER_URL}/getReport/${report}`;
 
             return $http.get(url, {timeout: this.reportCanceler.promise})
                         .then(function(result) {
@@ -49,20 +40,25 @@ angular.module('myApp.services', [])
                         }
             );
         },
-        getEncounter: function(encounter) {
+        getEncounter: function(encounter, model="current") {
             if(typeof this.encounterCanceler != 'undefined')
                 this.encounterCanceler.resolve();
 
             this.encounterCanceler = $q.defer();
-            var url = SERVER_URL + "getEncounter/" + encounter;
+            
+            let url1 = `${SERVER_URL}/getEncounter/${encounter}`;
+            let url2 = `${SERVER_URL}/getPredictions/encounter/${encounter}/${model}`;
 
-            return $http.get(url, {timeout: this.encounterCanceler.promise})
-                        .then(function(result) {
-                            return result.data;
-                        }, function(response){
-                            checkResponse(response);
-                            return $q.reject(response);
-                        }
+            return $q.all([$http.get(url1,{timeout: this.encounterCanceler.promise}),
+                $http.get(url2,{timeout: this.encounterCanceler.promise})])
+                .then(function(results){
+                        return Object.assign(results[0].data, results[1].data);
+                        // console.log({...results[0].data, ...results[1].data});
+                    }, 
+                    function (error){
+                        checkResponse(error);
+                        return $q.reject(error);
+                    }
             );
         },
         logout: function () {
@@ -77,7 +73,7 @@ angular.module('myApp.services', [])
             $cookieStore.put('authdata', encoded);
         },
         checkLogin: function() {            
-            return $http.get(SERVER_URL + "login/")
+            return $http.get(`${SERVER_URL}/login/`)
                         .then(function(result) {
                             return result.data;
                         }
@@ -87,17 +83,17 @@ angular.module('myApp.services', [])
             return getUserFromCookie()
         },
         putLogEvent: function(event_name, message){
-            var uri = SERVER_URL + "logEvent/";
+            let uri = `${SERVER_URL}/logEvent/`;
             console.log(event_name, message);
             return $http.put(uri + event_name, message);
         },
         getAnnotationUrls: function(report) {
             return {
-                create: SERVER_URL + "annotator/create/" + report,
-                update: SERVER_URL + "annotator/update/:id",
-                destroy: SERVER_URL + "annotator/destroy/:id",
-                read: SERVER_URL + "annotator/read/" + report,
-                search: SERVER_URL + "annotator/read/" + report
+                create: `${SERVER_URL}/annotator/create/${report}`,
+                update: `${SERVER_URL}/annotator/update/:id`,
+                destroy: `${SERVER_URL}/annotator/destroy/:id`,
+                read: `${SERVER_URL}/annotator/read/${report}`,
+                search: `${SERVER_URL}/annotator/read/${report}`
             }
         }
     };
