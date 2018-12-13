@@ -36,6 +36,7 @@
 .report pre {
     /*height: calc(100vh - 170px);*/
     border: 0;
+    background-color: white!important;
     line-height: 0rem;
     font-family: monospace;
     counter-reset: line;
