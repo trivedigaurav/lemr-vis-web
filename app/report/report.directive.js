@@ -6,6 +6,7 @@ angular.module('highlightedReport.directive', [])
             data: '<',
             recordId: '<',
             helperTerms: '<',
+            getPositives: '&'
             // redrawMap: '='
         },
         link: function (scope, element, attrs) {
@@ -14,9 +15,23 @@ angular.module('highlightedReport.directive', [])
 
                     if(!scope.data)
                         return
+
+                    //this needs to be done first as it is position sensitive
+                    levels = scope.getPositives({r_id: scope.recordId});
+
+                    let textArray = scope.data.split('');
+
+                    for(let i=0;i<textArray.length;i++){
+                        textArray[i]= textArray[i].replace(/</g,' &lt;')
+                                        .replace(/>/g,' &gt;');
+                    }
+
+                    for (sent of levels.sentences){
+                        textArray[sent.start] = `<span id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + textArray[sent.start];
+                        textArray[sent.end] = '</span>' + textArray[sent.end];
+                    }
                 
-                    element.text(scope.data.replace(/</g,' &lt; ')
-                                    .replace(/>/g,' &gt; '));
+                    element.text(textArray.join(''));
 
                     $(element).highlight(/S_O_H[\s\S]*E_O_H/, "dim") // header
                         .highlight(/De-ID.*reserved./i, "dim") //copright

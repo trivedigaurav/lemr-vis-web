@@ -75,6 +75,30 @@ angular.module('myApp.controllers', [])
 
 
         /*
+        * Get Positives
+        */
+        $scope.getPositivesByReport = function(r_id){
+            // console.log(r_id);
+
+            let levels = {
+                sentences: [],
+                sections: []
+            }
+
+            //sentences
+            for (let s_id of $scope.active.encounterData.reports[r_id].pos_sentences){
+                levels.sentences.push($scope.active.encounterData.sentences[s_id])
+            }
+
+            //sections
+            for (let s_id of $scope.active.encounterData.reports[r_id].pos_sections){
+                levels.sections.push($scope.active.encounterData.sections[s_id])
+            }
+
+            return levels;
+        }
+
+        /*
          * Helper Terms
          */
         $scope.search_list = ["tumor", "mass", "incidental", 
