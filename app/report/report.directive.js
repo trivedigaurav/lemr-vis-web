@@ -3,9 +3,9 @@ angular.module('highlightedReport.directive', [])
     return {
         restrict: 'E',
         scope: {
-            data: '=',
-            recordId: '=',
-            helperTerms: '=',
+            data: '<',
+            recordId: '<',
+            helperTerms: '<',
             // redrawMap: '='
         },
         link: function (scope, element, attrs) {
