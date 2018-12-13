@@ -1,0 +1,36 @@
+.navbar-form { padding-right: 0px; }
+
+.nav-tabs {
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: white;
+    padding-top: 10px;
+    position: fixed;
+    top: 51px;
+    width: calc(100% - 480px);
+    z-index: 998;
+}
+
+.navbar-nav > li{ cursor: pointer; }
+
+.navbar-nav > li a{
+  padding-bottom: 0px;
+  margin-bottom: -7px;
+}
+
+.navbar-nav > li a.dropdown-toggle{
+  padding-top: 10px;
+}
+
+.navbar-nav > li span{
+  font-size: 80%;
+  padding-left: 15px;
+  color: #aaa;
+}
+
+.navbar-nav:hover li a { color: #333; }

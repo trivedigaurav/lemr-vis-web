@@ -5,6 +5,8 @@
  /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
+  width: 100%
+  
 }
 
 .navbar-default {
@@ -22,9 +24,7 @@ body {
 
 .sub-header { padding-bottom: 10px; border-bottom: 1px solid #eee; }
 
-.navbar-form { padding-right: 0px; }
-
-.search-clear {
+/*.search-clear {
     height: 14px;
     margin: auto;
     font-size: 14px;
@@ -69,85 +69,7 @@ body {
 #main-menu{
   width: 700px;
 }
-
-.nav-tabs {
-    cursor: pointer;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-color: white;
-    padding-top: 10px;
-    position: fixed;
-    top: 51px;
-    width: calc(100% - 480px);
-    z-index: 998;
-}
-
-.navbar-nav > li{ cursor: pointer; }
-
-.navbar-nav > li a{
-  padding-bottom: 0px;
-  margin-bottom: -7px;
-}
-
-.navbar-nav > li a.dropdown-toggle{
-  padding-top: 10px;
-}
-
-.navbar-nav > li span{
-  font-size: 80%;
-  padding-left: 15px;
-  color: #aaa;
-}
-
-#modal {
-  position: absolute;
-  height: 100px;
-  /*background-clip: padding-box;*/
-  background-color: #fff;
-  /*border: 1px solid rgba(0, 0, 0, 0.15);*/
-  border-radius: 0 0 4px 0px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
-  float: left;
-  font-size: 14px;
-  left: 0px;
-  padding: 8px;
-  position: absolute;
-  top: calc(100% + 1px);
-  z-index: 1000;
-  width: 400px;
-}
-
-#modal .list {
-  margin-left: 15px;
-  width: 170px;
-  vertical-align: top;
-  display: inline-block;
-}
-
-#modal .list ul {
-  padding: 0;
-  height: 150px; 
-  overflow-y: scroll; 
-  overflow-x: hidden;
-}
-
-#modal .list li{
-  padding: 5px;
-  width: 120px;
-  cursor: pointer;
-}
-
-#modal .list ul .selected{
-  background-color: #eee;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 4px;
-}
-
-.navbar-nav:hover li a { color: #333; }
+*/
 
 .unselectable {
     -webkit-touch-callout: none;
@@ -159,16 +81,6 @@ body {
 }
 
 .clickable { cursor: pointer; }
-
-.empty-list { 
-    padding: 2px;
-    font-weight: bold;
-    font-family: "Courier New", Courier, monospace;
-}
-
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-  display: none !important;
-}
 
 .coverall{
     z-index: 2000;
@@ -194,59 +106,14 @@ body {
     margin: 10px;
 }
 
-
-.pointer {
-    cursor: pointer;
+#appError {
+    top: 0;
+    right: 50%; 
 }
 
-/* Side notes for calling out things
--------------------------------------------------- */
- 
-/* Base styles (regardless of theme) */
-.bs-callout {
-  margin: 20px 0;
-  padding: 15px 30px 15px 15px;
-  
-  border-color: #eee;
-  border-width: 0px 0px 0px 5px;
-  border-style: solid;
-}
+.danger-text { color: #a94442; }
 
-.bs-callout h4 {
-  margin-top: 0;
-}
-.bs-callout p:last-child {
-  margin-bottom: 0;
-}
-.bs-callout code,
-.bs-callout .highlight {
-  background-color: #fff;
-}
- 
-/* Themes for different contexts */
-.bs-callout-danger {
-  background-color: #fcf2f2;
-  border-color: #a94442;
-}
-.bs-callout-warning {
-  background-color: #fefbed;
-  border-color: #905e1e;
-}
-.bs-callout-info {
-  background-color: #f0f7fd;
-  border-color: #d0e3f0;
-}
-.bs-callout-success {
-  background-color: #f6fbf4;
-  border-color: green;
-}
-
-.danger-text {
-  color: #a94442;
-}
-.warning-text {
-  color: #905e1e;
-}
+.warning-text { color: #905e1e; }
 
 /*
  * Main content
@@ -258,220 +125,6 @@ body {
 }
 
 .main .page-header { margin-top: 0; }
-
-/*
- * Grid tooltips
- */
-
-/* Taken from http://cbracco.me/a-simple-css-tooltip/ */
-/* Base styles for the element that has a tooltip */
-[data-custom-tooltip],
-.custom-tooltip {
-  position: relative;
-  cursor: pointer;
-}
-
-/* Base styles for the entire tooltip */
-[data-custom-tooltip]:before,
-[data-custom-tooltip]:after,
-.custom-tooltip:before,
-.custom-tooltip:after {
-  position: absolute;
-  visibility: hidden;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-  opacity: 0;
-  -webkit-transition: 
-      opacity 0.2s ease-in-out,
-        visibility 0.2s ease-in-out,
-        -webkit-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
-    -moz-transition:    
-        opacity 0.2s ease-in-out,
-        visibility 0.2s ease-in-out,
-        -moz-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
-    transition:         
-        opacity 0.2s ease-in-out,
-        visibility 0.2s ease-in-out,
-        transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
-  /*-webkit-transform: translate3d(0, 0, 0);
-  -moz-transform:    translate3d(0, 0, 0);
-  transform:         translate3d(0, 0, 0);*/
-  pointer-events: none;
-}
-
-/* Show the entire tooltip on hover and focus */
-[data-custom-tooltip]:hover:before,
-[data-custom-tooltip]:hover:after,
-[data-custom-tooltip]:focus:before,
-[data-custom-tooltip]:focus:after,
-.custom-tooltip:hover:before,
-.custom-tooltip:hover:after,
-.custom-tooltip:focus:before,
-.custom-tooltip:focus:after {
-  visibility: visible;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
-  opacity: 1;
-  transition: 0s visibility;
-  transition-delay:0.5s;
-}
-
-/* Base styles for the tooltip's directional arrow */
-.custom-tooltip:before,
-[data-custom-tooltip]:before {
-  z-index: 1001;
-  border: 6px solid transparent;
-  background: transparent;
-  content: "";
-}
-
-/* Base styles for the tooltip's content area */
-.custom-tooltip:after,
-[data-custom-tooltip]:after {
-  z-index: 1000;
-  padding: 8px;
-  width: 40px;
-  background-color: #000;
-  background-color: hsla(0, 0%, 20%, 0.9);
-  color: #fff;
-  content: attr(data-custom-tooltip);
-  font-size: 10px;
-  line-height: 1.2;
-}
-
-/* Directions */
-
-/* Top (default) */
-[data-custom-tooltip]:before,
-[data-custom-tooltip]:after,
-.custom-tooltip:before,
-.custom-tooltip:after,
-.custom-tooltip-top:before,
-.custom-tooltip-top:after {
-  bottom: 120%;
-  left: 50%;
-}
-
-[data-custom-tooltip]:before,
-.custom-tooltip:before,
-.custom-tooltip-top:before {
-  margin-left: -6px;
-  margin-bottom: -12px;
-  border-top-color: #000;
-  border-top-color: hsla(0, 0%, 20%, 0.9);
-}
-
-/* Horizontally align top/bottom tooltips */
-[data-custom-tooltip]:after,
-.custom-tooltip:after,
-.custom-tooltip-top:after {
-  margin-left: -20px;
-}
-
-/*[data-custom-tooltip]:hover:before,
-[data-custom-tooltip]:hover:after,
-[data-custom-tooltip]:focus:before,
-[data-custom-tooltip]:focus:after,
-.custom-tooltip:hover:before,
-.custom-tooltip:hover:after,
-.custom-tooltip:focus:before,
-.custom-tooltip:focus:after,
-.custom-tooltip-top:hover:before,
-.custom-tooltip-top:hover:after,
-.custom-tooltip-top:focus:before,
-.custom-tooltip-top:focus:after {
-  -webkit-transform: translateY(-8px);
-  -moz-transform:    translateY(-8px);
-  transform:         translateY(-8px); 
-}*/
-
-/* Left */
-.custom-tooltip-left:before,
-.custom-tooltip-left:after {
-  right: 120%;
-  bottom: 50%;
-  left: auto;
-}
-
-.custom-tooltip-left:before {
-  margin-left: 0;
-  margin-right: -12px;
-  margin-bottom: 0;
-  border-top-color: transparent;
-  border-left-color: #000;
-  border-left-color: hsla(0, 0%, 20%, 0.9);
-}
-
-/*.custom-tooltip-left:hover:before,
-.custom-tooltip-left:hover:after,
-.custom-tooltip-left:focus:before,
-.custom-tooltip-left:focus:after {
-  -webkit-transform: translateX(-8px);
-  -moz-transform:    translateX(-8px);
-  transform:         translateX(-8px); 
-}*/
-
-/* Bottom */
-.custom-tooltip-bottom:before,
-.custom-tooltip-bottom:after {
-  top: 120%;
-  bottom: auto;
-  left: 50%;
-}
-
-.custom-tooltip-bottom:before {
-  margin-top: -12px;
-  margin-bottom: 0;
-  border-top-color: transparent;
-  border-bottom-color: #000;
-  border-bottom-color: hsla(0, 0%, 20%, 0.9);
-}
-
-/*.custom-tooltip-bottom:hover:before,
-.custom-tooltip-bottom:hover:after,
-.custom-tooltip-bottom:focus:before,
-.custom-tooltip-bottom:focus:after {
-  -webkit-transform: translateY(8px);
-  -moz-transform:    translateY(8px);
-  transform:         translateY(8px); 
-}*/
-
-/* Right */
-.custom-tooltip-right:before,
-.custom-tooltip-right:after {
-  bottom: 50%;
-  left: 120%;
-}
-
-.custom-tooltip-right:before {
-  margin-bottom: 0;
-  margin-left: -12px;
-  border-top-color: transparent;
-  border-right-color: #000;
-  border-right-color: hsla(0, 0%, 20%, 0.9);
-}
-
-/*.custom-tooltip-right:hover:before,
-.custom-tooltip-right:hover:after,
-.custom-tooltip-right:focus:before,
-.custom-tooltip-right:focus:after {
-  -webkit-transform: translateX(8px);
-  -moz-transform:    translateX(8px);
-  transform:         translateX(8px); 
-}*/
-
-/* Move directional arrows down a bit for left/right tooltips */
-.custom-tooltip-left:before,
-.custom-tooltip-right:before {
-  top: 3px;
-}
-
-/* Vertically center tooltip content for left/right tooltips */
-.custom-tooltip-left:after,
-.custom-tooltip-right:after {
-  margin-left: 0;
-  margin-bottom: -16px;
-}
 
 
 /*
@@ -522,41 +175,6 @@ body {
 .cert0-pos{background-color: #cde4f0; color: #053061;}
 .cert1-pos{background-color: #a6cfe4; color: #053061;}
 
-#sidebar {
-  background-color:#eee;
-  height:100%;
-  position:fixed;
-  right:0;
-  width:320px;
-}
-
-.panel {
-  margin: 10px 0px 10px 0px;
-}
-
-.panel ul {
-  margin: 0;
-}
-
-.tags{
-  border-radius: 15px !important;
-  width: auto;
-  padding: 1px 6px 2px 6px;
-  vertical-align: baseline;
-  white-space: nowrap;
-  box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.75);
-  background-image: linear-gradient(to bottom right,rgb(249, 73, 182) 0%,rgb(255, 139, 139) 100%);
-}
-
-.tagsContainer{
-  margin-top: 10px;
-}
-
-.annotation-helper {
-    background-image: linear-gradient(to bottom right,rgb(249, 73, 182) 0%,rgb(255, 139, 139) 100%);
-    box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.75);
-    padding: 1px;
-}
 
 /*
  * Spinning animation
@@ -596,15 +214,4 @@ body {
     position: absolute;
     display: block;
     max-width: 220px;
-}
-
-#doc-navigator{
-  position: fixed;
-  z-index: 999;
-  right:18px;
-  top: 75px;
-}
-
-#doc-navigator a:hover{
-    text-decoration: none;
 }

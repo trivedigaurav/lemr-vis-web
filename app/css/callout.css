@@ -1,0 +1,41 @@
+/* Side notes for calling out things
+-------------------------------------------------- */
+ 
+/* Base styles (regardless of theme) */
+.bs-callout {
+  margin: 20px 0;
+  padding: 15px 30px 15px 15px;
+  
+  border-color: #eee;
+  border-width: 0px 0px 0px 5px;
+  border-style: solid;
+}
+
+.bs-callout h4 {
+  margin-top: 0;
+}
+.bs-callout p:last-child {
+  margin-bottom: 0;
+}
+.bs-callout code,
+.bs-callout .highlight {
+  background-color: #fff;
+}
+ 
+/* Themes for different contexts */
+.bs-callout-danger {
+  background-color: #fcf2f2;
+  border-color: #a94442;
+}
+.bs-callout-warning {
+  background-color: #fefbed;
+  border-color: #905e1e;
+}
+.bs-callout-info {
+  background-color: #f0f7fd;
+  border-color: #d0e3f0;
+}
+.bs-callout-success {
+  background-color: #f6fbf4;
+  border-color: green;
+}

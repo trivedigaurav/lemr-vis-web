@@ -1,0 +1,43 @@
+#modal {
+  position: absolute;
+  height: 100px;
+  /*background-clip: padding-box;*/
+  background-color: #fff;
+  /*border: 1px solid rgba(0, 0, 0, 0.15);*/
+  border-radius: 0 0 4px 0px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+  float: left;
+  font-size: 14px;
+  left: 0px;
+  padding: 8px;
+  position: absolute;
+  top: calc(100% + 1px);
+  z-index: 1000;
+  width: 400px;
+}
+
+#modal .list {
+  margin-left: 15px;
+  width: 170px;
+  vertical-align: top;
+  display: inline-block;
+}
+
+#modal .list ul {
+  padding: 0;
+  height: 150px; 
+  overflow-y: scroll; 
+  overflow-x: hidden;
+}
+
+#modal .list li{
+  padding: 5px;
+  width: 120px;
+  cursor: pointer;
+}
+
+#modal .list ul .selected{
+  background-color: #eee;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}

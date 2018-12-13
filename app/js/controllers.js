@@ -68,7 +68,7 @@ angular.module('myApp.controllers', [])
                 stopLoading();                
             }, function() {
                 backend.putLogEvent("loadEncounterFailed", $scope.active.encounterId);
-                showError("Unable to load reports");
+                // showError("Unable to load reports");
                 stopLoading();
             });
         }

@@ -1,0 +1,20 @@
+<nav class="hidden-xs">
+  <ul class="nav navbar-nav" id="main-menu">
+    <span role="button" class="navbar-brand">
+      <img alt="Brand" src="favicon.png">&nbsp;
+      <small>Patient #</small>{{active.encounterId}}
+
+      <span ng-if="active.encounterData">
+        <small>Admit:</small> {{active.encounterData.admit | myDate}}          
+        <small>Discharge:</small> {{active.encounterData.discharge | myDate}}
+      </span>
+    </span>
+  </ul>
+
+  <ul class="nav navbar-nav navbar-right">
+    <li>
+      <a ng-click="doLogout()" ng-disabled="loaderCount != 0"><i class="glyphicon glyphicon-log-out ng-scope"></i> Logout &nbsp;</a>
+    </li>
+  </ul>
+
+</nav>

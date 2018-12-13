@@ -21,6 +21,9 @@
   <link rel="stylesheet" href="login/login.css"/>
   <link rel="stylesheet" href="report/report.css"/>
   <link rel="stylesheet" href="pagemap/pagemap.css"/>
+  <link rel="stylesheet" href="sidebar/sidebar.css"/>
+  <link rel="stylesheet" href="navbar/navbar.css"/>
+
 
   <!-- TODO: add a routine to merge all sources for production -->
 
@@ -51,28 +54,8 @@
     <strong>Loading!</strong> Please wait.
   </div>
 
-  <header class="navbar navbar-inverse navbar-fixed-top">
-    <nav class="hidden-xs">
-      <ul class="nav navbar-nav" id="main-menu">
-        <span role="button" class="navbar-brand">
-          <img alt="Brand" src="favicon.png">&nbsp;
-          <small>Patient #</small>{{active.encounterId}}
-
-          <span ng-if="active.encounterData">
-            <small>Admit:</small> {{active.encounterData.admit | myDate}}          
-            <small>Discharge:</small> {{active.encounterData.discharge | myDate}}
-          </span>
-        </span>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a ng-click="doLogout()" ng-disabled="loaderCount != 0"><i class="glyphicon glyphicon-log-out ng-scope"></i> Logout &nbsp;</a>
-        </li>
-      </ul>
-
-    </nav>
-  </header>
+  <header class="navbar navbar-inverse navbar-fixed-top" 
+  ng-include src="'navbar/navbar.partial.html?v=' + cacheBust"></header>
 
 <!-- Main container starts here. -->
 
@@ -83,59 +66,32 @@
       <!-- sidebar -->
       <div class="column col-xs-3" id="sidebar">
 
-          <div id="encounter-display" class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Select encounter</h3>
-            </div>
-            <div class="panel-body">
-              <encounter-select load="loadEncounter(encounter)"></encounter-select>
-            </div>
-          </div>
-
-<!--           <div id="lemr-suggest" class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">LEMR Suggestions</h3>
-            </div>
-            <div class="panel-body">
-              <div class="card-block">
-                  <div class="list-group">
-                    <a class="list-group-item active" href="javascript:;">
-                        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. <big><b>List group heading.</b></big> Maecenas sed diam eget risus varius blandit.</p>
-                    </a>
-                    <a class="list-group-item" href="javascript:;">
-                        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. <big><b>List group heading.</b></big> Maecenas sed diam eget risus varius blandit.</p>
-                    </a>
-                    <a class="list-group-item" href="javascript:;">
-                        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. <big><b>List group heading.</b></big> Maecenas sed diam eget risus varius blandit.</p>
-                    </a>
-                  </div>
-              
-                  <a class="btn btn-default btn-block" href="#">View Signout Note</a>
+            <div id="encounter-display" class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Select encounter</h3>
+              </div>
+              <div class="panel-body">
+                <encounter-select load="loadEncounter(encounter)"></encounter-select>
               </div>
             </div>
-          </div> -->
 
-          <div class="panel panel-default" ng-include src="'search-tags/search-panel.partial.html?v=' + cacheBust">
-          </div>
+            <div class="panel panel-default" ng-include src="'sidebar/search-panel.partial.html?v=' + cacheBust"></div>
 
-          <div id="signout-display" class="panel panel-default" ng-if="active.encounterData">
+            <div id="panel-last" class="panel panel-default" ng-include src="'sidebar/lemr-suggest.partial.html?v=' + cacheBust"></div>
+            
+            <!-- <div id="signout-display" class="panel panel-default" ng-if="active.encounterData">
             <div class="panel-heading">
               <h3 class="panel-title">Incidental Finding</h3>
             </div>
             <div class="panel-body">
               {{active.encounterData.incidental}}
             </div>
-          </div>
+          </div> -->
 
       </div>
 
       <!-- Document views -->
       <div class="main" class="column col-xs-9">
-        <!-- <div id="doc-navigator">
-          <a tooltip-placement="bottom" tooltip-animation="false" tooltip="Previous" href="#prev" class="glyphicon glyphicon-chevron-left" ng-click="gotoNextDoc(true)"></a>
-          <a tooltip-placement="bottom" tooltip-animation="false" tooltip="Next" href="#next" class="glyphicon glyphicon-chevron-right" ng-click="gotoNextDoc()"></a>
-        </div> -->
-        
         <!-- Feedback -->
   
         <tabset>
@@ -206,7 +162,7 @@
   <script src="js/jquery-routines.js"></script> <!-- TODO: Get rid of this! -->
 
   <!-- components -->
-  <script src="search-tags/search-tags.module.js"></script>
+  <script src="sidebar/search-tags.module.js"></script>
   <script src="encounter-select/encounter-select.module.js"></script>
   <script src="login/login.module.js"></script>
   <script src="report/report.directive.js"></script>
