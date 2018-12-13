@@ -4,25 +4,24 @@
 <div class="panel-body">
   
 
-  <div class="card-block" ng-repeat="r_id in active.encounterData.pos_reports">
-    
-    <span class="pull-right">&nbsp; <a class="clickable" scroll-to-bookmark="report-{{r_id}}">#{{r_id}}</a></span>
-    <hr />
-      <p class="clickable" ng-repeat="sent_id in active.encounterData.reports[r_id].pos_sentences">
-        <!-- HACK: ng-int is slowing down the app-->
-        <!-- initialize vars -->
-        {{start = active.encounterData.sentences[sent_id].start; ""}}
-        {{end = active.encounterData.sentences[sent_id].end; ""}}
-        {{report_id = active.encounterData.sentences[sent_id].report_id; ""}}
-
-        <!-- actual display -->
-        {{active.encounterData.rads[report_id].text.slice(start,end)}}
-        <!-- <big><b>List group heading.</b></big> -->
-      </p>
+<div class="card-block" ng-repeat="r_id in active.encounterData.pos_reports">
   
+  <span class="pull-right">&nbsp; <a class="clickable" scroll-to-bookmark="report-{{r_id}}">#{{r_id}}</a></span>
+  <hr />
+    <p class="clickable" ng-repeat="sent_id in active.encounterData.reports[r_id].pos_sentences">
+      <!-- HACK: ng-int is slowing down the app-->
+      <!-- initialize vars -->
+      {{start = active.encounterData.sentences[sent_id].start; ""}}
+      {{end = active.encounterData.sentences[sent_id].end; ""}}
+      {{report_id = active.encounterData.sentences[sent_id].report_id; ""}}
 
-  <div class="card-block" ng-if="active.encounterData.pos_sentences.length == 0">
-    No incidentals&hellip;
-  </div>
+      <!-- actual display -->
+      {{active.encounterData.rads[report_id].text.slice(start,end)}}
+      <!-- <big><b>List group heading.</b></big> -->
+    </p>
 
+</div>
+
+<div class="card-block" ng-if="active.encounterData.pos_sentences.length == 0">
+  No incidentals found.
 </div>

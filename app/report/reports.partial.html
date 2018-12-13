@@ -20,15 +20,15 @@
           <a tooltip-placement="bottom" tooltip-animation="false" tooltip="First" href="#first" class="glyphicon glyphicon-step-backward" scroll-to-bookmark="report-{{active.encounterData.rads_ids[0]}}"></a>
           <a tooltip-placement="bottom" tooltip-animation="false" tooltip="Previous" href="#prev" class="glyphicon glyphicon-chevron-left" scroll-to-bookmark="report-{{active.encounterData.rads_ids[$index-1]}}"></a>
 
-          <a href="#{{r_id}}">{{$index + 1}} of {{active.encounterData.rads_ids.length}}</a>
+          <a href="#report-{{r_id}}">{{$index + 1}} of {{active.encounterData.rads_ids.length}}</a>
 
           <a tooltip-placement="bottom" tooltip-animation="false" tooltip="Next" href="#next" class="glyphicon glyphicon-chevron-right" scroll-to-bookmark="report-{{active.encounterData.rads_ids[$index+1]}}"></a>
           <a tooltip-placement="bottom" tooltip-animation="false" tooltip="Last" href="#last" class="glyphicon glyphicon-step-forward" scroll-to-bookmark="report-{{active.encounterData.rads_ids[active.encounterData.rads_ids.length - 1]}}"></a>
       </span>
 
   </div>
-  <pre>
-      <highlighted-report ng-class="{'report-incidental': active.encounterData.reports[r_id].class == 'pos'}" data='active.encounterData.rads[r_id].text' record-id='r_id' helper-terms="search_list" >
+  <pre ng-class="{'report-incidental': active.encounterData.reports[r_id].class == 'pos'}">
+      <highlighted-report data='active.encounterData.rads[r_id].text' record-id='r_id' helper-terms="search_list" >
       <!-- redraw-map='pagemapCtrl.redraw'> -->
      </highlighted-report>
   </pre>

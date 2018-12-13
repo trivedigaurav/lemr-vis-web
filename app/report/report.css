@@ -26,6 +26,7 @@
     padding: 6px;
 }
 
+
 .report .info .btn{
     width: 50px;
     margin-top: -2px;
@@ -35,11 +36,14 @@
 .report pre {
     /*height: calc(100vh - 170px);*/
     border: 0;
-    background-color: white;
     line-height: 0rem;
     font-family: monospace;
     counter-reset: line;
     font-size: 12px;
+}
+
+pre .report-incidental {
+    background-color: #ffffeb;
 }
 
 .report pre code {
