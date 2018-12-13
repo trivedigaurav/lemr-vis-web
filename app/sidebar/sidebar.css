@@ -21,9 +21,12 @@
   margin: 0;
 }
 
-.panel hr {
-	margin-top: 10px;
-	margin-bottom: 10px;
+.panel p:hover{
+  background-color: #eee;
+}
+
+.panel .pull-right{
+  margin-top: -10px;
 }
 
 #panel-last{

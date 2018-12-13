@@ -19,9 +19,10 @@ angular.module('pagemap.directive', [])
                         styles: {
                             '.info': 'rgba(0,0,0,0.08)',
                             'highlighted-report': '#ffffff',
+                            '.report-incidental': '#ffffeb',
                             '.annotator-hl-yellow': '#fffc00',
                             '.annotation-helper': 'rgb(255, 139, 139)',
-                            '.highlight-flash': '#000000'
+                            '.highlight-flash': '#000000',
                         },
                     });
                 };
