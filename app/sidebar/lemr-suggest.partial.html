@@ -16,7 +16,7 @@
       {{report_id = active.encounterData.sentences[sent_id].report_id; ""}}
 
       <!-- actual display -->
-      {{active.encounterData.rads[report_id].text.slice(start,end)}}
+      {{active.encounterData.rads[report_id].text.slice(start,end)|truncate:100}}
       <!-- <big><b>List group heading.</b></big> -->
     </p>
 
