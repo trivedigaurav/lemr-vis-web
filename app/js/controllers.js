@@ -3,9 +3,9 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('appCtrl', ['$scope', '$window', '$document', 
+  .controller('appCtrl', ['$scope', '$window', '$document', '$timeout', 
     '$rootScope', 'backend', 'truncateFilter', '$filter',
-    function($scope, $window, $document,
+    function($scope, $window, $document, $timeout,
         $rootScope, backend, truncateFilter, $filter) {
         /*
          * Debug
@@ -201,9 +201,10 @@ angular.module('myApp.controllers', [])
 
                     let found = hl_elements[$scope.active.hl_index];
 
-                    $('html, body').animate({scrollTop: $(found).offset().top - 200}, 1000); //ScrollTo doesn't work here :(
+                    // $('html, body').animate({scrollTop: $(found).offset().top - 200}, 1000); //ScrollTo doesn't work here :(
+                    found.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
                     $(found).addClass("highlight-flash");
-                    setTimeout(function () { 
+                    $timeout(function () { 
                         $(found).removeClass('highlight-flash');
                     }, 2000);
                 }
