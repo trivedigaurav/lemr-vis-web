@@ -16,12 +16,14 @@ angular.module('pagemap.directive', [])
                         // viewport: document.querySelector("#viewport"),
                         //HACK: We don't know when the annotations finish loading
                         interval: 500,
+                        viewport: document.querySelector("#main"),
                         styles: {
                             '.info': 'rgba(0,0,0,0.08)',
                             '.report pre': '#ffffff',
-                            '.report-incidental': '#ffffeb',
-                            '.annotator-hl-yellow': '#fffc00',
-                            '.sentence-incidental': '#fffc00',
+                            '.report-incidental': '#fffee5',
+                            '.section-incidental': '#fffdb2',
+                            '.sentence-incidental': '#E5E100',
+                            '.annotator-hl-yellow': '#E5E100',
                             '.annotation-helper': 'rgb(255, 139, 139)',
                             '.highlight-flash': '#000000',
                         },
