@@ -73,14 +73,15 @@ angular.module('myApp.directives', [])
 .directive('scrollToBookmark', ['$timeout', function($timeout) {
     return {
       link: function(scope, element, attrs) {
-        var value = attrs.scrollToBookmark;
+        let value = attrs.scrollToBookmark;
         element.bind("click", function(e){
           scope.$apply(function() {
-            var selector = "[scroll-bookmark='"+ value +"']";
-            var found = $(selector);
+            let selector = "[scroll-bookmark='"+ value +"']";
+            let found = $(selector);
 
             if(found.length){
-                $('html, body').animate({scrollTop: $(found).offset().top - 100}, 1000); //ScrollTo doesn't work here :(
+                // $('#main').animate({scrollTop: $(found).position().top - 100}, 1000); //ScrollTo doesn't work here :(
+                found[0].scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
                 $(found).addClass("highlight-flash");
                 $timeout(function () { 
                     $(found).removeClass('highlight-flash');
