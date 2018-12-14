@@ -6,7 +6,7 @@
 body {
   padding-top: 50px;
   width: 100%
-  
+
 }
 
 .navbar-default {
@@ -119,12 +119,12 @@ body {
  * Main content
  */
 
-.main {
+#main {
   padding: 20px;
   width: calc(100% - 440px);
 }
 
-.main .page-header { margin-top: 0; }
+#main .page-header { margin-top: 0; }
 
 
 /*
