@@ -47,6 +47,18 @@ angular.module('highlightedReport.directive', [])
                                 index--;
                             charArray[index] = '</span>' + charArray[index];
                         }
+
+                        for (sect of levels.sections){
+                            let index = sect.start;
+                            while(charArray[index].trim() == '')
+                                index++;
+                            charArray[index] = `<span class="section-incidental" id="section-${sect.section_id}" scroll-bookmark="section-${sect.section_id}">` + charArray[index];
+                            
+                            index = sect.end - 1;
+                            while(charArray[index].trim() == '')
+                                index--;
+                            charArray[index] = '</span>' + charArray[index];
+                        }
                     
                         element.text(charArray.join(''));
                     }
