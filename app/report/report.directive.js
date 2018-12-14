@@ -19,19 +19,37 @@ angular.module('highlightedReport.directive', [])
                     //this needs to be done first as it is position sensitive
                     levels = scope.getPositives({r_id: scope.recordId});
 
-                    let textArray = scope.data.split('');
 
-                    for(let i=0;i<textArray.length;i++){
-                        textArray[i]= textArray[i].replace(/</g,' &lt;')
-                                        .replace(/>/g,' &gt;');
-                    }
+                    if (levels.sentences.length == 0 && 
+                        levels.sections.length == 0){
 
-                    for (sent of levels.sentences){
-                        textArray[sent.start] = `<span id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + textArray[sent.start];
-                        textArray[sent.end] = '</span>' + textArray[sent.end];
+                        element.text(scope.data.replace(/</g,' &lt; ')
+                                    .replace(/>/g,' &gt; '));
                     }
-                
-                    element.text(textArray.join(''));
+                    else{
+                        let charArray = scope.data.split('');
+
+                        for(let i=0;i<charArray.length;i++){
+                            if (charArray[i] == '<')
+                                charArray[i] = ' &lt;';
+                            else if(charArray[i] == '<')
+                                charArray[i] = ' &gt;';
+                        }
+
+                        for (sent of levels.sentences){
+                            let index = sent.start;
+                            while(charArray[index].trim() == '')
+                                index++;
+                            charArray[index] = `<span class="sentence-incidental" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
+                            
+                            index = sent.end - 1;
+                            while(charArray[index].trim() == '')
+                                index--;
+                            charArray[index] = '</span>' + charArray[index];
+                        }
+                    
+                        element.text(charArray.join(''));
+                    }
 
                     $(element).highlight(/S_O_H[\s\S]*E_O_H/, "dim") // header
                         .highlight(/De-ID.*reserved./i, "dim") //copright
@@ -51,10 +69,10 @@ angular.module('highlightedReport.directive', [])
                     });
 
 
-                    //For line numbers
-                    element.html('<code>' + element.html()
-                                    .split('\n')
-                                    .join(' </code>\n<code>') + '</code>');
+                    // //For line numbers
+                    // element.html('<code>' + element.html()
+                    //                 .split('\n')
+                    //                 .join(' </code>\n<code>') + '</code>');
 
 
                     //Initialize annotator
