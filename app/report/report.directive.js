@@ -6,7 +6,7 @@ angular.module('highlightedReport.directive', [])
             data: '<',
             recordId: '<',
             helperTerms: '<',
-            getPositives: '&'
+            getLevels: '&'
             // redrawMap: '='
         },
         link: function (scope, element, attrs) {
@@ -17,16 +17,16 @@ angular.module('highlightedReport.directive', [])
                         return
 
                     //this needs to be done first as it is position sensitive
-                    levels = scope.getPositives({r_id: scope.recordId});
+                    let levels = scope.getLevels({r_id: scope.recordId});
 
 
-                    if (levels.sentences.length == 0 && 
-                        levels.sections.length == 0){
+                    // if (levels.sentences.length == 0 && 
+                    //     levels.sections.length == 0){
 
-                        element.text(scope.data.replace(/</g,' &lt; ')
-                                    .replace(/>/g,' &gt; '));
-                    }
-                    else{
+                    //     element.text(scope.data.replace(/</g,' &lt; ')
+                    //                 .replace(/>/g,' &gt; '));
+                    // }
+                    // else{
                         let charArray = scope.data.split('');
 
                         for(let i=0;i<charArray.length;i++){
@@ -36,32 +36,41 @@ angular.module('highlightedReport.directive', [])
                                 charArray[i] = ' &gt;';
                         }
 
-                        for (sent of levels.sentences){
+                        for (let sent of levels.sentences){
                             let index = sent.start;
                             while(charArray[index].trim() == '')
                                 index++;
-                            charArray[index] = `<span class="sentence-incidental" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
+
+                            if (sent.class == "pos")
+                                charArray[index] = `<span class="sentence-incidental" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
+                            else
+                                charArray[index] = `<span id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
                             
                             index = sent.end - 1;
+
                             while(charArray[index].trim() == '')
                                 index--;
-                            charArray[index] = '</span>' + charArray[index];
+                            charArray[index] = charArray[index] + '</span>'; 
                         }
 
-                        for (sect of levels.sections){
-                            let index = sect.start;
-                            while(charArray[index].trim() == '')
-                                index++;
-                            charArray[index] = `<span class="section-incidental" id="section-${sect.section_id}" scroll-bookmark="section-${sect.section_id}">` + charArray[index];
+                        // for (let sect of levels.sections){
+                        //     let index = sect.start;
+                        //     while(charArray[index].trim() == '')
+                        //         index++;
+
+                        //     if (sect.class == "pos")
+                        //         charArray[index] = `<span class="section-incidental" id="section-${sect.section_id}" scroll-bookmark="section-${sect.section_id}">` + charArray[index];
+                        //     else
+                        //         charArray[index] = `<span id="section-${sect.section_id}" scroll-bookmark="section-${sect.section_id}">` + charArray[index];
                             
-                            index = sect.end - 1;
-                            while(charArray[index].trim() == '')
-                                index--;
-                            charArray[index] = '</span>' + charArray[index];
-                        }
+                        //     index = sect.end - 1;
+                        //     while(charArray[index].trim() == '')
+                        //         index--;
+                        //     charArray[index] = charArray[index] + '</span>';
+                        // }
                     
                         element.text(charArray.join(''));
-                    }
+                    // }
 
                     $(element).highlight(/S_O_H[\s\S]*E_O_H/, "dim") // header
                         .highlight(/De-ID.*reserved./i, "dim") //copright

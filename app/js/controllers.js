@@ -77,7 +77,7 @@ angular.module('myApp.controllers', [])
         /*
         * Get Positives
         */
-        $scope.getPositivesByReport = function(r_id){
+        $scope.getLevelsByReport = function(r_id){
             // console.log(r_id);
 
             let levels = {
@@ -85,13 +85,16 @@ angular.module('myApp.controllers', [])
                 sections: []
             }
 
+            if (!$scope.active.encounterData.reports[r_id])
+                return levels
+
             //sentences
-            for (let s_id of $scope.active.encounterData.reports[r_id].pos_sentences){
+            for (let s_id of $scope.active.encounterData.reports[r_id].sentences){
                 levels.sentences.push($scope.active.encounterData.sentences[s_id])
             }
 
             //sections
-            for (let s_id of $scope.active.encounterData.reports[r_id].pos_sections){
+            for (let s_id of $scope.active.encounterData.reports[r_id].sections){
                 levels.sections.push($scope.active.encounterData.sections[s_id])
             }
 
