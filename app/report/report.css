@@ -53,6 +53,14 @@ pre .report-incidental {
   background: #fffc00;
 }
 
+/*#map .section {
+  background: #fffc00;
+}*/
+
+#map .sentence {
+  background: rgba(0,0,0,0.04);
+}
+
 /*.report pre code {
     display: block;
     line-height: 1.8rem;

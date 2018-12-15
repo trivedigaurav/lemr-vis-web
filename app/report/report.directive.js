@@ -37,6 +37,13 @@ angular.module('highlightedReport.directive', [])
                         }
 
                         for (let sent of levels.sentences){
+
+                            if (scope.data.slice(sent.start, sent.end).trim() == ""){
+                                //skip blank seentences
+                                continue;
+                            }
+
+
                             let index = sent.start;
                             while(charArray[index].trim() == '')
                                 index++;
@@ -44,7 +51,7 @@ angular.module('highlightedReport.directive', [])
                             if (sent.class == "pos")
                                 charArray[index] = `<span class="sentence-incidental" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
                             else
-                                charArray[index] = `<span id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
+                                charArray[index] = `<span class="sentence" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
                             
                             index = sent.end - 1;
 
@@ -53,21 +60,28 @@ angular.module('highlightedReport.directive', [])
                             charArray[index] = charArray[index] + '</span>'; 
                         }
 
-                        // for (let sect of levels.sections){
-                        //     let index = sect.start;
-                        //     while(charArray[index].trim() == '')
-                        //         index++;
+                        for (let sect of levels.sections){
 
-                        //     if (sect.class == "pos")
-                        //         charArray[index] = `<span class="section-incidental" id="section-${sect.section_id}" scroll-bookmark="section-${sect.section_id}">` + charArray[index];
-                        //     else
-                        //         charArray[index] = `<span id="section-${sect.section_id}" scroll-bookmark="section-${sect.section_id}">` + charArray[index];
+                            if (scope.data.slice(sect.start, sect.end).trim() == ""){
+                                //skip blank sections
+                                continue;
+                            }
+
+
+                            let index = sect.start;
+                            while(charArray[index].trim() == '')
+                                index++;
+
+                            if (sect.class == "pos")
+                                charArray[index] = `<span class="section-incidental" id="section-${sect.section_id}" scroll-bookmark="section-${sect.section_id}">` + charArray[index];
+                            else
+                                charArray[index] = `<span class="section" id="section-${sect.section_id}" scroll-bookmark="section-${sect.section_id}">` + charArray[index];
                             
-                        //     index = sect.end - 1;
-                        //     while(charArray[index].trim() == '')
-                        //         index--;
-                        //     charArray[index] = charArray[index] + '</span>';
-                        // }
+                            index = sect.end - 1;
+                            while(charArray[index].trim() == '')
+                                index--;
+                            charArray[index] = charArray[index] + '</span>';
+                        }
                     
                         element.text(charArray.join(''));
                     // }

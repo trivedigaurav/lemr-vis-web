@@ -22,6 +22,7 @@ angular.module('pagemap.directive', [])
                             '.report pre': '#ffffff',
                             '.report-incidental': '#fffee5',
                             '.section-incidental': '#fffdb2',
+                            '.sentence': 'rgba(0,0,0,0.04)',
                             '.sentence-incidental': '#E5E100',
                             '.annotator-hl-yellow': '#E5E100',
                             '.annotation-helper': 'rgb(255, 139, 139)',
