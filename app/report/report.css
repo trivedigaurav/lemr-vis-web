@@ -45,22 +45,6 @@
     margin-left: 10px;
 }
 
-pre .report-incidental {
-    background-color: #ffffeb;
-}
-
-.sentence-incidental {
-  background: #fffc00;
-}
-
-/*#map .section {
-  background: #fffc00;
-}*/
-
-#map .sentence {
-  background: rgba(0,0,0,0.04);
-}
-
 /*.report pre code {
     display: block;
     line-height: 1.8rem;
@@ -153,4 +137,37 @@ pre .report-incidental {
 .d3-tip{
     opacity: 0;
     font-size: 90%;
+}
+
+/*#map .section {
+  background: #fffc00;
+}*/
+
+/*#map .sentence {
+  background: rgba(0,0,0,0.04);
+}*/
+
+.report .sentence-incidental {
+  background-color: #fffc00;
+}
+
+.report .sentence:hover{
+  text-decoration: underline dotted #888;
+}
+
+.report .section{
+  display: block;
+}
+
+.report .section-incidental{
+  background-color: #fffee5;
+}
+
+.report .section:hover{
+  background-color: rgba(0,0,0,0.06);
+}
+
+
+.report .section-incidental:hover{
+  background-color: #FFFCC9;
 }
