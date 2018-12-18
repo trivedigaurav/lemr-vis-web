@@ -259,37 +259,37 @@ angular.module('myApp.controllers', [])
          * Sorting
          */
 
-        function variableCompare(variable) {
-            return function(a, b) {
-                var diff = a[variable].confidence - b[variable].confidence;
+        // function variableCompare(variable) {
+        //     return function(a, b) {
+        //         var diff = a[variable].confidence - b[variable].confidence;
 
-                if(diff === 0)
-                    return parseInt(a.id) - parseInt(b.id);
-                else
-                    return diff
-            }
-        }
+        //         if(diff === 0)
+        //             return parseInt(a.id) - parseInt(b.id);
+        //         else
+        //             return diff
+        //     }
+        // }
 
-        function idCompare() {
-            return function(a, b) {
-                return parseInt(a.id) - parseInt(b.id);
-            }
-        }
+        // function idCompare() {
+        //     return function(a, b) {
+        //         return parseInt(a.id) - parseInt(b.id);
+        //     }
+        // }
 
-        String.prototype.truncate = function(length, end) {
-            if (isNaN(length))
-                length = 10;
+        // String.prototype.truncate = function(length, end) {
+        //     if (isNaN(length))
+        //         length = 10;
 
-            if (end === undefined)
-                end = "...";
+        //     if (end === undefined)
+        //         end = "...";
 
-            if (this.length <= length || this.length - end.length <= length) {
-                return this;
-            }
-            else {
-                return String(this).substring(0, length-end.length) + end;
-            }
-        }
+        //     if (this.length <= length || this.length - end.length <= length) {
+        //         return this;
+        //     }
+        //     else {
+        //         return String(this).substring(0, length-end.length) + end;
+        //     }
+        // }
 
         return true;
     }])
