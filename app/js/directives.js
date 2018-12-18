@@ -72,6 +72,8 @@ angular.module('myApp.directives', [])
 //From http://nadeemkhedr.wordpress.com/2014/01/03/angularjs-scroll-to-element-using-directives/
 .directive('scrollToBookmark', ['$timeout', function($timeout) {
     return {
+      lastEl: null,
+      lastCount: 0,
       link: function(scope, element, attrs) {
         let value = attrs.scrollToBookmark;
         
@@ -81,9 +83,24 @@ angular.module('myApp.directives', [])
             let found = $(selector);
 
             if(found.length){
+                //This is a continued search
+                if (value == this.lastEl){
+                    //Goto next
+                    this.lastCount += 1;
+
+                    //Start from begining
+                    if (this.lastCount >= found.length)
+                        this.lastCount = 0;
+                }
+                else{
+                    //This is a new search
+                    this.lastEl = value;
+                    this.lastCount = 0;
+                }
+
                 $(".highlight-flash").removeClass("highlight-flash");
                 // $('#main').animate({scrollTop: $(found).position().top - 100}, 1000); //ScrollTo doesn't work here :(
-                found[0].scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
+                found[this.lastCount].scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
                 $(found).addClass("highlight-flash");
                 // console.log($(".highlight-flash"));
                 $timeout(function () { 
