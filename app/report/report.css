@@ -3,7 +3,7 @@
  */
 
 .report {
-    /*width: calc(100% - 320px);*/
+    /*width: 700px;*/
     /*height: calc(100vh - 140px);*/
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -43,6 +43,7 @@
     font-size: 14px;
     line-height: 20px;
     margin-left: 10px;
+    margin-right: 10px;
 }
 
 /*.report pre code {
@@ -152,11 +153,12 @@
 }
 
 .report .sentence:hover{
-  text-decoration: underline dotted #888;
+  text-decoration: underline dotted;
 }
 
 .report .section{
   display: block;
+  transition: all .1s ease-in;
 }
 
 .report .section-incidental{

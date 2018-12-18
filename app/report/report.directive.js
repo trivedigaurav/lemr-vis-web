@@ -83,24 +83,25 @@ angular.module('highlightedReport.directive', [])
                             charArray[index] = charArray[index] + '</span>';
                         }
                     
-                        element.text(charArray.join(''));
+                        element.html(charArray.join(''));
                     // }
 
-                    $(element).highlight(/S_O_H[\s\S]*E_O_H/, "dim") // header
-                        .highlight(/De-ID.*reserved./i, "dim") //copright
-                        .highlight(/\[Report de-identified.*/i, "dim") //De-ID
-                        .highlight(/\*\* Report Electronically Signed Out \*\*/, "dim") //Pathology template
-                        .highlight(/My signature is attestation[\s\S]*reflects that evaluation./, "dim") //Pathology template
-                        .highlight(/E_O_R/, "dim") //End of report
+                    // $(element).find("span")
+                    //     .highlight(/S_O_H[\s\S]*E_O_H/, "dim") // header
+                    //     .highlight(/De-ID.*reserved./i, "dim") //copright
+                    //     .highlight(/\[Report de-identified.*/i, "dim") //De-ID
+                    //     .highlight(/\*\* Report Electronically Signed Out \*\*/, "dim") //Pathology template
+                    //     .highlight(/My signature is attestation[\s\S]*reflects that evaluation./, "dim") //Pathology template
+                    //     .highlight(/E_O_R/, "dim") //End of report
 
 
                     $(element).highlight(/[a-zA-Z\-\ #]*\:/g, "bold") //Colon fields
-                            .highlight(/\*\*[a-zA-Z\ ,-\[\]\.]*/g, "dim"); //DE-IDed Names
+                    // $(element).find("span").highlight(/\*\*[a-zA-Z\ ,-\[\]\.]*/g, "dim"); //DE-IDed Names
 
                     //annotation-helper
                     scope.helperTerms.forEach( function(keyword) {
                         // console.log(new RegExp("\\b"+keyword+"\\b","gi"))
-                        $(element).highlight(new RegExp(keyword,"gi"), "annotation-helper", "annotation-helper-" + keyword);
+                        $(element).find("span").highlight(new RegExp(keyword,"gi"), "annotation-helper", "annotation-helper-" + keyword);
                     });
 
 
