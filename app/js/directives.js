@@ -85,7 +85,7 @@ angular.module('myApp.directives', [])
                 // $('#main').animate({scrollTop: $(found).position().top - 100}, 1000); //ScrollTo doesn't work here :(
                 found[0].scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
                 $(found).addClass("highlight-flash");
-                console.log($(".highlight-flash"));
+                // console.log($(".highlight-flash"));
                 $timeout(function () { 
                     $(found).removeClass('highlight-flash');
                 }, 2000);
