@@ -101,13 +101,13 @@ angular.module('myApp.directives', [])
                 $(".highlight-flash").removeClass("highlight-flash");
                 // $('#main').animate({scrollTop: $(found).position().top - 100}, 1000); //ScrollTo doesn't work here :(
                 found[this.lastCount].scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
-                $(found).addClass("highlight-flash");
+                $(found[this.lastCount]).addClass("highlight-flash");
                 // console.log($(".highlight-flash"));
                 $timeout(function () { 
                     $(found).removeClass('highlight-flash');
                 }, 2000);
             } else {
-                $(element).removeClass('animated shake').addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+                $(element).parent("div").removeClass('animated shake').addClass('animated shake').one('animationend', function(){
                     $(this).removeClass('animated shake');
                 });
             }
