@@ -1,6 +1,6 @@
 <div class="tagsContainer">
-  <div class="tags">
-    {{tag.text}} 
-    <i class="glyphicon glyphicon-remove-circle pointer" ng-click="tag.close({text: tag.text})"></i>
+  <div class="tags clickable">
+    <span scroll-to-bookmark="annotation-helper-{{tag.text}}">{{tag.text}}</span>
+    <i class="glyphicon glyphicon-remove-circle clickable" ng-click="tag.close({text: tag.text})"></i>
   </div>
 </div>

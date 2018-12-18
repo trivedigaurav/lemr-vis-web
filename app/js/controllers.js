@@ -176,45 +176,46 @@ angular.module('myApp.controllers', [])
         /*
          * Keypress
          */
-        $scope.keypressCallback = function($event, reverse) {
-            if (! $($event.target.nodeName).is("input")){
-                $event.preventDefault();
+         //TODO: This needs to done in a directive
+        // $scope.keypressCallback = function($event, reverse) {
+        //     if (! $($event.target.nodeName).is("input")){
+        //         $event.preventDefault();
                 
-                let hl_elements = $("[scroll-bookmark^='annotation-helper']");
+        //         let hl_elements = $("[scroll-bookmark^='annotation-helper']");
 
-                if(hl_elements != -1){
-                    //Remove prior annimations
-                    $('html, body').clearQueue();
-                    $(hl_elements[$scope.active.hl_index]).removeClass('highlight-flash');
-                }
+        //         if(hl_elements != -1){
+        //             //Remove prior annimations
+        //             $('html, body').clearQueue();
+        //             $(hl_elements[$scope.active.hl_index]).removeClass('highlight-flash');
+        //         }
 
-                if(hl_elements.length){
-                    if(reverse){
-                        if($scope.active.hl_index <= 0)
-                            $scope.active.hl_index  = hl_elements.length - 1;
-                        else
-                            $scope.active.hl_index  = $scope.active.hl_index - 1;
-                    }
-                    else{
-                        if($scope.active.hl_index >= hl_elements.length - 1)
-                            $scope.active.hl_index = 0;
-                        else
-                            $scope.active.hl_index = $scope.active.hl_index + 1;
-                    }
+        //         if(hl_elements.length){
+        //             if(reverse){
+        //                 if($scope.active.hl_index <= 0)
+        //                     $scope.active.hl_index  = hl_elements.length - 1;
+        //                 else
+        //                     $scope.active.hl_index  = $scope.active.hl_index - 1;
+        //             }
+        //             else{
+        //                 if($scope.active.hl_index >= hl_elements.length - 1)
+        //                     $scope.active.hl_index = 0;
+        //                 else
+        //                     $scope.active.hl_index = $scope.active.hl_index + 1;
+        //             }
 
-                    let found = hl_elements[$scope.active.hl_index];
+        //             let found = hl_elements[$scope.active.hl_index];
 
-                    // $('html, body').animate({scrollTop: $(found).offset().top - 200}, 1000); //ScrollTo doesn't work here :(
-                    found.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
-                    $(found).addClass("highlight-flash");
-                    $timeout(function () { 
-                        $(found).removeClass('highlight-flash');
-                    }, 2000);
-                }
+        //             // $('html, body').animate({scrollTop: $(found).offset().top - 200}, 1000); //ScrollTo doesn't work here :(
+        //             found.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
+        //             $(found).addClass("highlight-flash");
+        //             $timeout(function () { 
+        //                 $(found).removeClass('highlight-flash');
+        //             }, 2000);
+        //         }
 
 
-            }
-        };
+        //     }
+        // };
 
 
         /*
