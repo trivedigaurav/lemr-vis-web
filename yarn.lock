@@ -462,6 +462,10 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
+jquery-contextmenu@^2.7.1:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/jquery-contextmenu/-/jquery-contextmenu-2.7.1.tgz#12e7f9e51e70d2a43d0d90da835abbca0c0ffc15"
+
 jquery.scrollTo@flesler/jquery.scrollTo#1.4.12:
   version "0.0.0"
   resolved "https://codeload.github.com/flesler/jquery.scrollTo/tar.gz/cb88f0b9ca64d806957139df93934b2f3ff6417f"
