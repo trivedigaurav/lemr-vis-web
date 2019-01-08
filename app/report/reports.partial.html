@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<div ng-repeat="r_id in active.encounterData.rads_ids track by $index" id="emr-report-{{r_id}}" class="report" ng-mouseup="expandSelectionText()">
+<div ng-repeat="r_id in active.encounterData.rads_ids track by $index" id="emr-report-{{r_id}}" class="report">
   <div class="info unselectable" scroll-bookmark='report-{{r_id}}'>
     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
     <a tooltip-placement="bottom" tooltip-animation="false" tooltip='{{r_id}}'>
@@ -28,7 +28,7 @@
 
   </div>
   <pre ng-class="{'report-incidental': active.encounterData.reports[r_id].class == 'pos'}">
-      <highlighted-report data='active.encounterData.rads[r_id].text' record-id='r_id' helper-terms="search_list" get-levels='getLevelsByReport(r_id)'>
+      <highlighted-report data='active.encounterData.rads[r_id].text' record-id='r_id' encounter-id='active.encounterId' helper-terms="search_list" get-levels='getLevelsByReport(r_id)' show-context-menu="showContextMenu(event, items)">
       <!-- redraw-map='pagemapCtrl.redraw'> -->
      </highlighted-report>
   </pre>

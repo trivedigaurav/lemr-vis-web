@@ -5,9 +5,10 @@ angular.module('highlightedReport.directive', [])
         scope: {
             data: '<',
             recordId: '<',
+            encounterId: '<',
             helperTerms: '<',
-            getLevels: '&'
-            // redrawMap: '='
+            getLevels: '&',
+            showContextMenu: '&'
         },
         link: function (scope, element, attrs) {
 
@@ -18,73 +19,64 @@ angular.module('highlightedReport.directive', [])
 
                     //this needs to be done first as it is position sensitive
                     let levels = scope.getLevels({r_id: scope.recordId});
-
-
-                    // if (levels.sentences.length == 0 && 
-                    //     levels.sections.length == 0){
-
-                    //     element.text(scope.data.replace(/</g,' &lt; ')
-                    //                 .replace(/>/g,' &gt; '));
-                    // }
-                    // else{
-                        let charArray = scope.data.split('');
-
-                        for(let i=0;i<charArray.length;i++){
-                            if (charArray[i] == '<')
-                                charArray[i] = ' &lt;';
-                            else if(charArray[i] == '<')
-                                charArray[i] = ' &gt;';
-                        }
-
-                        for (let sent of levels.sentences){
-
-                            if (scope.data.slice(sent.start, sent.end).trim() == ""){
-                                //skip blank seentences
-                                continue;
-                            }
-
-
-                            let index = sent.start;
-                            while(charArray[index].trim() == '')
-                                index++;
-
-                            if (sent.class == "pos")
-                                charArray[index] = `<span class="sentence sentence-incidental" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
-                            else
-                                charArray[index] = `<span class="sentence" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
-                            
-                            index = sent.end - 1;
-
-                            while(charArray[index].trim() == '')
-                                index--;
-                            charArray[index] = charArray[index] + '</span>'; 
-                        }
-
-                        for (let sect of levels.sections){
-
-                            if (scope.data.slice(sect.start, sect.end).trim() == ""){
-                                //skip blank sections
-                                continue;
-                            }
-
-
-                            let index = sect.start;
-                            while(charArray[index].trim() == '')
-                                index++;
-
-                            if (sect.class == "pos")
-                                charArray[index] = `<span class="section section-incidental" id="section-${sect.section_id}" scroll-bookmark="section-${sect.section_id}">` + charArray[index];
-                            else
-                                charArray[index] = `<span class="section" id="section-${sect.section_id}" scroll-bookmark="section-${sect.section_id}">` + charArray[index];
-                            
-                            index = sect.end - 1;
-                            while(charArray[index].trim() == '')
-                                index--;
-                            charArray[index] = charArray[index] + '</span>';
-                        }
                     
-                        element.html(charArray.join(''));
-                    // }
+                    let charArray = scope.data.split('');
+
+                    for(let i=0;i<charArray.length;i++){
+                        if (charArray[i] == '<')
+                            charArray[i] = ' &lt;';
+                        else if(charArray[i] == '<')
+                            charArray[i] = ' &gt;';
+                    }
+
+                    for (let sent of levels.sentences){
+
+                        if (scope.data.slice(sent.start, sent.end).trim() == ""){
+                            //skip blank seentences
+                            continue;
+                        }
+
+
+                        let index = sent.start;
+                        while(charArray[index].trim() == '')
+                            index++;
+
+                        if (sent.class == "pos")
+                            charArray[index] = `<span class="sentence sentence-incidental" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
+                        else
+                            charArray[index] = `<span class="sentence" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
+                        
+                        index = sent.end - 1;
+
+                        while(charArray[index].trim() == '')
+                            index--;
+                        charArray[index] = charArray[index] + '</span>'; 
+                    }
+
+                    for (let sect of levels.sections){
+
+                        if (scope.data.slice(sect.start, sect.end).trim() == ""){
+                            //skip blank sections
+                            continue;
+                        }
+
+
+                        let index = sect.start;
+                        while(charArray[index].trim() == '')
+                            index++;
+
+                        if (sect.class == "pos")
+                            charArray[index] = `<span class="section section-incidental" id="section-${sect.section_id}" scroll-bookmark="section-${sect.section_id}">` + charArray[index];
+                        else
+                            charArray[index] = `<span class="section" id="section-${sect.section_id}" scroll-bookmark="section-${sect.section_id}">` + charArray[index];
+                        
+                        index = sect.end - 1;
+                        while(charArray[index].trim() == '')
+                            index--;
+                        charArray[index] = charArray[index] + '</span>';
+                    }
+                
+                    element.html(charArray.join(''));
 
                     $(element).find("span")
                         // .highlight(/S_O_H[\s\S]*E_O_H/, "dim") // header
@@ -110,40 +102,6 @@ angular.module('highlightedReport.directive', [])
                     //                 .split('\n')
                     //                 .join(' </code>\n<code>') + '</code>');
 
-
-                    //Initialize annotator
-                    var options = {};
-                    
-                    scope.annotator = angular.element(element).annotator(options).data('annotator');
-
-                    scope.annotator.addPlugin('Categories', {
-                        incidental: 'annotator-hl-yellow',
-                        mechanism: 'annotator-hl-green',
-                        todo: 'annotator-hl-red',
-                        injuries: 'annotator-hl-blue',
-                        operative: 'annotator-hl-purple',
-                        intervention: 'annotator-hl-orange'
-                    });
-
-                    // console.log(backend.getAnnotationBackend());
-
-                    scope.annotator.addPlugin('Store', {
-                        // The endpoint of the store on your server.
-                        prefix: "",
-                        urls: backend.getAnnotationUrls(scope.recordId)
-                    });
-
-                    // annotator.addPlugin('Tags', {
-                    //     // // The endpoint of the store on your server.
-                    //     // prefix: "",
-                    //     // urls: backend.getAnnotationUrls(scope.recordId)
-                    // });
-
-                    //HACK: We don't know when the annotations finish loading
-                    // setTimeout(function(){
-                    //     scope.redrawMap();
-                    // }, 5000)
-
                     // scope.redrawMap();
 
                 };
@@ -154,6 +112,52 @@ angular.module('highlightedReport.directive', [])
                     scope.highlightTerms();
                     // console.log("Directive redrawn!");
                 }, true);
-        }
+
+                element.on('contextmenu', function (event) {
+                    event.preventDefault();
+
+                    items = {}
+                    
+                    scope.$apply(function () {                     
+
+                        //if any text is selected
+                        var selection = rangy.getSelection();
+                        if(!selection.isCollapsed) {
+                            selection.expand("word");
+
+                            var text = selection.toString().trim();
+
+                            if (text) {
+                               items["text"] = text;
+                            }
+                        }
+
+                    });
+
+                    items["encounter"] = scope.encounterId;
+                    items["report"] = scope.recordId;
+
+                    let sections = $(".section:hover");
+                
+                    if (sections.length == 1){
+                        // sections.addClass("section-add");
+                        items["section"] = sections[0].id.split("-")[1];
+
+                        let sentences = $(".sentence:hover");
+                        if (sentences.length == 1){
+                            // sentences.addClass("sentence-add");
+                            items["sentence"] = sentences[0].id.split("-")[1];
+                        }
+                    }
+
+                    scope.showContextMenu({event:event, items:items});
+
+                });
+
+                //remove context menu
+                element.on('click', function (event) {
+                    scope.showContextMenu({event:event, items:false});
+                });
+            }
     };
 }])

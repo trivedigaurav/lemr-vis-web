@@ -24,49 +24,7 @@ body {
 
 .sub-header { padding-bottom: 10px; border-bottom: 1px solid #eee; }
 
-/*.search-clear {
-    height: 14px;
-    margin: auto;
-    font-size: 14px;
-    cursor: pointer;
-    opacity: 0.5;
-}
-
-.search-clear:hover {
-    opacity: 1;
-}
-
-.search-clear-addon {
-    border-left: 0;
-    background: #fff;
-    padding: 5px;
-}
-
-.filter-docs{
-    margin-top:8px;
-    position: fixed;
-    width: 200px;
-}
-
-.filter-docs .search-input {
-    width: 240px!important;
-}
-
-.search-input, .search-input:focus {
-    border-color: #ccc;
-    box-shadow: none;
-    padding-right: 1px;
-    padding-left: 7px;
-    border-right: 0;
-}
-
-.search-input-active {
-    color: #8a6d3b;
-    background-color: #fdfbee;
-    transition: background-color 100ms linear;
-}
-
-#main-menu{
+/*#main-menu{
   width: 700px;
 }
 */
@@ -138,7 +96,7 @@ body {
  * Classes
  */
 
-.positive {
+/*.positive {
     background-color: #cde4f0;
     fill: #388db8;
     color: #053061;
@@ -173,9 +131,8 @@ body {
 
 .cert0-neg{background-color: #fcece6; color: #67001f;}
 .cert1-neg{background-color: #f7cebd; color: #67001f;}
-/*.cert4-neu{background-color: #7bccc4; color: #252525;}*/
 .cert0-pos{background-color: #cde4f0; color: #053061;}
-.cert1-pos{background-color: #a6cfe4; color: #053061;}
+.cert1-pos{background-color: #a6cfe4; color: #053061;}*/
 
 
 /*
@@ -195,25 +152,4 @@ body {
 @-webkit-keyframes spin {
     from {-webkit-transform: rotate(0deg);}
     to {-webkit-transform: rotate(359deg);}
-}
-
-
-/*
- * Context Menu
- */
-
-.dropdown {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1060;
-}
-
-.dropdown ul { 
-    display: block;
-    position: absolute;
-    display: block;
-    max-width: 220px;
 }

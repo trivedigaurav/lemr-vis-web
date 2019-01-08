@@ -30,7 +30,14 @@ angular.module('myApp.controllers', [])
             encounterId: null,
             encounterData: null, 
             username: null,
-            hl_index: -1
+            hl_index: -1,
+            feedback: {
+                "reports": [],
+                "sections": [],
+                "sentences": [],
+                "texts": [],
+                "list": []
+            }
         };
 
         $scope.doLogout = function() {
@@ -74,7 +81,7 @@ angular.module('myApp.controllers', [])
         }
 
 
-        /*
+       /*
         * Get Positives
         */
         $scope.getLevelsByReport = function(r_id){
@@ -99,6 +106,32 @@ angular.module('myApp.controllers', [])
             }
 
             return levels;
+        }
+
+
+        /*
+         * Feedback
+         */
+
+        $scope.checkFeedback = function(type, id){
+            
+            type = type + "s";
+
+            if (type == "encounters")
+                return $scope.active.encounterData.class == "pos";
+            else
+                return $scope.active.encounterData[type][id].class == "pos";
+        }
+
+        $scope.addFeedback = function(feedback){
+            console.log(feedback);
+        }
+
+        $scope.showContextMenu = function(event, items){
+            $scope.$emit("show-feedbackmenu", {
+                event: event,
+                items: items
+            });
         }
 
         /*
@@ -131,47 +164,6 @@ angular.module('myApp.controllers', [])
 
         $scope.tabs = {docView: true};
         $scope.isNavCollapsed = false;
-
-
-        /*
-         * Feedback Context Menu
-         */
-
-        $scope.expandSelectionText = function(){
-            var selection = rangy.getSelection();
-
-            if(!selection.isCollapsed) {
-                    selection.expand("word");
-                    // var text = selection.toString().trim();
-
-                    // if (text) {
-                    //     $scope.feedbackText = text;
-                    //     return;
-                    // }
-            }
-            // else{
-            //     $scope.feedbackText = null;
-            // }
-        };
-
-        // $scope.documentContextMenu = function() {
-        //     var options = []
-
-        //     if($scope.feedbackText){
-        //         options = [
-        //             ["Important", function () {
-        //                 feedbackFunction('positive');
-        //             }],
-        //             null,
-        //             ["Not important", function () {
-        //                 feedbackFunction('negative');
-        //             }]
-        //         ];
-        //     }
-
-        //     return options;
-        // };
-
 
         /*
          * Keypress
