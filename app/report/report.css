@@ -122,6 +122,10 @@
  * Report highlighting
  */
 
+highlighted-report {
+  display: block;
+}
+
 .report pre .dim {
     color: #aaa;
 }
@@ -156,13 +160,31 @@
   text-decoration: underline dotted;
 }
 
-.report .section{
-  display: block;
-  transition: all .1s ease-in;
+.report .sentence-add{
+  font-weight: bold;
+  text-decoration: underline;
 /*  padding-left: 10px;
   padding-right: 10px;
   width: 100%;*/
 }
+
+
+.report .section{
+  display: block;
+  transition: all .1s ease-in;
+  /*cursor: pointer;*/
+/*  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;*/
+}
+
+.report .section-add{
+  background-color: #fffee5;
+/*  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;*/
+}
+
 
 .report .section-incidental{
   background-color: #fffee5;

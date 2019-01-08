@@ -13,5 +13,6 @@ var app = angular.module('myApp', [
   'encounter.select',
   'login',
   'highlightedReport.directive',
-  'pagemap.directive'
+  'pagemap.directive',
+  'feedbackmenu'
 ]);
