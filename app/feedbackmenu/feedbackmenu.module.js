@@ -14,11 +14,11 @@
             getLabel: '&'
         },
         templateUrl: _template,
-        controller: ['$scope', 'backend', feedbackmenuController],
+        controller: ['$scope', feedbackmenuController],
         controllerAs: 'menu'
     });
 
-    function feedbackmenuController($scope, backend) {
+    function feedbackmenuController($scope) {
         var self = this;
 
         self.$onInit = function() {
