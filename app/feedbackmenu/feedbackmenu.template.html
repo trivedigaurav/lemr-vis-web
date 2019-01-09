@@ -1,7 +1,40 @@
 <div ng-if="menu.display" style="top:{{menu.top}}px; left:{{menu.left}}px" id="feedbackmenu" class="dropdown clearfix">
   <ul class="dropdown-menu" role="menu">
-    <li><a href="#">Buy</a></li>
-    <!-- <li class="divider"></li> -->
-    <li><a href="#">Sell</a></li>
+    <li><a href="#" ng-click="menu.addFeedbackCallback()"><span class="glyphicon glyphicon-plus"></span> &nbsp;Add feedback</a></li>
+    
+    <li class="divider"></li>
+
+    <li ng-if="menu.text!=null">
+      <input class="form-check-input pull-right" type="text" id="text" ng-disabled="menu.textDisabled" ng-model="menu.text" ng-change="menu.checkFeedback()">
+    </li>
+    
+    <li ng-if="menu.sentence">
+      <input class="form-check-input pull-right" type="checkbox" value="" id="sentence" ng-disabled="menu.sentenceDisabled" ng-model="menu.sentenceIs" ng-change="menu.checkFeedback()">
+      <label class="clickable form-check-label unselectable" for="sentence">
+        Sentence
+      </label>
+    </li>
+
+    <li ng-if="menu.section">
+      <input class="form-check-input pull-right" type="checkbox" value="" id="section" ng-disabled="menu.sectionDisabled" ng-model="menu.sectionIs" ng-change="menu.checkFeedback()">
+      <label class="clickable form-check-label unselectable" for="section">
+        Section
+      </label>
+    </li>
+
+    <li ng-if="menu.report">
+      <input class="form-check-input pull-right" type="checkbox" value="" id="report" ng-disabled="menu.reportDisabled" ng-model="menu.reportIs" ng-change="menu.checkFeedback()">
+      <label class="clickable form-check-label unselectable" for="report">
+        Report
+      </label>
+    </li>
+
+    <li ng-if="menu.encounter">
+      <input class="form-check-input pull-right" type="checkbox" value="" id="encounter" ng-disabled="menu.encounterDisabled" ng-model="menu.encounterIs" ng-change="menu.checkFeedback()">
+      <label class="clickable form-check-label unselectable" for="encounter">
+        Encounter
+      </label>
+    </li>
+
   </ul>
 </div>

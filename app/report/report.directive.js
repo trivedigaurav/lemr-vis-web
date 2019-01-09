@@ -117,22 +117,18 @@ angular.module('highlightedReport.directive', [])
                     event.preventDefault();
 
                     items = {}
-                    
-                    scope.$apply(function () {                     
+                                     
+                    //if any text is selected
+                    var selection = rangy.getSelection();
+                    if(!selection.isCollapsed) {
+                        selection.expand("word");
 
-                        //if any text is selected
-                        var selection = rangy.getSelection();
-                        if(!selection.isCollapsed) {
-                            selection.expand("word");
+                        var text = selection.toString().trim();
 
-                            var text = selection.toString().trim();
-
-                            if (text) {
-                               items["text"] = text;
-                            }
+                        if (text) {
+                           items["text"] = text;
                         }
-
-                    });
+                    }
 
                     items["encounter"] = scope.encounterId;
                     items["report"] = scope.recordId;

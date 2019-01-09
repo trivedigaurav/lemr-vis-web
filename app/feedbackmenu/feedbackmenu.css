@@ -1,10 +1,35 @@
-#feedbackmenu ul{
-  	display: block;
+#feedbackmenu {
     position: absolute;
-    max-width: 220px;
+    z-index: 4001;
 }
 
-#feedbackmenu {
-   	position: absolute;
-    z-index: 4001;
+#feedbackmenu ul{
+    display: block;
+    width: 200px;
+}
+
+#feedbackmenu label{
+    width: 165px;
+    padding-left: 20px;
+}
+
+#feedbackmenu input{
+    margin-right: 20px;
+}
+
+#feedbackmenu input[type=text]{
+    margin-bottom: 5px;
+    margin-left: 20px;
+}
+
+#feedbackmenu input[type=checkbox][disabled] + label {
+    color: #bbb;
+}
+
+#feedbackmenu input[type=checkbox] + label {
+    font-weight: normal;
+}
+
+#feedbackmenu input[type=checkbox]:checked + label {
+    font-weight: 700;
 }

@@ -113,14 +113,17 @@ angular.module('myApp.controllers', [])
          * Feedback
          */
 
-        $scope.checkFeedback = function(type, id){
+        $scope.getLabel = function(type, id){
             
             type = type + "s";
 
             if (type == "encounters")
                 return $scope.active.encounterData.class == "pos";
-            else
+            else if (type in $scope.active.encounterData)
                 return $scope.active.encounterData[type][id].class == "pos";
+            else
+                return false;
+
         }
 
         $scope.addFeedback = function(feedback){
@@ -132,6 +135,7 @@ angular.module('myApp.controllers', [])
                 event: event,
                 items: items
             });
+        
         }
 
         /*
