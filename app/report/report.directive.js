@@ -136,12 +136,12 @@ angular.module('highlightedReport.directive', [])
                     let sections = $(".section:hover");
                 
                     if (sections.length == 1){
-                        // sections.addClass("section-add");
+                        sections.addClass("section-add");
                         items["section"] = sections[0].id.split("-")[1];
 
                         let sentences = $(".sentence:hover");
                         if (sentences.length == 1){
-                            // sentences.addClass("sentence-add");
+                            sentences.addClass("sentence-add");
                             items["sentence"] = sentences[0].id.split("-")[1];
                         }
                     }

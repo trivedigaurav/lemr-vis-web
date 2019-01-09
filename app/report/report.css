@@ -179,7 +179,7 @@ highlighted-report {
 }
 
 .report .section-add{
-  background-color: #fffee5;
+  border-right: 5px solid black;
 /*  padding-left: 10px;
   padding-right: 10px;
   width: 100%;*/
