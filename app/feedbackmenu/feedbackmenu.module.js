@@ -130,13 +130,17 @@
             let ret = {}
 
             for (let level of self.levels){
-                if (self[level+"Is"])
-                    ret[level] = self[level]
+                if (self[level])
+                    ret[level] = {
+                        "id": self[level],
+                        "class": self[level+"Is"]
+                    }
                 else
                     ret[level] = null;
             }
 
             self.addFeedback({feedback: ret});
+            rangy.getSelection().collapseToEnd();
             self.display = false;
         }
     }
