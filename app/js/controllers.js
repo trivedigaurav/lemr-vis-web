@@ -32,10 +32,11 @@ angular.module('myApp.controllers', [])
             username: null,
             hl_index: -1,
             feedback: {
-                "reports": [],
-                "sections": [],
-                "sentences": [],
-                "texts": [],
+                // "encounters": {},
+                // "reports": {},
+                // "sections": {},
+                // "sentences": {},
+                // "texts": {},
                 "list": []
             }
         };
@@ -43,9 +44,9 @@ angular.module('myApp.controllers', [])
         $scope.doLogout = function() {
             var confirm = true;
 
-            // if($scope.feedbackList.length > 0){
-            //     confirm = $window.confirm("You have made unsaved changes. Would you still like to leave this page?");
-            // }
+            if($scope.active.feedbackList.length > 0){
+                confirm = $window.confirm("You have made unsaved changes. Would you still like to leave this page?");
+            }
 
             if(confirm) {
                 backend.putLogEvent("endSession", "OK");
@@ -127,7 +128,69 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.addFeedback = function(feedback){
-            console.log(feedback);
+
+            // console.log(feedback);
+
+            backend.putLogEvent("addFeedbackToList", JSON.stringify(feedback));
+            $scope.active.feedback.list.push(feedback);
+
+            // let levels = ["encounter", "report", "section", "sentence", "text"];
+
+            // for (let level of levels){
+            //     if (feedback[level]){
+            //         if (level == "text")
+            //             $scope.active.feedback.texts[feedback["report"].id] = feedback.text.id;
+            //         else
+            //             $scope.active.feedback[level+"s"][feedback[level].id] = feedback[level].class;
+            //     }
+            // }
+        }
+
+        $scope.removeFeedback = function(index) {
+
+            // var hidden_id = $scope.active.feedback.list[index].$hidden_id;
+
+            backend.putLogEvent("removeFeedback", JSON.stringify($scope.active.feedback.list[index]));
+
+            var feedback = $scope.active.feedback.list.splice(index, 1)[0];
+
+            // $scope.active.feedbackList.forEach(function(feedback) {
+            //     var i = feedback.conflictList.indexOf(hidden_id);
+            //     if (i > -1) {
+            //         feedback.conflictList.splice(i, 1);
+            //     }
+            // });
+        }
+
+        $scope.clearFeedback = function() {
+
+            // var hidden_id = $scope.active.feedback.list[index].$hidden_id;
+
+            backend.putLogEvent("clearFeedback", "");
+
+            $scope.active.feedback.list = [];
+        }
+
+        $scope.confirmFeedback = function(override) {
+
+            if($scope.retrainData.loading == true){
+                backend.putLogEvent("Error", "Re-training already in process!");    
+                alert("Re-training already in process!");
+            }
+            else {
+                setTimeout(function() {
+                    $scope.sendFeedback(override);
+                });
+            }
+
+        }
+
+
+        $window.onbeforeunload = function(event) {
+            if($scope.active.feedback.list.length > 0) {
+                return "You have made unsaved changes. \
+                    Would you still like to leave this page?";
+            }
         }
 
         $scope.showContextMenu = function(event, items){
@@ -135,7 +198,6 @@ angular.module('myApp.controllers', [])
                 event: event,
                 items: items
             });
-        
         }
 
         /*
