@@ -210,6 +210,9 @@ angular.module('myApp.controllers', [])
         $scope.addTag = function(input){
            if(input !== ''){
                 //check if not already there
+
+                backend.putLogEvent("addTag", input);
+
                 if($scope.search_list.indexOf(input) === -1){
                     $scope.search_list.push(input);
                     $scope.insertTag = '';
@@ -218,8 +221,11 @@ angular.module('myApp.controllers', [])
         }
         
         $scope.closeTag = function(text){
+
+            backend.putLogEvent("removeTag", text);
+
             $scope.search_list = $filter('filter')($scope.search_list, function(value){
-            return value != text;
+                return value != text;
             });
         }
                     
