@@ -171,7 +171,7 @@ angular.module('myApp.controllers', [])
             $scope.active.feedback.list = [];
         }
 
-        $scope.confirmFeedback = function(override) {
+        $scope.sendFeedback = function(override) {
 
             if($scope.retrainData.loading == true){
                 backend.putLogEvent("Error", "Re-training already in process!");    
@@ -179,11 +179,88 @@ angular.module('myApp.controllers', [])
             }
             else {
                 setTimeout(function() {
-                    $scope.sendFeedback(override);
+                    $scope.retrainFeedback(override);
                 });
             }
 
         }
+
+
+        /*
+        * Retraining
+        */
+
+
+        $scope.retrainData = new Object();
+        $scope.retrainData.message = null;
+        $scope.retrainData.loading = false;
+        $scope.retrainData.status = null;
+
+        $scope.retrainFeedback = function(override=false) {
+            // alert('Re-training!');
+            if($scope.retrainData.loading == true)
+                return;
+
+            $scope.retrainData.loading = true;
+
+            //assign ids to feedback list
+            for (var i=0; i < $scope.active.feedback.length; i++) {
+                $scope.feedback.list[i].$hidden_id = i.toString();
+            }
+
+            backend.putFeedback($scope.active.feedback.list, "1", override)
+                .then(function(data) {
+
+                    if(data.status == "OK"){
+
+                        backend.putLogEvent("putFeedback", "OK");
+
+                        $scope.retrainData.message = data.latestModel;
+
+                        // assignDataToVars(data.gridVarData);
+
+                        // $scope.modelList = data.modelList;
+                        // $scope.active.model = data.latestModel;
+
+                        // $scope.retrainData.feedbackList = $.extend(true,[],$scope.feedbackList);
+
+                        $scope.retrainData.status = "OK";
+
+                        $scope.clearFeedback();
+                    }
+                    else if(data.status == "Error") {
+
+                        backend.putLogEvent("putFeedback", "Error: " + JSON.stringify(data.errorList));
+
+                        $scope.retrainData.message = data.errorList;
+                        $scope.retrainData.status = "Error";
+
+                        // setConflictList(data.feedbackList);
+                    }
+                    else if(data.status == "Warning") {
+
+                        backend.putLogEvent("putFeedback", "Warning: " + JSON.stringify(data.warningList));
+
+                        $scope.retrainData.message = data.warningList;
+                        $scope.retrainData.status = "Warning";
+
+                        // setConflictList(data.feedbackList);
+                    }
+                    else{
+                        backend.putLogEvent("Error", "Invalid response for putfeedback");
+                        alert("Sorry, something went wrong. Please report this.");
+                    }
+
+                    $scope.retrainData.loading = false;
+
+                }, function() { 
+                    backend.putLogEvent("Error", "Unable to send feedback.");
+                    alert("Unable to send feedback."); 
+                    $scope.retrainData.loading = false;
+                    $scope.retrainData.status = "Fail";
+                    $scope.retrainData.message ="Unable to send feedback!" 
+                });
+        };
 
 
         $window.onbeforeunload = function(event) {

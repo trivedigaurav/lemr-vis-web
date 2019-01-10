@@ -87,15 +87,28 @@ angular.module('myApp.services', [])
             console.log(event_name, message);
             return $http.put(uri + event_name, message);
         },
-        getAnnotationUrls: function(report) {
-            return {
-                create: `${SERVER_URL}/annotator/create/${report}`,
-                update: `${SERVER_URL}/annotator/update/:id`,
-                destroy: `${SERVER_URL}/annotator/destroy/:id`,
-                read: `${SERVER_URL}/annotator/read/${report}`,
-                search: `${SERVER_URL}/annotator/read/${report}`
-            }
-        }
+        // getAnnotationUrls: function(report) {
+        //     return {
+        //         create: `${SERVER_URL}/annotator/create/${report}`,
+        //         update: `${SERVER_URL}/annotator/update/:id`,
+        //         destroy: `${SERVER_URL}/annotator/destroy/:id`,
+        //         read: `${SERVER_URL}/annotator/read/${report}`,
+        //         search: `${SERVER_URL}/annotator/read/${report}`
+        //     }
+        // },
+        putFeedback: function(feedbackList, model, override) {
+            var uri = `${SERVER_URL}/putFeedback/`;
+
+            return $http.put(uri + model + "/" + override, 
+                            JSON.stringify(feedbackList))
+                        .then(function(result) {
+                            return result.data;
+                        }, function(response){
+                            checkResponse(response);
+                            return $q.reject(response);
+                        }
+            );
+        },
     };
 }])
 
