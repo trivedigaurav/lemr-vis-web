@@ -86,6 +86,9 @@ body {
 
 #main .page-header { margin-top: 0; }
 
+.tab-inner-content {
+  margin-top: 50px;
+}
 
 /*
  * Other vis-specific stuff

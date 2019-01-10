@@ -1,0 +1,25 @@
+<h4>Feedback List</h4>
+
+<div id="feedbackList">
+  <p ng-hide="active.feedback.list.length">Feedback list is empty.</p>
+
+  <alert ng-repeat="feedback in active.feedback.list" type="default" close="removeFeedback($index)">
+
+    <!-- <span ng-class="{'danger-text': active.feedback.conflictList.length, 'warning-text': active.feedback.status == 'Warning'}"> -->
+      <strong>{{$index + 1}}.</strong>
+      {{feedback}}
+    <!-- </span> -->
+
+  </alert>
+
+  <div class="form-horizontal" ng-show="active.feedback.list.length">
+    <button class="btn btn-default"
+            on-confirm-click="clearFeedback()" confirm-click="Do you wish to clear all feedback?">
+      <i class="glyphicon glyphicon-trash"> </i> Clear All
+    </button>
+    <button class="btn btn-primary" 
+            ng-click="confirmFeedback(false)" >
+            <i class="glyphicon glyphicon-refresh"> </i> Re-Train
+    </button>
+  </div>
+</div>

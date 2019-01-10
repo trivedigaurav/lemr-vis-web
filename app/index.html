@@ -108,27 +108,9 @@
           <!-- Retrain view -->
           <tab>
             <tab-heading>
-              <i class="glyphicon glyphicon-refresh"></i> Re-Train &nbsp;<span ng-if="feedbackList.length > 0" class="badge alert-info pull-right animated bounceIn"> {{feedbackList.length}} </span>
+              <i class="glyphicon glyphicon-refresh"></i> Re-Train &nbsp;<span ng-if="active.feedback.list.length > 0" class="badge alert-info pull-right animated bounceIn"> {{active.feedback.list.length}} </span>
             </tab-heading>
-            <div class="tab-inner-content">
-
-              <h4>Feedback List</h4>
-              <div id="feedbackList">
-                <p ng-hide="feedbackList.length">Feedback list is empty.</p>
-                
-                <div class="form-horizontal" ng-show="feedbackList.length">
-                  <button class="btn btn-default"
-                          on-confirm-click="clearFeedback()" confirm-click="Do you wish to clear all feedback?">
-                    <i class="glyphicon glyphicon-trash"> </i> Clear All
-                  </button>
-                  <button class="btn btn-primary" 
-                          ng-click="confirmFeedback(false)" >
-                          <i class="glyphicon glyphicon-refresh"> </i> Re-Train
-                  </button>
-                </div>
-              </div>
-
-            </div>
+            <div class="tab-inner-content" ng-include src="'retrain/retrain.partial.html?v=' + cacheBust"></div>
           </tab>
         </tabset>
 
@@ -139,8 +121,8 @@
 
   <!-- <pagemap dirty="pagemapDirty"></pagemap> -->
   <feedbackmenu add-feedback="addFeedback(feedback)" get-label="getLabel(type, t_id)"></feedbackmenu>
-  <pagemap></pagemap>
-
+  
+  <pagemap visible="tabs.docView"></pagemap>
 
   <!-- plugins -->
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
