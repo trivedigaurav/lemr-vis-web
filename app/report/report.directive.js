@@ -107,8 +107,6 @@ angular.module('highlightedReport.directive', [])
                 };
         
                 scope.$watchGroup(['data', 'helperTerms.length'], function(){
-                    if(scope.annotator)
-                        scope.annotator.destroy();
                     scope.highlightTerms();
                     // console.log("Directive redrawn!");
                 }, true);
