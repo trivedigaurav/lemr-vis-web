@@ -2,9 +2,9 @@ angular.module('pagemap.directive', [])
 .directive('pagemap', [function() {
     return {
         restrict: 'E',
-        // scope: {
-        //     dirty: '=',
-        // },
+        scope: {
+            visible: '<',
+        },
         link: function (scope, element, attrs) {
                 scope.redrawMap = function() {
 
@@ -33,15 +33,15 @@ angular.module('pagemap.directive', [])
 
                 scope.redrawMap();
         
-                // scope.$watch('dirty', function(){
+                scope.$watch('visible', function(){
                     
-                //     if(scope.dirty){
-                //         scope.redrawMap();
-                //         scope.dirty = false;
-                //     }
+                    $("#map").off();
+                    $('#map').remove();
+
+                    if(scope.visible)
+                        scope.redrawMap();
                     
-                //     // console.log("Directive redrawn!");
-                // }, true);
+                });
         }
     };
 }])
