@@ -94,7 +94,7 @@
             //check low to high
             let lowest = false;
             
-            for (let i = self.levels.length; i >= 0; --i) {
+            for (let i = self.levels.length - 1; i >= 0; --i) {
                 let level = self.levels[i];
 
                 //enable all
@@ -129,18 +129,34 @@
 
             let ret = {}
 
-            for (let level of self.levels){
-                if (self[level])
+
+            if (self.text != null){
+                for (let level of self.levels)
+                    ret[level] = null;
+
+                ret["text"] = {
+                    "id": self.text,
+                    "class": true,
+                    "report": self["report"]
+                }
+            }
+            else{
+                for (let i = self.levels.length - 2; i >= 0; --i) {
+                    let level = self.levels[i];
+
                     ret[level] = {
                         "id": self[level],
                         "class": self[level+"Is"]
                     }
-                else
-                    ret[level] = null;
+                }
             }
 
             self.addFeedback({feedback: ret});
-            rangy.getSelection().collapseToEnd();
+            
+            let selection = rangy.getSelection()
+            if (!selection.isCollapsed)
+                selection.collapseToEnd();
+
             self.display = false;
         }
     }

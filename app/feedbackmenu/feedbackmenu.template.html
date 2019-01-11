@@ -5,36 +5,39 @@
     <li class="divider"></li>
 
     <li ng-if="menu.text!=null">
-      <input class="form-check-input pull-right" type="text" id="text" ng-disabled="menu.textDisabled" ng-model="menu.text" ng-change="menu.checkFeedback()">
+      <!-- <input class="form-check-input pull-right" type="text" id="text" ng-disabled="menu.textDisabled" ng-model="menu.text" ng-change="menu.checkFeedback()"> -->
+      <textarea class="form-control">{{menu.text}}</textarea>
     </li>
     
-    <li ng-if="menu.sentence">
-      <input class="form-check-input pull-right" type="checkbox" value="" id="sentence" ng-disabled="menu.sentenceDisabled" ng-model="menu.sentenceIs" ng-change="menu.checkFeedback()">
-      <label class="clickable form-check-label unselectable" for="sentence">
-        Sentence
-      </label>
-    </li>
+    <span ng-if="menu.text==null">
+      <li ng-if="menu.sentence">
+        <input class="form-check-input pull-right" type="checkbox" value="" id="sentence" ng-disabled="menu.sentenceDisabled" ng-model="menu.sentenceIs" ng-change="menu.checkFeedback()">
+        <label class="clickable form-check-label unselectable" for="sentence">
+          Sentence
+        </label>
+      </li>
 
-    <li ng-if="menu.section">
-      <input class="form-check-input pull-right" type="checkbox" value="" id="section" ng-disabled="menu.sectionDisabled" ng-model="menu.sectionIs" ng-change="menu.checkFeedback()">
-      <label class="clickable form-check-label unselectable" for="section">
-        Section
-      </label>
-    </li>
+      <li ng-if="menu.section">
+        <input class="form-check-input pull-right" type="checkbox" value="" id="section" ng-disabled="menu.sectionDisabled" ng-model="menu.sectionIs" ng-change="menu.checkFeedback()">
+        <label class="clickable form-check-label unselectable" for="section">
+          Section
+        </label>
+      </li>
 
-    <li ng-if="menu.report">
-      <input class="form-check-input pull-right" type="checkbox" value="" id="report" ng-disabled="menu.reportDisabled" ng-model="menu.reportIs" ng-change="menu.checkFeedback()">
-      <label class="clickable form-check-label unselectable" for="report">
-        Report
-      </label>
-    </li>
+      <li ng-if="menu.report">
+        <input class="form-check-input pull-right" type="checkbox" value="" id="report" ng-disabled="menu.reportDisabled" ng-model="menu.reportIs" ng-change="menu.checkFeedback()">
+        <label class="clickable form-check-label unselectable" for="report">
+          Report
+        </label>
+      </li>
 
-    <li ng-if="menu.encounter">
-      <input class="form-check-input pull-right" type="checkbox" value="" id="encounter" ng-disabled="menu.encounterDisabled" ng-model="menu.encounterIs" ng-change="menu.checkFeedback()">
-      <label class="clickable form-check-label unselectable" for="encounter">
-        Encounter
-      </label>
-    </li>
+      <li ng-if="menu.encounter">
+        <input class="form-check-input pull-right" type="checkbox" value="" id="encounter" ng-disabled="menu.encounterDisabled" ng-model="menu.encounterIs" ng-change="menu.checkFeedback()">
+        <label class="clickable form-check-label unselectable" for="encounter">
+          Encounter
+        </label>
+      </li>
+    </span>
 
   </ul>
 </div>
