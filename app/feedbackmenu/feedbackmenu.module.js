@@ -11,7 +11,8 @@
         restrict: 'E',
         bindings: {
             addFeedback: '&',
-            getLabel: '&'
+            getLabel: '&',
+            showFeedbackMenu: '='
         },
         templateUrl: _template,
         controller: ['$scope', feedbackmenuController],
@@ -25,78 +26,67 @@
             self.top = "200";
             self.left = "300";
             self.display = false;
-            self.levels = ["encounter", "report", "section", "sentence", "text"];
+            self.levels = ["sentence", "section", "report", "encounter"];
+
+            self.showFeedbackMenu = showFeedbackMenu;
 
             // for (level of self.levels){
             //   self[level+"Disabled"] = true;
             // }
         }
 
-        //TODO: What's the properway to do this?
-        $scope.$parent.$on("show-feedbackmenu", function(event, contextMenuObj) {
-            createMenu(contextMenuObj);
-            $scope.$apply();
-        });
+        function showFeedbackMenu(event, items) {
+            if (items) {
+                if ("text" in items){
+                    self.text = items.text;
+                }
+                else{
 
-        function createMenu(contextMenuObj) {
+                    self.text = null;
 
-            if (contextMenuObj.items) {
+                    let first = false;
 
-                let first = false;
+                    for (let level of self.levels) {
 
-                for (var i = self.levels.length - 1; i >= 0; --i) {
+                        if (level in items) {
 
-                    let level = self.levels[i];
+                            self[level] = items[level];
 
-                    if (level in contextMenuObj.items) {
-
-                        self[level] = contextMenuObj.items[level];
-
-                        if (level == "text"){
-                            self.textIs = true;
-                            continue;
+                            self[level + "Is"] = self.getLabel({
+                                    type: level,
+                                    t_id: self[level]
+                                });
+                            
+                            if (!first) {
+                              self[level+"Is"] = !self[level+"Is"]
+                              first = true;
+                            }
+                        } 
+                        else {
+                            self[level] = null;
+                            self[level+"Is"] = false;
                         }
-
-                        self[level + "Is"] = self.getLabel({
-                                type: level,
-                                t_id: self[level]
-                            });
-                        
-                        if (!first) {
-                          self[level+"Is"] = !self[level+"Is"]
-                          first = true;
-                        }
-                    } 
-                    else {
-                        self[level] = null;
-                        self[level+"Is"] = false;
                     }
                 }
 
                 self.checkFeedback();
 
-                self.top = contextMenuObj.event.pageY;
-                self.left = contextMenuObj.event.pageX;
+                self.top = event.pageY;
+                self.left = event.pageX;
 
                 self.display = true;
-            } else {
+            } 
+            else {
                 self.display = false;
             }
+
         }
 
         self.checkFeedback = function() {
-            
-            if(!self.text)
-                self.textIs = false;
-            else
-                self.textIs = true;
-
             //check low to high
             let lowest = false;
             
-            for (let i = self.levels.length - 1; i >= 0; --i) {
-                let level = self.levels[i];
-
+            for (let level of self.levels) {
                 //enable all
                 self[level+"Disabled"] = false;
 
@@ -113,7 +103,10 @@
             //check high to low
             let highest = true;
 
-            for (let level of self.levels){
+            for (let i = self.levels.length - 1; i >= 0; i--){
+
+                let level = self.levels[i];
+
                 if (highest) {
                     if (!self[level+"Is"])
                         highest = false;
@@ -126,9 +119,7 @@
         }
 
         self.addFeedbackCallback = function() {
-
             let ret = {}
-
 
             if (self.text != null){
                 for (let level of self.levels)
@@ -141,9 +132,7 @@
                 }
             }
             else{
-                for (let i = self.levels.length - 2; i >= 0; --i) {
-                    let level = self.levels[i];
-
+                for (let level of self.levels) {
                     ret[level] = {
                         "id": self[level],
                         "class": self[level+"Is"]

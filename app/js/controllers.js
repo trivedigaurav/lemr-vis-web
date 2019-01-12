@@ -18,19 +18,19 @@ angular.module('myApp.controllers', [])
          * App config
          */
 
-        $rootScope.config = Object();
+        // $rootScope.config = Object();
         
-        $rootScope.config.classificationName = {
-            "positive": "True",
-            "negative": "False",
-            "unclassified": "?"
-        };
+        // $rootScope.config.classificationName = {
+        //     "positive": "True",
+        //     "negative": "False",
+        //     "unclassified": "?"
+        // };
 
         $scope.active = {
             encounterId: null,
             encounterData: null, 
             username: null,
-            hl_index: -1,
+            // hl_index: -1,
             feedback: {
                 // "encounters": {},
                 // "reports": {},
@@ -72,7 +72,7 @@ angular.module('myApp.controllers', [])
 
             backend.getEncounter($scope.active.encounterId).then(function(data) {
                 $scope.active.encounterData = data;
-                $scope.active.hl_index = -1;
+                // $scope.active.hl_index = -1;
                 stopLoading();                
             }, function() {
                 backend.putLogEvent("loadEncounterFailed", $scope.active.encounterId);
@@ -113,6 +113,8 @@ angular.module('myApp.controllers', [])
         /*
          * Feedback
          */
+
+        $scope.showFeedbackMenu = null; //define in directive
 
         $scope.getLabel = function(type, id){
             
@@ -226,7 +228,7 @@ angular.module('myApp.controllers', [])
 
                         $scope.retrainData.status = "OK";
 
-                        $scope.clearFeedback();
+                        // $scope.clearFeedback();
                     }
                     else if(data.status == "Error") {
 
@@ -268,13 +270,6 @@ angular.module('myApp.controllers', [])
                 return "You have made unsaved changes. \
                     Would you still like to leave this page?";
             }
-        }
-
-        $scope.showContextMenu = function(event, items){
-            $scope.$emit("show-feedbackmenu", {
-                event: event,
-                items: items
-            });
         }
 
         /*

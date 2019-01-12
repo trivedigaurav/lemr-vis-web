@@ -8,7 +8,7 @@ angular.module('highlightedReport.directive', [])
             encounterId: '<',
             helperTerms: '<',
             getLevels: '&',
-            showContextMenu: '&'
+            showFeedbackMenu: '&'
         },
         link: function (scope, element, attrs) {
 
@@ -144,13 +144,15 @@ angular.module('highlightedReport.directive', [])
                         }
                     }
 
-                    scope.showContextMenu({event:event, items:items});
+                    scope.showFeedbackMenu({event:event, items:items});
+                    scope.$apply();
 
                 });
 
                 //remove context menu
                 element.on('click', function (event) {
-                    scope.showContextMenu({event:event, items:false});
+                    scope.showFeedbackMenu({event:event, items:false});
+                    scope.$apply();
                 });
             }
     };
