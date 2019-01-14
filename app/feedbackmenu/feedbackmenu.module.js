@@ -41,6 +41,7 @@
 
                 if ("text" in items){
                     self.text = items.text;
+                    self.report = items.report;
                 }
                 else{
 

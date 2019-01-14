@@ -42,9 +42,9 @@ angular.module('highlightedReport.directive', [])
                             index++;
 
                         if (sent.class == "pos")
-                            charArray[index] = `<span class="sentence sentence-incidental" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
+                            charArray[index] = `<span data-report="${scope.recordId}" class="sentence sentence-incidental" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
                         else
-                            charArray[index] = `<span class="sentence" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
+                            charArray[index] = `<span data-report="${scope.recordId}" class="sentence" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
                         
                         index = sent.end - 1;
 
@@ -66,9 +66,9 @@ angular.module('highlightedReport.directive', [])
                             index++;
 
                         if (sect.class == "pos")
-                            charArray[index] = `<span class="section section-incidental" id="section-${sect.section_id}" scroll-bookmark="section-${sect.section_id}">` + charArray[index];
+                            charArray[index] = `<span data-report="${scope.recordId}" class="section section-incidental" id="section-${sect.section_id}" scroll-bookmark="section-${sect.section_id}">` + charArray[index];
                         else
-                            charArray[index] = `<span class="section" id="section-${sect.section_id}" scroll-bookmark="section-${sect.section_id}">` + charArray[index];
+                            charArray[index] = `<span data-report="${scope.recordId}" class="section" id="section-${sect.section_id}" scroll-bookmark="section-${sect.section_id}">` + charArray[index];
                         
                         index = sect.end - 1;
                         while(charArray[index].trim() == '')
@@ -116,15 +116,21 @@ angular.module('highlightedReport.directive', [])
 
                     items = {}
                                      
-                    //if any text is selected
-                    var selection = rangy.getSelection();
-                    if(!selection.isCollapsed) {
-                        selection.expand("word");
+                    //if any text is selected in this element
+                    var selection = rangy.getSelection(element[0]);
 
-                        var text = selection.toString().trim();
+                    if(!selection.isCollapsed){
+                        if ($(selection.anchorNode.parentElement).data("report") == scope.recordId) {
+                            selection.expand("word");
 
-                        if (text) {
-                           items["text"] = text;
+                            var text = selection.toString().trim();
+
+                            if (text) {
+                               items["text"] = text;
+                            }
+                        }
+                        else{
+                            selection.collapseToEnd();
                         }
                     }
 
