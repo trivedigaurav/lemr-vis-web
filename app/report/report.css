@@ -160,12 +160,13 @@ highlighted-report {
   text-decoration: underline dotted;
 }
 
-.report .sentence-add{
+.report .sentence-feedback{
   font-weight: bold;
   text-decoration: underline;
-/*  padding-left: 10px;
-  padding-right: 10px;
-  width: 100%;*/
+}
+
+.report .sentence-add{
+  text-decoration: underline dotted;
 }
 
 
@@ -178,13 +179,13 @@ highlighted-report {
   width: 100%;*/
 }
 
-.report .section-add{
+.report .section-feedback{
   border-right: 5px solid black;
-/*  padding-left: 10px;
-  padding-right: 10px;
-  width: 100%;*/
 }
 
+.report .section-add{
+  background-color: rgba(0,0,0,0.06);
+}
 
 .report .section-incidental{
   background-color: #fffee5;

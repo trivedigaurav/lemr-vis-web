@@ -35,12 +35,10 @@
             // }
         }
 
-        function showFeedbackMenu(event, items, callback) {
-
-            if (callback)
+        function showFeedbackMenu(event, items, callback) {                
+            if (items) {
                 self.callback = callback;
 
-            if (items) {
                 if ("text" in items){
                     self.text = items.text;
                 }
@@ -82,6 +80,9 @@
             } 
             else {
                 self.display = false;
+
+                if(callback)
+                    callback(null);
             }
 
         }
@@ -147,7 +148,9 @@
 
             self.display = false;
             self.addFeedback({feedback: ret});
-            self.callback(ret);
+
+            if(self.callback)
+                self.callback(ret);
         }
     }
 

@@ -150,16 +150,38 @@ angular.module('highlightedReport.directive', [])
                 });
 
                 function feedbackCallback(ret){
-                    let selection = rangy.getSelection()
-                    if (!selection.isCollapsed)
-                        selection.collapseToEnd();
 
-                    console.log(ret);
+                    $('.section-add').removeClass('section-add');
+                    $('.sentence-add').removeClass('sentence-add');
+
+                    
+                    // if (!selection.isCollapsed)
+                    //     selection.collapseToEnd();    
+
+                    if(ret){
+                        if (ret["text"]){
+                            let selection = rangy.getSelection();
+                            rangy.createClassApplier("highlight").applyToSelection();
+                            selection.collapseToEnd();  
+                        }
+                        
+                        if (ret["sentence"]){
+                            $("#sentence-"+ret["sentence"].id).addClass("sentence-feedback");
+                            // console.log(ret["sentence"].id);
+                        }
+
+                        if(ret["section"]){
+                            $("#section-"+ret["section"].id).addClass("section-feedback");
+                            // console.log(ret["section"].id);
+                        }
+                    }
+
+                    // console.log(ret);
                 }
 
                 //remove context menu
                 element.on('click', function (event) {
-                    scope.showFeedbackMenu({event:event, items:false});
+                    scope.showFeedbackMenu({event:event, items:false, callback:feedbackCallback});
                     scope.$apply();
                 });
             }
