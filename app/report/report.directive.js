@@ -42,9 +42,9 @@ angular.module('highlightedReport.directive', [])
                             index++;
 
                         if (sent.class == "pos")
-                            charArray[index] = `<span data-report="${scope.recordId}" class="sentence sentence-incidental" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
+                            charArray[index] = `<span data-section="${sent.section_id}" data-report="${scope.recordId}" class="sentence sentence-incidental" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
                         else
-                            charArray[index] = `<span data-report="${scope.recordId}" class="sentence" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
+                            charArray[index] = `<span data-section="${sent.section_id}" data-report="${scope.recordId}" class="sentence" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
                         
                         index = sent.end - 1;
 
@@ -120,7 +120,8 @@ angular.module('highlightedReport.directive', [])
                     var selection = rangy.getSelection(element[0]);
 
                     if(!selection.isCollapsed){
-                        if ($(selection.anchorNode.parentElement).data("report") == scope.recordId) {
+                        //check if it is contained in a sentence of the same report
+                        if ($(selection.anchorNode).closest(".sentence").data("report") == scope.recordId) {
                             selection.expand("word");
 
                             var text = selection.toString().trim();
