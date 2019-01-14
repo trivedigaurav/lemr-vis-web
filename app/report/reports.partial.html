@@ -28,7 +28,7 @@
 
   </div>
   <pre ng-class="{'report-incidental': active.encounterData.reports[r_id].class == 'pos'}">
-      <highlighted-report data='active.encounterData.rads[r_id].text' record-id='r_id' encounter-id='active.encounterId' helper-terms="search_list" get-levels='getLevelsByReport(r_id)' show-feedback-menu="showFeedbackMenu(event, items)">
+      <highlighted-report data='active.encounterData.rads[r_id].text' record-id='r_id' encounter-id='active.encounterId' helper-terms="search_list" get-levels='getLevelsByReport(r_id)' show-feedback-menu="showFeedbackMenu(event, items, callback)">
       <!-- redraw-map='pagemapCtrl.redraw'> -->
      </highlighted-report>
   </pre>

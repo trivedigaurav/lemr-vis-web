@@ -144,10 +144,18 @@ angular.module('highlightedReport.directive', [])
                         }
                     }
 
-                    scope.showFeedbackMenu({event:event, items:items});
+                    scope.showFeedbackMenu({event:event, items:items, callback:feedbackCallback});
                     scope.$apply();
 
                 });
+
+                function feedbackCallback(ret){
+                    let selection = rangy.getSelection()
+                    if (!selection.isCollapsed)
+                        selection.collapseToEnd();
+
+                    console.log(ret);
+                }
 
                 //remove context menu
                 element.on('click', function (event) {

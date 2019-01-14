@@ -35,7 +35,11 @@
             // }
         }
 
-        function showFeedbackMenu(event, items) {
+        function showFeedbackMenu(event, items, callback) {
+
+            if (callback)
+                self.callback = callback;
+
             if (items) {
                 if ("text" in items){
                     self.text = items.text;
@@ -132,6 +136,7 @@
                 }
             }
             else{
+                ret["text"] = null;
                 for (let level of self.levels) {
                     ret[level] = {
                         "id": self[level],
@@ -140,13 +145,9 @@
                 }
             }
 
-            self.addFeedback({feedback: ret});
-            
-            let selection = rangy.getSelection()
-            if (!selection.isCollapsed)
-                selection.collapseToEnd();
-
             self.display = false;
+            self.addFeedback({feedback: ret});
+            self.callback(ret);
         }
     }
 
