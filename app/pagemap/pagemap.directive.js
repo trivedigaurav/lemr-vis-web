@@ -29,19 +29,22 @@ angular.module('pagemap.directive', [])
                             '.highlight-flash': '#000000',
                         },
                     });
+
+                    // let leaveWidth = $("#map").width() + 440;
+                    // $("#main").css('width', '100%').css('width', '-='+leaveWidth+'px');
                 };
 
                 scope.redrawMap();
         
-                scope.$watch('visible', function(){
+                // scope.$watch('visible', function(){
                     
-                    $("#map").off();
-                    $('#map').remove();
+                //     $("#map").off();
+                //     $('#map').remove();
 
-                    if(scope.visible)
-                        scope.redrawMap();
+                //     if(scope.visible)
+                //         scope.redrawMap();
                     
-                });
+                // });
         }
     };
 }])
