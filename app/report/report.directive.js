@@ -158,8 +158,8 @@ angular.module('highlightedReport.directive', [])
 
                 function feedbackCallback(ret){
 
-                    $('.section-add').removeClass('section-add');
-                    $('.sentence-add').removeClass('sentence-add');
+                    $('.section-add').removeClass('section-add').removeClass("section-incidental");
+                    $('.sentence-add').removeClass('sentence-add').removeClass("sentence-incidental");
 
                     
                     // if (!selection.isCollapsed)
@@ -174,12 +174,19 @@ angular.module('highlightedReport.directive', [])
                         
                         if (ret["sentence"]){
                             $("#sentence-"+ret["sentence"].id).addClass("sentence-feedback");
+
+                            if(ret["sentence"].class)
+                                $("#sentence-"+ret["sentence"].id).addClass("sentence-incidental");
                             // console.log(ret["sentence"].id);
                         }
 
                         if(ret["section"]){
                             $("#section-"+ret["section"].id).addClass("section-feedback");
                             // console.log(ret["section"].id);
+
+                            if(ret["section"].class)
+                                $("#section-"+ret["section"].id).addClass("section-incidental");
+
                         }
                     }
 
