@@ -42,6 +42,7 @@
                 if ("text" in items){
                     self.text = items.text;
                     self.report = items.report;
+                    self.encounter = items.encounter;
                 }
                 else{
 
@@ -134,7 +135,8 @@
                 ret["text"] = {
                     "id": self.text,
                     "class": true,
-                    "report": self["report"]
+                    "report": self["report"],
+                    "encounter": self["encounter"]
                 }
             }
             else{
