@@ -276,7 +276,7 @@ angular.module('myApp.controllers', [])
          * Helper Terms
          */
         $scope.search_list = ["tumor", "mass", "incidental", 
-                        "nodule", "note", "adenoma",
+                        "nodule", "adenoma",
                         "cyst", "lesion", "aneurysm"];
 
         $scope.addTag = function(input){
@@ -302,12 +302,12 @@ angular.module('myApp.controllers', [])
         }
                     
 
-        /*
-         * Tabs
-         */
+        // /*
+        //  * Tabs
+        //  */
 
-        $scope.tabs = {docView: true};
-        $scope.isNavCollapsed = false;
+        // $scope.tabs = {docView: true};
+        // $scope.isNavCollapsed = false;
 
         /*
          * Keypress

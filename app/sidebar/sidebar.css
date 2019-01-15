@@ -15,6 +15,7 @@
   margin: 10px 0px 10px 0px;
   display: flex;
   flex-direction: column;
+  max-height: 415px;
 }
 
 .panel ul {
@@ -30,7 +31,7 @@
   background-color: #eee;
 }
 
-.panel .pull-right{
+.panel .report-href{
   margin-top: -10px;
 }
 
