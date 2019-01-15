@@ -79,7 +79,7 @@ body {
 
 #main {
   padding: 20px;
-  width: calc(100% - 440px);
+  width: calc(100% - 575px);
   overflow: auto;
   height: calc(100vh - 55px);
 }
