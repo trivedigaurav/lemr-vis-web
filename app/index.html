@@ -97,22 +97,19 @@
       <div id="main" class="column col-xs-9">
         <!-- Feedback -->
   
-        <tabset>
+        <!-- <tabset> -->
 
           <!-- Report view -->
-          <tab active="tabs.docView" heading="Report">
-            <div class="tab-inner-content" ng-if="active.encounterData" ng-include src="'report/reports.partial.html?v=' + cacheBust">
-            </div>
-          </tab>
+          <div ng-if="active.encounterData" ng-include src="'report/reports.partial.html?v=' + cacheBust"></div>
 
           <!-- Retrain view -->
-          <tab>
+          <!-- <tab>
             <tab-heading>
               <i class="glyphicon glyphicon-refresh"></i> Re-Train &nbsp;<span ng-if="active.feedback.list.length > 0" class="badge alert-info pull-right animated bounceIn"> {{active.feedback.list.length}} </span>
             </tab-heading>
             <div class="tab-inner-content" ng-include src="'retrain/retrain.partial.html?v=' + cacheBust"></div>
-          </tab>
-        </tabset>
+          </tab> -->
+        <!-- </tabset> -->
 
       </div>
 
