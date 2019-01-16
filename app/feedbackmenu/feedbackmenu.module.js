@@ -129,15 +129,21 @@
             let ret = {}
 
             if (self.text != null){
-                for (let level of self.levels)
-                    ret[level] = null;
-
-                ret["text"] = {
-                    "id": self.text,
-                    "class": true,
-                    "report": self["report"],
-                    "encounter": self["encounter"]
+                for (let level of self.levels){
+                    ret[level] = {
+                        "id": self[level],
+                        "class": true
+                    }
                 }
+
+                ret["sentence"] = null;
+                ret["section"] = null;
+
+                ret ["text"] = {
+                        "id": self.text,
+                        "class": true
+                    }
+
             }
             else{
                 ret["text"] = null;
