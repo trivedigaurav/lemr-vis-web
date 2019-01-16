@@ -148,9 +148,14 @@
             else{
                 ret["text"] = null;
                 for (let level of self.levels) {
-                    ret[level] = {
-                        "id": self[level],
-                        "class": self[level+"Is"]
+                    if (self[level]){
+                        ret[level] = {
+                            "id": self[level],
+                            "class": self[level+"Is"]
+                        }    
+                    }
+                    else{
+                        ret[level] = null;
                     }
                 }
             }
