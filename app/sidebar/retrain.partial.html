@@ -1,24 +1,56 @@
 <div class="panel-heading">
   <h3 class="panel-title">Feedback List
-  <span class="badge alert-info pull-right animated bounceIn"> {{active.feedback.list.length}} </span>
+    
+    <span class="badge alert-info animated bounceIn"> {{active.feedback.list.length}} </span>
+
+     <div class="pull-right form-horizontal" ng-show="active.feedback.list.length">
+        <button class="btn btn-default btn-xs"
+                on-confirm-click="clearFeedback()" confirm-click="Do you wish to clear all feedback?">
+          <i class="glyphicon glyphicon-trash"> </i>
+        </button>
+        <button class="btn btn-primary btn-xs" 
+                ng-click="sendFeedback()" >
+                <i class="glyphicon glyphicon-refresh"> </i>
+        </button>
+    </div>
+
   </h3>
 </div>
 
 <div class="panel-body" ng-if="!isNavCollapsed">
-  
-<div class="card-block" ng-repeat="feedback in active.feedback.list">
-  
-  <!-- <span class="pull-right report-href">&nbsp; <a class="clickable" scroll-to-bookmark="report-{{r_id}}">#{{r_id}}</a></span> -->
-  <!-- <hr /> -->
-    <p class="clickable" scroll-to-bookmark="sentence-{{sent_id}}">
-	  <big><b>{{$index + 1}}.</b></big>
-      {{feedback}}
-    </p>
 
-</div>
+    <div class="card-block" ng-repeat="feedback in active.feedback.list" 
+        ng-if="feedback.encounter.id == active.encounterId">
 
-<div class="card-block" ng-if="active.feedback.list.length == 0">
-  Feedback list is empty.
-</div>
+        <!-- scroll-to-bookmark="sentence-{{sent_id}}" -->
+        <p class="clickable">
+            {{getFeedbackBlurb($index)|truncate:50}}
+
+            <span class="pull-right glyphicon glyphicon-remove clickable" ng-click="removeFeedback($index)"></span>
+        </p>
+
+	</div>
+
+
+    <div class="card-block" ng-repeat="feedback in active.feedback.list | limitTo:1" 
+        ng-if="feedback.encounter.id != active.encounterId">
+
+        <span class="pull-right report-href">&nbsp; <em>Other encounters</em></span>
+        <hr />
+
+    </div>    
+
+    <!-- TODO: show only unique encounters -->
+    <div class="card-block" ng-repeat="feedback in active.feedback.list" ng-if="feedback.encounter.id != active.encounterId">
+        
+	   <a href="#{{feedback.encounter.id}}" ng-click="loadEncounter(feedback.encounter.id)">#{{feedback.encounter.id}}</a>
+
+       <!-- TODO: Highlight class color -->
+
+    </div>
+
+	<div class="card-block" ng-if="active.feedback.list.length == 0">
+	  Feedback list is empty.
+	</div>
 
 </div>

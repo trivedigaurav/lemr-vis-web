@@ -14,6 +14,8 @@ angular.module('myApp.controllers', [])
         $window.appCtrl = $scope;
         $scope.cacheBust = Date.now('U');
 
+        $scope.levels = ["text", "sentence", "section", "report", "encounter"];
+
         /*
          * App config
          */
@@ -110,6 +112,16 @@ angular.module('myApp.controllers', [])
         }
 
 
+        $scope.getBlurb = function(id, level){
+            level = level + "s";
+
+            let start = $scope.active.encounterData[level][id].start;
+            let end = $scope.active.encounterData[level][id].end;
+            let report_id = $scope.active.encounterData[level][id].report_id;
+
+            return $scope.active.encounterData.rads[report_id].text.slice(start,end)
+        }
+
         /*
          * Feedback
          */
@@ -136,7 +148,6 @@ angular.module('myApp.controllers', [])
             backend.putLogEvent("addFeedbackToList", JSON.stringify(feedback));
             $scope.active.feedback.list.push(feedback);
 
-            // let levels = ["encounter", "report", "section", "sentence", "text"];
 
             // for (let level of levels){
             //     if (feedback[level]){
@@ -187,6 +198,27 @@ angular.module('myApp.controllers', [])
 
         }
 
+
+        $scope.getFeedbackBlurb = function(index){
+            let feedback = $scope.active.feedback.list[index];
+
+            for (let level of $scope.levels){
+                if (feedback[level]){
+                    switch(level){
+                        case "text":
+                            return feedback["text"].id;
+                        case "sentence":
+                            return $scope.getBlurb(feedback[level].id, level);
+                        case "section":
+                            return $scope.getBlurb(feedback[level].id, level);
+                        case "report":
+                            return "Report #"+feedback[level].id;
+                        case "encounter":
+                            return "Encounter #"+feedback[level].id;
+                    }
+                }
+            }
+        }
 
         /*
         * Retraining
