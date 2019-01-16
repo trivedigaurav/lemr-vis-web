@@ -43,7 +43,7 @@
     <!-- TODO: show only unique encounters -->
     <div class="card-block" ng-repeat="feedback in active.feedback.list" ng-if="feedback.encounter.id != active.encounterId">
         
-	   <a href="#{{feedback.encounter.id}}" ng-click="loadEncounter(feedback.encounter.id)">#{{feedback.encounter.id}}</a>
+	   <a href="#{{feedback.encounter.id}}" ng-click="selectEncounter(feedback.encounter.id)">#{{feedback.encounter.id}}</a>
 
        <!-- TODO: Highlight class color -->
 

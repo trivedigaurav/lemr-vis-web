@@ -113,6 +113,9 @@ angular.module('myApp.controllers', [])
 
 
         $scope.getBlurb = function(id, level){
+            if (!$scope.active.encounterData)
+                return
+
             level = level + "s";
 
             let start = $scope.active.encounterData[level][id].start;
@@ -130,6 +133,9 @@ angular.module('myApp.controllers', [])
 
         $scope.getLabel = function(type, id){
             
+            if (!$scope.active.encounterData)
+                return
+
             type = type + "s";
 
             if (type == "encounters")

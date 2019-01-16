@@ -10,7 +10,8 @@
       
       restrict: 'E',
       bindings: {
-        load: '&'
+        load: '&',
+        selectEncounter: '='
       },
       templateUrl: _template,
       controller: SelectController,
@@ -23,11 +24,16 @@
     
     self.$onInit = function(){
       self.eid = localStorage.getItem('activeEncounter') || "232369324";
-      self.changeEncounter();
+      self.selectEncounter = selectEncounter;
+      selectEncounter();
     }
 
-    self.changeEncounter = function(){
+    function selectEncounter(eid){
       // console.log("changeEncounter", self.eid);
+      if (eid){
+        self.eid = eid;
+      }
+      
       self.load({encounter: self.eid});
       localStorage.setItem('activeEncounter', self.eid);
     }
