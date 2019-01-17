@@ -132,7 +132,7 @@
                 for (let level of self.levels){
                     ret[level] = {
                         "id": self[level],
-                        "class": true
+                        "class": 1
                     }
                 }
 
@@ -141,7 +141,7 @@
 
                 ret ["text"] = {
                         "id": self.text,
-                        "class": true
+                        "class": 1
                     }
 
             }
@@ -149,9 +149,10 @@
                 ret["text"] = null;
                 for (let level of self.levels) {
                     if (self[level]){
+                        
                         ret[level] = {
                             "id": self[level],
-                            "class": self[level+"Is"]
+                            "class": (self[level+"Is"] ? 1 : 0)
                         }    
                     }
                     else{
