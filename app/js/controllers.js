@@ -139,9 +139,9 @@ angular.module('myApp.controllers', [])
             type = type + "s";
 
             if (type == "encounters")
-                return $scope.active.encounterData.class
+                return $scope.active.encounterData.class == 1
             else if (type in $scope.active.encounterData)
-                return $scope.active.encounterData[type][id].class;
+                return $scope.active.encounterData[type][id].class == 1;
             else
                 return false;
 
