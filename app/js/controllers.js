@@ -248,46 +248,19 @@ angular.module('myApp.controllers', [])
                 $scope.feedback.list[i].$hidden_id = i.toString();
             }
 
-            backend.putFeedback($scope.active.feedback.list, "1", override)
+            backend.putFeedback($scope.active.feedback.list, "current", override)
                 .then(function(data) {
-
                     if(data.status == "OK"){
-
                         backend.putLogEvent("putFeedback", "OK");
-
-                        $scope.retrainData.message = data.latestModel;
-
-                        // assignDataToVars(data.gridVarData);
-
-                        // $scope.modelList = data.modelList;
-                        // $scope.active.model = data.latestModel;
-
-                        // $scope.retrainData.feedbackList = $.extend(true,[],$scope.feedbackList);
-
+                        $scope.retrainData.message = data.model;
                         $scope.retrainData.status = "OK";
 
-                        // $scope.clearFeedback();
-                    }
-                    else if(data.status == "Error") {
-
-                        backend.putLogEvent("putFeedback", "Error: " + JSON.stringify(data.errorList));
-
-                        $scope.retrainData.message = data.errorList;
-                        $scope.retrainData.status = "Error";
-
-                        // setConflictList(data.feedbackList);
-                    }
-                    else if(data.status == "Warning") {
-
-                        backend.putLogEvent("putFeedback", "Warning: " + JSON.stringify(data.warningList));
-
-                        $scope.retrainData.message = data.warningList;
-                        $scope.retrainData.status = "Warning";
-
-                        // setConflictList(data.feedbackList);
+                        $scope.loadEncounter($scope.active.encounterId);
+                        $scope.clearFeedback();
                     }
                     else{
-                        backend.putLogEvent("Error", "Invalid response for putfeedback");
+                        //TODO: Handle conflicts and warnings
+                        backend.putLogEvent("Error", "Invalid response from putfeedback - " + data.status);
                         alert("Sorry, something went wrong. Please report this.");
                     }
 
