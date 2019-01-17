@@ -157,10 +157,6 @@ angular.module('highlightedReport.directive', [])
                 });
 
                 function feedbackCallback(ret){
-
-                    $('.section-add').removeClass('section-add').removeClass("section-incidental");
-                    $('.sentence-add').removeClass('sentence-add').removeClass("sentence-incidental");
-
                     
                     // if (!selection.isCollapsed)
                     //     selection.collapseToEnd();    
@@ -173,6 +169,8 @@ angular.module('highlightedReport.directive', [])
                         }
                         
                         if (ret["sentence"]){
+                            $('.sentence-add').removeClass('sentence-add').removeClass("sentence-incidental");
+
                             $("#sentence-"+ret["sentence"].id).addClass("sentence-feedback");
 
                             if(ret["sentence"].class)
@@ -181,6 +179,8 @@ angular.module('highlightedReport.directive', [])
                         }
 
                         if(ret["section"]){
+                            $('.section-add').removeClass('section-add').removeClass("section-incidental");
+
                             $("#section-"+ret["section"].id).addClass("section-feedback");
                             // console.log(ret["section"].id);
 
@@ -188,6 +188,10 @@ angular.module('highlightedReport.directive', [])
                                 $("#section-"+ret["section"].id).addClass("section-incidental");
 
                         }
+                    }
+                    else{
+                        $('.sentence-add').removeClass('sentence-add');
+                        $('.section-add').removeClass('section-add');
                     }
 
                     // console.log(ret);
