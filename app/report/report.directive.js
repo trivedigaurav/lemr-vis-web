@@ -41,7 +41,7 @@ angular.module('highlightedReport.directive', [])
                         while(charArray[index].trim() == '')
                             index++;
 
-                        if (sent.class == "pos")
+                        if (sent.class)
                             charArray[index] = `<span data-section="${sent.section_id}" data-report="${scope.recordId}" class="sentence sentence-incidental" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
                         else
                             charArray[index] = `<span data-section="${sent.section_id}" data-report="${scope.recordId}" class="sentence" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
@@ -65,7 +65,7 @@ angular.module('highlightedReport.directive', [])
                         while(charArray[index].trim() == '')
                             index++;
 
-                        if (sect.class == "pos")
+                        if (sect.class)
                             charArray[index] = `<span data-report="${scope.recordId}" class="section section-incidental" id="section-${sect.section_id}" scroll-bookmark="section-${sect.section_id}">` + charArray[index];
                         else
                             charArray[index] = `<span data-report="${scope.recordId}" class="section" id="section-${sect.section_id}" scroll-bookmark="section-${sect.section_id}">` + charArray[index];
