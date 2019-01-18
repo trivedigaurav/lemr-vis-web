@@ -9,17 +9,12 @@
 }
 
 #feedbackmenu label{
-    width: 165px;
-    padding-left: 20px;
+    width: 170px;
+    padding-left: 4px;
 }
 
 #feedbackmenu input{
-    margin-right: 20px;
-}
-
-#feedbackmenu input[type=text]{
-    margin-bottom: 5px;
-    margin-left: 20px;
+    margin-left: 5px;
 }
 
 #feedbackmenu input[type=checkbox][disabled] + label {
@@ -32,4 +27,27 @@
 
 #feedbackmenu input[type=checkbox]:checked + label {
     font-weight: 700;
+    background: #fffc00;
+    border: 1px solid #b3b3b3;
+}
+
+.dropdown-menu .divider {
+    margin-top: 0;
+}
+
+.dropdown-menu > li > a {
+    display: block;
+    padding: 8px;
+}
+
+.dropdown-menu {
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 0; 
+}
+
+.dropdown-menu textarea{
+    border: unset;
+    border-top: 1px solid #ccc;
+    border-radius: 0;
 }
