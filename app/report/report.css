@@ -36,14 +36,13 @@
 .report pre {
     /*height: calc(100vh - 170px);*/
     border: 0;
-    background-color: white!important;
+    background-color: white;
     /*line-height: 0rem;*/
     font-family: monospace;
     /*counter-reset: line;*/
     font-size: 14px;
     line-height: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 0;
 }
 
 /*.report pre code {
@@ -187,8 +186,12 @@ highlighted-report {
   background-color: rgba(0,0,0,0.06);
 }
 
+.report-incidental{
+  background-color: #fffee5!important;
+}
+
 .report .section-incidental{
-  background-color: #fffee5;
+  background-color: #fffcc9;
 }
 
 .report .section:hover{
@@ -197,7 +200,7 @@ highlighted-report {
 
 
 .report .section-incidental:hover{
-  background-color: #FFFCC9;
+  background-color: #fffdb2;
 }
 
 .highlight {
