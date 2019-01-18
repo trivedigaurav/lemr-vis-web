@@ -291,7 +291,9 @@ angular.module('myApp.controllers', [])
                         "cyst", "lesion", "aneurysm"];
 
         $scope.addTag = function(input){
-           if(input !== ''){
+            input = input.trim();
+
+            if(input !== ''){
                 //check if not already there
 
                 backend.putLogEvent("addTag", input);
