@@ -140,7 +140,7 @@
                 ret["section"] = null;
 
                 ret ["text"] = {
-                        "id": self.text,
+                        "id": self.text.replace("\n", "\r\n"),
                         "class": 1
                     }
 
