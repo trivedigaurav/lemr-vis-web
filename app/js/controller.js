@@ -1,8 +1,8 @@
 'use strict';
 
-/* Controllers */
+/* Main Controller */
 
-angular.module('myApp.controllers', [])
+angular.module('myApp.mainController', [])
   .controller('appCtrl', ['$scope', '$window', '$document', '$timeout', 
     '$rootScope', 'backend', 'truncateFilter', '$filter',
     function($scope, $window, $document, $timeout,

@@ -4,7 +4,7 @@
 var app = angular.module('myApp', [
   'myApp.directives',
   'myApp.services',
-  'myApp.controllers',
+  'myApp.mainController',
   'myApp.filters',
   'ui.bootstrap',
   'ngCookies',
