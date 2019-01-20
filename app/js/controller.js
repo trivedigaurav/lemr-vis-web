@@ -63,6 +63,11 @@ angular.module('myApp.mainController', [])
          */
 
         $scope.loadEncounter = function(encounter){
+
+            if ($scope.active.feedback.list){
+                $scope.retrainFeedback();
+            }
+
             startLoading();
 
             if(encounter)
@@ -199,6 +204,7 @@ angular.module('myApp.mainController', [])
             else {
                 setTimeout(function() {
                     $scope.retrainFeedback(override);
+                    $scope.loadEncounter($scope.active.encounterId);
                 });
             }
 
@@ -255,7 +261,6 @@ angular.module('myApp.mainController', [])
                         $scope.retrainData.message = data.model;
                         $scope.retrainData.status = "OK";
 
-                        $scope.loadEncounter($scope.active.encounterId);
                         $scope.clearFeedback();
                     }
                     else{
