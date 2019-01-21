@@ -125,6 +125,10 @@
             }
         }
 
+        function generateUID(){
+            return (Date.now().toString(36) + Math.random().toString(36).substr(2,5));
+        }
+
         self.addFeedbackCallback = function() {
             let ret = {}
 
@@ -132,7 +136,7 @@
                 for (let level of self.levels){
                     ret[level] = {
                         "id": self[level],
-                        "class": 1
+                        "class": 1,
                     }
                 }
 
@@ -141,7 +145,8 @@
 
                 ret ["text"] = {
                         "id": self.text.replace("\n", "\r\n"),
-                        "class": 1
+                        "class": 1,
+                        "uid": generateUID()
                     }
 
             }

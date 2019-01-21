@@ -170,6 +170,42 @@ angular.module('myApp.mainController', [])
             // }
         }
 
+        //TODO: Move this to report.directive
+        function fixHighlights(level, id){
+
+            let el = null;
+            //TODO:!
+            if (level == "encounter")
+                return
+            else if (level == "report")
+                el = $("#"+level+"-"+id + " pre");
+            else
+                el = $("#"+level+"-"+id);
+
+            let class_ = null;
+
+            el.removeClass(level + "-feedback")
+                        .removeClass(level + "-incidental");
+
+            for (let feedback of $scope.active.feedback.list){
+                if (feedback[level]){
+                    if (feedback[level]["id"] == id)
+                        class_ = feedback[level]["class"] == 1
+
+                    el.addClass(level + "-feedback");
+                }
+            }
+                            
+            if (class_ == null)
+                class_ = $scope.getLabel(level, id);
+
+            if (class_){
+                el.addClass(level + "-incidental");
+            }
+
+            console.log(level, id, class_);
+        }
+
         $scope.removeFeedback = function(index) {
 
             // var hidden_id = $scope.active.feedback.list[index].$hidden_id;
@@ -177,6 +213,28 @@ angular.module('myApp.mainController', [])
             backend.putLogEvent("removeFeedback", JSON.stringify($scope.active.feedback.list[index]));
 
             var feedback = $scope.active.feedback.list.splice(index, 1)[0];
+
+            for (let level of $scope.levels){
+                if (feedback[level]){
+                    switch(level){
+                        case "text":
+                            $(".highlight."+feedback["text"]["uid"]).contents().unwrap();
+                            break;
+                        case "sentence":
+                            fixHighlights("sentence", feedback["sentence"]["id"]);
+                            break;
+                        case "section":
+                            fixHighlights("section", feedback["section"]["id"]);
+                            break;
+                        case "report":
+                            fixHighlights("report", feedback["report"]["id"]);
+                            break;
+                        case "encounter":
+                            fixHighlights("encounter", feedback["encounter"]["id"]);
+                            break;
+                    }
+                }
+            }
 
             // $scope.active.feedbackList.forEach(function(feedback) {
             //     var i = feedback.conflictList.indexOf(hidden_id);

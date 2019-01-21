@@ -190,6 +190,17 @@ highlighted-report {
   background-color: #fffee5!important;
 }
 
+.report-feedback{
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.02),
+    rgba(0, 0, 0, 0.02) 10px,
+    rgba(0, 0, 0, 0.03) 10px,
+    rgba(0, 0, 0, 0.03) 20px
+  );
+}
+
+
 .report .section-incidental{
   background-color: #fffcc9;
 }

@@ -8,7 +8,8 @@ angular.module('highlightedReport.directive', [])
             encounterId: '<',
             helperTerms: '<',
             getLevels: '&',
-            showFeedbackMenu: '&'
+            showFeedbackMenu: '&',
+            undoHighlight: '&'
         },
         link: function (scope, element, attrs) {
 
@@ -164,7 +165,10 @@ angular.module('highlightedReport.directive', [])
                     if(ret){
                         if (ret["text"]){
                             let selection = rangy.getSelection();
-                            rangy.createClassApplier("highlight").applyToSelection();
+                            rangy.createClassApplier("highlight " + ret["text"]["uid"], {normalize: false, useExistingElements: false}) 
+                                    // {"elementProperties": {"data": "uid: '" + ret["text"]["uid"] + "'"}})
+                                    // {"elementProperties": {"data": "uid: '" + ret["text"]["uid"] + "'"}})
+                                .applyToSelection();
                             selection.collapseToEnd();  
                         }
                         
@@ -186,7 +190,20 @@ angular.module('highlightedReport.directive', [])
 
                             if(ret["section"].class)
                                 $("#section-"+ret["section"].id).addClass("section-incidental");
+                            // else{
+                            //     $("#section-"+ret["section"].id + " sentence*").removeClass("sentence-incidental");
+                            // }
 
+                        }
+
+                        if(ret["report"]){
+                            let el = $("#report-" + ret["report"].id + " pre");
+                            el.removeClass("report-incidental");
+                            
+                            el.addClass("report-feedback");
+
+                            if(ret["report"].class)
+                                el.addClass("report-incidental");
                         }
                     }
                     else{
