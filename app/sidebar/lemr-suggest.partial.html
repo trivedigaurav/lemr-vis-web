@@ -12,19 +12,17 @@
 
 <div class="card-block" ng-repeat="r_id in active.encounterData.pos_reports">
   
-  <!-- <span class="pull-right report-href">&nbsp; <a class="clickable" scroll-to-bookmark="report-{{r_id}}">#{{r_id}}</a></span>
-  <hr /> -->
-    <p class="clickable" scroll-to-bookmark="sentence-{{sent_id}}" ng-repeat="sent_id in active.encounterData.reports[r_id].pos_sentences">
-      <!-- HACK: ng-int is slowing down the app-->
-      <!-- initialize vars -->
-<!--       {{start = active.encounterData.sentences[sent_id].start; ""}}
-      {{end = active.encounterData.sentences[sent_id].end; ""}}
-      {{report_id = active.encounterData.sentences[sent_id].report_id; ""}} -->
+  <p class="clickable" ng-if="active.encounterData.reports[r_id].pos_sections == 0 &&  active.encounterData.reports[r_id].pos_sentences == 0" scroll-to-bookmark="report-{{r_id}}">Report #{{r_id}}</p>
 
-      <!-- actual display -->
-      {{getBlurb(sent_id, "sentence")|truncate:120}}
-      <!-- <big><b>List group heading.</b></big> -->
-    </p>
+  <span ng-repeat="section_id in active.encounterData.reports[r_id].pos_sections">
+
+    <p class="clickable" scroll-to-bookmark="section-{{section_id}}" ng-if="  active.encounterData.sections[section_id].pos_sentences == 0">
+    {{getBlurb(section_id, "section")|truncate:120}}</p>
+
+    <p class="clickable" scroll-to-bookmark="sentence-{{sentence_id}}" ng-repeat="sentence_id in active.encounterData.sections[section_id].pos_sentences">
+    {{getBlurb(sentence_id, "sentence")|truncate:120}}</p>
+
+  </span>
 
 </div>
 
