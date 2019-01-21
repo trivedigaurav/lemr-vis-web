@@ -310,6 +310,18 @@ angular.module('myApp.mainController', [])
             }
         }
 
+        $scope.getFeedbackClass = function(index){
+            let feedback = $scope.active.feedback.list[index];
+            for (let level of $scope.levels){
+                if (feedback[level]){
+                    if (level == "text")
+                        return true;
+                    else
+                        return feedback[level]["class"] == 1; 
+                }
+            }
+        }
+
         /*
         * Retraining
         */
