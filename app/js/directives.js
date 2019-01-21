@@ -17,6 +17,10 @@ angular.module('myApp.directives', [])
             let selector = "[scroll-bookmark='"+ value +"']";
             let found = $(selector);
 
+            //Find class
+            if (!found.length)
+                found = $("."+value);
+
             if(found.length){
                 //This is a continued search
                 if (value == this.lastEl){

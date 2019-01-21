@@ -23,7 +23,7 @@
         ng-if="feedback.encounter.id == active.encounterId">
 
         <!-- scroll-to-bookmark="sentence-{{sent_id}}" -->
-        <p class="clickable">
+        <p class="clickable" scroll-to-bookmark="{{getFeedbackLink($index)}}">
             {{getFeedbackBlurb($index)|truncate:50}}
 
             <span class="pull-right glyphicon glyphicon-remove clickable" ng-click="removeFeedback($index)"></span>

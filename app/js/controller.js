@@ -268,6 +268,26 @@ angular.module('myApp.mainController', [])
 
         }
 
+        $scope.getFeedbackLink = function(index){
+            let feedback = $scope.active.feedback.list[index];
+
+            for (let level of $scope.levels){
+                if (feedback[level]){
+                    switch(level){
+                        case "text":
+                            return feedback["text"]["uid"];
+                        case "sentence":
+                            return "sentence-"+feedback[level].id;
+                        case "section":
+                            return "section-"+feedback[level].id;
+                        case "report":
+                            return "report-"+feedback[level].id;
+                        // case "encounter":
+                        //     return "Encounter #"+feedback[level].id;
+                    }
+                }
+            }
+        }
 
         $scope.getFeedbackBlurb = function(index){
             let feedback = $scope.active.feedback.list[index];
