@@ -64,7 +64,7 @@ angular.module('myApp.mainController', [])
 
         $scope.loadEncounter = function(encounter){
 
-            if ($scope.active.feedback.list){
+            if ($scope.active.feedback.list.length){
                 $scope.retrainFeedback();
             }
 
