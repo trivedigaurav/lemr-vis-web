@@ -14,19 +14,11 @@ angular.module('myApp.mainController', [])
         $window.appCtrl = $scope;
         $scope.cacheBust = Date.now('U');
 
-        $scope.levels = ["text", "sentence", "section", "report", "encounter"];
-
         /*
          * App config
          */
 
-        // $rootScope.config = Object();
-        
-        // $rootScope.config.classificationName = {
-        //     "positive": "True",
-        //     "negative": "False",
-        //     "unclassified": "?"
-        // };
+        $scope.levels = ["text", "sentence", "section", "report", "encounter"];
 
         $scope.active = {
             encounterId: null,
@@ -171,6 +163,7 @@ angular.module('myApp.mainController', [])
         }
 
         //TODO: Move this to report.directive
+        //Using jquery here is not very clean
         function fixHighlights(level, id){
 
             let el = null;
@@ -255,7 +248,7 @@ angular.module('myApp.mainController', [])
 
         $scope.sendFeedback = function(override) {
 
-            if($scope.retrainData.loading == true){
+            if($scope.retraining == true){
                 backend.putLogEvent("Error", "Re-training already in process!");    
                 alert("Re-training already in process!");
             }
@@ -325,32 +318,25 @@ angular.module('myApp.mainController', [])
         /*
         * Retraining
         */
-
-
-        $scope.retrainData = new Object();
-        $scope.retrainData.message = null;
-        $scope.retrainData.loading = false;
-        $scope.retrainData.status = null;
+        $scope.retraining = false;
+        
 
         $scope.retrainFeedback = function(override=false) {
             // alert('Re-training!');
-            if($scope.retrainData.loading == true)
+            if($scope.retraining == true)
                 return;
 
-            $scope.retrainData.loading = true;
+            $scope.retraining = true;
 
             //assign ids to feedback list
-            for (var i=0; i < $scope.active.feedback.length; i++) {
-                $scope.feedback.list[i].$hidden_id = i.toString();
-            }
+            // for (var i=0; i < $scope.active.feedback.length; i++) {
+            //     $scope.feedback.list[i].$hidden_id = i.toString();
+            // }
 
             backend.putFeedback($scope.active.feedback.list, "current", override)
                 .then(function(data) {
                     if(data.status == "OK"){
                         backend.putLogEvent("putFeedback", "OK");
-                        $scope.retrainData.message = data.model;
-                        $scope.retrainData.status = "OK";
-
                         $scope.clearFeedback();
                     }
                     else{
@@ -359,14 +345,12 @@ angular.module('myApp.mainController', [])
                         alert("Sorry, something went wrong. Please report this.");
                     }
 
-                    $scope.retrainData.loading = false;
+                    $scope.retraining = false;
 
                 }, function() { 
                     backend.putLogEvent("Error", "Unable to send feedback.");
                     alert("Unable to send feedback."); 
-                    $scope.retrainData.loading = false;
-                    $scope.retrainData.status = "Fail";
-                    $scope.retrainData.message ="Unable to send feedback!" 
+                    $scope.retraining = false;
                 });
         };
 
@@ -410,58 +394,6 @@ angular.module('myApp.mainController', [])
         }
                     
 
-        // /*
-        //  * Tabs
-        //  */
-
-        // $scope.tabs = {docView: true};
-        // $scope.isNavCollapsed = false;
-
-        /*
-         * Keypress
-         */
-         //TODO: This needs to done in a directive
-        // $scope.keypressCallback = function($event, reverse) {
-        //     if (! $($event.target.nodeName).is("input")){
-        //         $event.preventDefault();
-                
-        //         let hl_elements = $("[scroll-bookmark^='annotation-helper']");
-
-        //         if(hl_elements != -1){
-        //             //Remove prior annimations
-        //             $('html, body').clearQueue();
-        //             $(hl_elements[$scope.active.hl_index]).removeClass('highlight-flash');
-        //         }
-
-        //         if(hl_elements.length){
-        //             if(reverse){
-        //                 if($scope.active.hl_index <= 0)
-        //                     $scope.active.hl_index  = hl_elements.length - 1;
-        //                 else
-        //                     $scope.active.hl_index  = $scope.active.hl_index - 1;
-        //             }
-        //             else{
-        //                 if($scope.active.hl_index >= hl_elements.length - 1)
-        //                     $scope.active.hl_index = 0;
-        //                 else
-        //                     $scope.active.hl_index = $scope.active.hl_index + 1;
-        //             }
-
-        //             let found = hl_elements[$scope.active.hl_index];
-
-        //             // $('html, body').animate({scrollTop: $(found).offset().top - 200}, 1000); //ScrollTo doesn't work here :(
-        //             found.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
-        //             $(found).addClass("highlight-flash");
-        //             $timeout(function () { 
-        //                 $(found).removeClass('highlight-flash');
-        //             }, 2000);
-        //         }
-
-
-        //     }
-        // };
-
-
         /*
          * Misc.
          */
@@ -469,20 +401,6 @@ angular.module('myApp.mainController', [])
         function showError (notice){
             $window.alert(notice)
         }
-
-        // $scope.popReport = function(reportid) {
-        //     //http://stackoverflow.com/questions/2255291/print-the-contents-of-a-div
-        //     var mywindow = $window.open('', reportid, "location=no, toolbar=no, scrollbars=yes, width=800");
-        //     mywindow.document.write('<html><head><title>Report #'+ reportid +'</title>');
-        //     mywindow.document.write('</head><body><pre>');
-
-        //     //Hide annotator classes
-        //     var tree = $("<div" + $("#emr-report-" + reportid + " pre").html() + "</div>");
-        //     tree.find(".annotator-hide").remove()
-        //     mywindow.document.write(tree.html());
-
-        //     mywindow.document.write('</pre></body></html>');
-        // }
 
         // Loading
         $scope.loaderCount = 0;
@@ -498,42 +416,6 @@ angular.module('myApp.mainController', [])
             else
                 $scope.loaderCount = 0;
         }
-
-        /*
-         * Sorting
-         */
-
-        // function variableCompare(variable) {
-        //     return function(a, b) {
-        //         var diff = a[variable].confidence - b[variable].confidence;
-
-        //         if(diff === 0)
-        //             return parseInt(a.id) - parseInt(b.id);
-        //         else
-        //             return diff
-        //     }
-        // }
-
-        // function idCompare() {
-        //     return function(a, b) {
-        //         return parseInt(a.id) - parseInt(b.id);
-        //     }
-        // }
-
-        // String.prototype.truncate = function(length, end) {
-        //     if (isNaN(length))
-        //         length = 10;
-
-        //     if (end === undefined)
-        //         end = "...";
-
-        //     if (this.length <= length || this.length - end.length <= length) {
-        //         return this;
-        //     }
-        //     else {
-        //         return String(this).substring(0, length-end.length) + end;
-        //     }
-        // }
 
         return true;
     }])
