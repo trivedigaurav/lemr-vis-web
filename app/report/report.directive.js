@@ -43,7 +43,7 @@ angular.module('highlightedReport.directive', [])
                             index++;
 
                         if (sent.class)
-                            charArray[index] = `<span data-section="${sent.section_id}" data-report="${scope.recordId}" class="sentence sentence-incidental" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
+                            charArray[index] = `<span data-tooltip="Model: ${sent.model}" data-section="${sent.section_id}" data-report="${scope.recordId}" class="sentence sentence-incidental tooltip-right" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
                         else
                             charArray[index] = `<span data-section="${sent.section_id}" data-report="${scope.recordId}" class="sentence" id="sentence-${sent.sentence_id}" scroll-bookmark="sentence-${sent.sentence_id}">` + charArray[index];
                         
@@ -199,7 +199,7 @@ angular.module('highlightedReport.directive', [])
                         if(ret["report"]){
                             let el = $("#report-" + ret["report"].id + " pre");
                             el.removeClass("report-incidental");
-                            
+
                             el.addClass("report-feedback");
 
                             if(ret["report"].class)
