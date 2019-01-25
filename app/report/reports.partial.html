@@ -10,8 +10,8 @@
 <div ng-repeat="r_id in active.encounterData.rads_ids track by $index" id="report-{{r_id}}" class="report" scroll-bookmark='report-{{r_id}}'>
   <div class="info unselectable" >
     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
-    <a tooltip-placement="bottom" tooltip-animation="false" tooltip='{{r_id}}'>
-      <strong class="file-name js-selectable-text">{{ active.encounterData.rads[r_id].date | myDate }}</strong>
+    <a>
+      <strong class="file-name js-selectable-text">#{{ r_id }}</strong> - <strong class="file-name js-selectable-text">{{ active.encounterData.rads[r_id].date | myDate }}</strong>
     </a>
     
     <!-- <a class="btn btn-xs btn-default pull-right" ng-click="popReport(r_id)" href="#{{r_id}}"><i class="glyphicon glyphicon-new-window"></i></a> -->
