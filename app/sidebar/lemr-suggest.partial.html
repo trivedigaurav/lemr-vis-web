@@ -12,11 +12,11 @@
 
 <div class="card-block" ng-repeat="r_id in active.encounterData.pos_reports">
   
-  <p class="clickable" ng-if="active.encounterData.reports[r_id].pos_sections == 0 &&  active.encounterData.reports[r_id].pos_sentences == 0" scroll-to-bookmark="report-{{r_id}}">Report #{{r_id}}</p>
+  <p class="clickable" ng-if="active.encounterData.reports[r_id].pos_sections.length == 0 &&  active.encounterData.reports[r_id].pos_sentences.length == 0" scroll-to-bookmark="report-{{r_id}}">Report #{{r_id}}</p>
 
   <span ng-repeat="section_id in active.encounterData.reports[r_id].pos_sections">
 
-    <p class="clickable" scroll-to-bookmark="section-{{section_id}}" ng-if="  active.encounterData.sections[section_id].pos_sentences == 0">
+    <p class="clickable" scroll-to-bookmark="section-{{section_id}}" ng-if="active.encounterData.sections[section_id].pos_sentences.length == 0">
     {{getBlurb(section_id, "section")|truncate:120}}</p>
 
     <p class="clickable" scroll-to-bookmark="sentence-{{sentence_id}}" ng-repeat="sentence_id in active.encounterData.sections[section_id].pos_sentences">
