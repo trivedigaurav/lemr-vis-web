@@ -23,15 +23,17 @@
     var self = this;
 
     self.$onInit = function(){
-         self.checkLogin();
+         // self.checkLogin();
     }
 
     self.checkLogin = function(manual) {
         backend.checkLogin()
             .then(function () {
                 self.user = backend.getUserName();
-                backend.putLogEvent("startSession", self.user);
-                self.load();
+                if (self.user){
+                  backend.putLogEvent("startSession", self.user);
+                  self.load();  
+                }
             }, function() {
                 if(manual) {
                     $("#login-box").addClass('has-error animated shake');
