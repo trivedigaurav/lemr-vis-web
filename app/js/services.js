@@ -5,7 +5,7 @@
 angular.module('myApp.services', [])
 .factory('backend', ['Base64', '$cookieStore', '$http', '$q', function (Base64, $cookieStore, $http, $q) {
 
-    $http.defaults.headers.common['Authorization'] = 'Basic ' + $cookieStore.get('authdata');
+    // $http.defaults.headers.common['Authorization'] = 'Basic ' + $cookieStore.get('authdata');
 
     var SERVER_URL = "http://localhost:10000";
 
