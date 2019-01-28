@@ -144,7 +144,7 @@
                 ret["section"] = null;
 
                 ret ["text"] = {
-                        "id": self.text.replace("\n", "\r\n"),
+                        "id": self.text.replace(new RegExp("\n", 'g'), "\r\n"),
                         "class": 1,
                         "uid": generateUID()
                     }
