@@ -16,10 +16,3 @@ var app = angular.module('myApp', [
   'pagemap.directive',
   'feedbackmenu'
 ]);
-
-
-app.run(['$cookieStore', '$http',
-    function ($cookieStore, $http) {
-        // keep user logged in after page refresh
-        $http.defaults.headers.common['Authorization'] = 'Basic ' + $cookieStore.get('authdata');
-    }]);
