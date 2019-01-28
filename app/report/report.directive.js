@@ -125,8 +125,13 @@ angular.module('highlightedReport.directive', [])
 
                     if(!selection.isCollapsed){
                         //check if it is contained in a sentence of the same report
-                        if ($(selection.anchorNode).closest(".sentence").data("report") == scope.recordId) {
-                            selection.expand("word");
+                        if ($(selection.anchorNode).parent().data("report") == scope.recordId) {
+                            // selection.expand("word", {
+                            //     trim: true,
+                            //     // wordOptions: {
+                            //     //     wordRegex: /[a-z0-9]+(['\-][a-z0-9]+)*/gi
+                            //     // }
+                            // });
 
                             var text = selection.toString().trim();
 
