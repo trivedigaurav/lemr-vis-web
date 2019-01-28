@@ -11,7 +11,8 @@
       restrict: 'E',
       bindings: {
         load: '&',
-        selectEncounter: '='
+        selectEncounter: '=',
+        user: '&'
       },
       templateUrl: _template,
       controller: SelectController,
@@ -35,8 +36,10 @@
         self.eid = eid;
       }
       
-      self.load({encounter: self.eid});
-      localStorage.setItem('activeEncounter', self.eid);
+      if(self.user){
+        self.load({encounter: self.eid});
+        localStorage.setItem('activeEncounter', self.eid);
+      }
     }
     
   }
