@@ -27,7 +27,7 @@
 
       let stored = localStorage.getItem('activeEncounter');
 
-      if (self.enc_343_int.indexOf(stored) != -1)
+      if (self.enc_286_int.indexOf(stored) != -1)
         self.eid = stored;
       else{
         self.eid = "232369324";
