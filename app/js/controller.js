@@ -64,6 +64,8 @@ angular.module('myApp.mainController', [])
 
             if(encounter)
                 $scope.active.encounterId = encounter;
+            else
+                $scope.active.encounterId = localStorage.getItem('activeEncounter');
 
             $scope.active.encounterData = null;
 

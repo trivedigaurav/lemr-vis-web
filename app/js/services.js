@@ -11,7 +11,7 @@ angular.module('myApp.services', [])
 
     function checkResponse(response) {
         if(response.status == 401)
-            alert("Invalid username or password!");
+            console.error("Invalid username or password!");
     }
 
     function getUserFromCookie(){

@@ -23,7 +23,7 @@
     var self = this;
 
     self.$onInit = function(){
-         // self.checkLogin();
+        self.checkLogin();
     }
 
     self.checkLogin = function(manual) {
