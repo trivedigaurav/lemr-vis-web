@@ -2,7 +2,7 @@
 
     <select class="form-control" ng-model="esel.eid" ng-change="esel.selectEncounter()">
 
-        <option ng-repeat="enc in esel.enc_686"
+        <option ng-repeat="enc in esel.enc_343_control"
             value="{{enc}}">
             {{ ($index > 9 ? ($index > 99 ? ($index > 999 ? $index : '&nbsp;'+$index) : '&nbsp;&nbsp;'+$index) : '&nbsp;&nbsp;&nbsp;'+$index) }}. 
             {{enc}}
