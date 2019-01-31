@@ -259,8 +259,7 @@ angular.module('myApp.mainController', [])
             }
             else {
                 setTimeout(function() {
-                    $scope.retrainFeedback(override);
-                    $scope.loadEncounter($scope.active.encounterId);
+                    $scope.retrainFeedback(override, $scope.loadEncounter);
                 });
             }
 
@@ -326,7 +325,7 @@ angular.module('myApp.mainController', [])
         $scope.retraining = false;
         
 
-        $scope.retrainFeedback = function(override=false) {
+        $scope.retrainFeedback = function(override=false, callback=null) {
             // alert('Re-training!');
             if($scope.retraining == true)
                 return;
@@ -349,6 +348,9 @@ angular.module('myApp.mainController', [])
                         backend.putLogEvent("Error", "Invalid response from putfeedback - " + data.status);
                         alert("Sorry, something went wrong. Please report this.");
                     }
+
+                    if(callback)
+                        callback($scope.active.encounterId)
 
                     $scope.retraining = false;
 
