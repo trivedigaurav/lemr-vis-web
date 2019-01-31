@@ -11,6 +11,7 @@
       restrict: 'E',
       bindings: {
         load: '&',
+        showNextEncounter: '='
       },
       templateUrl: _template,
       controller: SelectController,
@@ -33,16 +34,35 @@
         self.eid = "232369324";
         localStorage.setItem('activeEncounter', self.eid);
       }
+
+      self.showNextEncounter = function(reverse) {
+        let idx = self.enc_286_int.indexOf(parseInt(self.eid));
+
+        if (!reverse){
+          if(idx < self.enc_286_int.length - 1)
+            loadEncounter(self.enc_286_int[idx + 1]);
+        }
+        else{
+          if(idx > 0)
+            loadEncounter(self.enc_286_int[idx - 1]);
+        }
+      };
+    }
+
+    function loadEncounter(enc){
+      self.eid = enc.toString();      
+      localStorage.setItem('activeEncounter', self.eid);
+      self.load({encounter: self.eid});
     }
 
     self.selectEncounter = function(){
       // console.log("changeEncounter", self.eid);
       if(self.eid == null)
         return
-
-      localStorage.setItem('activeEncounter', self.eid);
-      self.load({encounter: self.eid});
+      loadEncounter(self.eid);
     }
+
+    
     
   }
   

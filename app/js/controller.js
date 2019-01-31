@@ -248,7 +248,7 @@ angular.module('myApp.mainController', [])
             while($scope.active.feedback.list.length != 0){
                 $scope.removeFeedback(0);
             }
-            
+
         }
 
         $scope.sendFeedback = function(override) {
@@ -420,6 +420,13 @@ angular.module('myApp.mainController', [])
                 $scope.loaderCount -= 1;
             else
                 $scope.loaderCount = 0;
+        }
+
+        $scope.keypressCallback = function($event, reverse) {
+            if (! $($event.target.nodeName).is("input")){
+                $event.preventDefault();
+                $scope.showNextEncounter(reverse);
+            }
         }
 
         return true;
