@@ -9,10 +9,10 @@
 }
 
 #feedbackmenu button{
-    width: 175px;
+    width: 100%;
     text-align: left;
-    padding-left: 0px;
-    margin-left: 5px;
+    padding-left: 18px;
+    /*margin-left: 5px;*/
     border-radius: 0;
 }
 

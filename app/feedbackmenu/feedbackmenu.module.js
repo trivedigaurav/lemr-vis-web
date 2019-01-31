@@ -85,7 +85,7 @@
                         }
                     }
 
-                    checkAll();
+                    // checkAll();
                 }
 
                 self.checkFeedback();
@@ -105,37 +105,37 @@
 
         }
 
-        function checkAll(){
-            self.allIs = true;
+        // function checkAll(){
+        //     self.allIs = true;
 
-            if(self.text)
-                return;
+        //     if(self.text)
+        //         return;
 
-            for (let level of self.levels){
-                if(self[level]){
-                    if(!self[level+"Is"]){
-                        self.allIs = false;
-                    }
-                }
-            }
+        //     for (let level of self.levels){
+        //         if(self[level]){
+        //             if(!self[level+"Is"]){
+        //                 self.allIs = false;
+        //             }
+        //         }
+        //     }
 
-        }
+        // }
 
-        self.toggleAll = function(){
-            let val = null;
+        // self.toggleAll = function(){
+        //     let val = null;
 
-            if (self.allIs)
-                val = true;
-            else
-                val = false;
+        //     if (self.allIs)
+        //         val = true;
+        //     else
+        //         val = false;
 
-            for (let level of self.levels){
-                if(self[level]){
-                    self[level+"Is"] = val;
-                    self[level+"Disabled"] = false;
-                }
-            }
-        }
+        //     for (let level of self.levels){
+        //         if(self[level]){
+        //             self[level+"Is"] = val;
+        //             self[level+"Disabled"] = false;
+        //         }
+        //     }
+        // }
 
         self.checkFeedback = function() {
             //check low to high
@@ -168,12 +168,12 @@
                 }
                 else{
                     self[level+"Is"] = false;
-                    self.allIs = false;
+                    // self.allIs = false;
                     self[level+"Disabled"] = true;
                 }
             }
 
-            checkAll();
+            // checkAll();
 
         }
 
