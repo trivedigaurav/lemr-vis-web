@@ -69,8 +69,11 @@
                         else {
                             self[level] = null;
                             self[level+"Is"] = false;
+                            self.allIs = false;
                         }
                     }
+
+                    checkAll();
                 }
 
                 self.checkFeedback();
@@ -78,6 +81,7 @@
                 self.top = event.pageY;
                 self.left = event.pageX;
 
+                // $("#all-levels").prop("indeterminate", true);
                 self.display = true;
             } 
             else {
@@ -87,6 +91,38 @@
                     callback(null);
             }
 
+        }
+
+        function checkAll(){
+            self.allIs = true;
+
+            if(self.text)
+                return;
+
+            for (let level of self.levels){
+                if(self[level]){
+                    if(!self[level+"Is"]){
+                        self.allIs = false;
+                    }
+                }
+            }
+
+        }
+
+        self.toggleAll = function(){
+            let val = null;
+
+            if (self.allIs)
+                val = true;
+            else
+                val = false;
+
+            for (let level of self.levels){
+                if(self[level]){
+                    self[level+"Is"] = val;
+                    self[level+"Disabled"] = false;
+                }
+            }
         }
 
         self.checkFeedback = function() {
@@ -120,9 +156,13 @@
                 }
                 else{
                     self[level+"Is"] = false;
+                    self.allIs = false;
                     self[level+"Disabled"] = true;
                 }
             }
+
+            checkAll();
+
         }
 
         function generateUID(){
