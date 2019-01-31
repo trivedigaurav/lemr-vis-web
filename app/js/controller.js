@@ -337,6 +337,8 @@ angular.module('myApp.mainController', [])
 
             $scope.retraining = true;
 
+            startLoading();
+
             //assign ids to feedback list
             // for (var i=0; i < $scope.active.feedback.length; i++) {
             //     $scope.feedback.list[i].$hidden_id = i.toString();
@@ -358,11 +360,14 @@ angular.module('myApp.mainController', [])
                         callback()
 
                     $scope.retraining = false;
+                    stopLoading();                
 
                 }, function() { 
                     backend.putLogEvent("Error", "Unable to send feedback.");
                     alert("Unable to send feedback."); 
                     $scope.retraining = false;
+                    stopLoading();                
+
                 });
         };
 
