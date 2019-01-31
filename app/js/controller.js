@@ -149,6 +149,26 @@ angular.module('myApp.mainController', [])
 
         }
 
+        $scope.checkLevelSingle = function(type, id){
+
+            if (!$scope.active.encounterData)
+                return
+
+            switch(type){
+                case "text":
+                    return false;
+                case "sentence":
+                    return true;
+                case "section":
+                    return $scope.active.encounterData["sections"][id]["pos_sentences"].length == 1;
+                case "report":
+                    return $scope.active.encounterData["reports"][id]["pos_sections"].length == 1;
+                case "encounter":
+                    return $scope.active.encounterData["pos_reports"].length == 1;
+            }
+
+        }
+
         $scope.addFeedback = function(feedback){
 
             // console.log(feedback);

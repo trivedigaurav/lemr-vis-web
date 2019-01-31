@@ -12,6 +12,7 @@
         bindings: {
             addFeedback: '&',
             getLabel: '&',
+            checkLevelSingle: '&',
             showFeedbackMenu: '='
         },
         templateUrl: _template,
@@ -49,6 +50,7 @@
                     self.text = null;
 
                     let first = false;
+                    let checkNext = true;
 
                     for (let level of self.levels) {
 
@@ -65,6 +67,16 @@
                               self[level+"Is"] = !self[level+"Is"]
                               first = true;
                             }
+                            else if(checkNext){
+                                self[level + "Is"] = !self.checkLevelSingle({
+                                    type: level,
+                                    t_id: self[level]
+                                })
+                            }
+
+                            if (self[level+"Is"])
+                                checkNext = false;
+
                         } 
                         else {
                             self[level] = null;
