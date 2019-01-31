@@ -18,6 +18,10 @@
   max-height: 415px;
 }
 
+#searchKeyword {
+  width: 208px;
+}
+
 .panel ul {
   margin: 0;
 }

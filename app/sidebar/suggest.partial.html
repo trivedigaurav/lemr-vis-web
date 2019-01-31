@@ -1,8 +1,14 @@
 <div class="panel-heading">
-  <h3 class="panel-title">LEMR Suggestions
-  <span class="pull-right clickable" ng-click="isNavCollapsed = !isNavCollapsed">
-    <span class="glyphicon glyphicon-chevron-up" ng-if="!isNavCollapsed"></span>
-    <span class="glyphicon glyphicon-chevron-down" ng-if="isNavCollapsed"></span>
+  <h3 class="panel-title">Suggestions
+  <span class="pull-right clickable" >
+    <div class="pull-right form-horizontal">
+        <button class="btn btn-xs"
+                ng-click="isNavCollapsed = !isNavCollapsed">
+          <span class="glyphicon glyphicon-chevron-up" ng-if="!isNavCollapsed"></span>
+          <span class="glyphicon glyphicon-chevron-down" ng-if="isNavCollapsed"></span>
+        </button>
+    </div>
+
   </span>
   </h3>
 </div>

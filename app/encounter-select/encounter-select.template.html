@@ -1,4 +1,7 @@
 <div class="input-group">
+    <span class="input-group-btn">
+      <button ng-click="esel.selectEncounter()" class="btn btn-default" type="button">Select encounter:</button>
+    </span>
 
     <select class="form-control" ng-model="esel.eid" ng-change="esel.selectEncounter()">
 
@@ -9,9 +12,5 @@
         </option>
 
     </select> 
-
-    <span class="input-group-btn">
-      <button ng-click="esel.selectEncounter()" class="btn btn-default" type="button">Go</button>
-    </span>
 
 </div>
