@@ -341,7 +341,7 @@ angular.module('myApp.mainController', [])
                 .then(function(data) {
                     if(data.status == "OK"){
                         backend.putLogEvent("putFeedback", "OK");
-                        $scope.clearFeedback();
+                        $scope.active.feedback.list = []
                     }
                     else{
                         //TODO: Handle conflicts and warnings
