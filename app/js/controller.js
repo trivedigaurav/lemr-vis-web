@@ -244,8 +244,11 @@ angular.module('myApp.mainController', [])
             // var hidden_id = $scope.active.feedback.list[index].$hidden_id;
 
             backend.putLogEvent("clearFeedback", "");
-
-            $scope.active.feedback.list = [];
+            
+            while($scope.active.feedback.list.length != 0){
+                $scope.removeFeedback(0);
+            }
+            
         }
 
         $scope.sendFeedback = function(override) {
