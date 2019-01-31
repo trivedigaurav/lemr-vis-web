@@ -43,8 +43,8 @@
 
 </head>
 
-<body class="ng-cloak" ng-controller="appCtrl">
- <!-- ui-keypress="{'right':'keypressCallback($event, false)', 'left':'keypressCallback($event, true)'}"> -->
+<body class="ng-cloak" ng-controller="appCtrl"
+ ui-keypress="{'right':'keypressCallback($event, false)', 'left':'keypressCallback($event, true)'}">
   <canvas id="map"></canvas>
 
 <!-- <div ng-show="appDisabled" class="coverall"></div> -->
@@ -72,16 +72,14 @@
 
             <div id="encounter-display" class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">Select encounter</h3>
+                <encounter-select show-next-encounter="showNextEncounter" load="loadEncounter(encounter)"></encounter-select>
               </div>
-              <div class="panel-body">
-                <encounter-select load="loadEncounter(encounter)"></encounter-select>
-              </div>
+              
             </div>
 
             <div class="panel panel-default" ng-include src="'sidebar/search-panel.partial.html?v=' + cacheBust"></div>
 
-            <div class="panel panel-default" ng-include src="'sidebar/lemr-suggest.partial.html?v=' + cacheBust"></div>
+            <div class="panel panel-default" ng-include src="'sidebar/suggest.partial.html?v=' + cacheBust"></div>
 
             <div id="panel-last" class="panel panel-default" ng-include src="'sidebar/retrain.partial.html?v=' + cacheBust"></div>
 
