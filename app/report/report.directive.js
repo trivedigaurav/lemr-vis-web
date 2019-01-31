@@ -9,7 +9,6 @@ angular.module('highlightedReport.directive', [])
             helperTerms: '<',
             getLevels: '&',
             showFeedbackMenu: '&',
-            undoHighlight: '&'
         },
         link: function (scope, element, attrs) {
 
