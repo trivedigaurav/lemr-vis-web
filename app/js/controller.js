@@ -57,7 +57,10 @@ angular.module('myApp.mainController', [])
         $scope.loadEncounter = function(encounter){
 
             if ($scope.active.feedback.list.length){
-                $scope.retrainFeedback();
+                $scope.retrainFeedback(false, function(){ 
+                        return $scope.loadEncounter(encounter); 
+                    });
+                return;
             }
 
             startLoading();
@@ -259,7 +262,9 @@ angular.module('myApp.mainController', [])
             }
             else {
                 setTimeout(function() {
-                    $scope.retrainFeedback(override, $scope.loadEncounter);
+                    $scope.retrainFeedback(override, function(){ 
+                        return $scope.loadEncounter($scope.active.encounterId); 
+                    });
                 });
             }
 
@@ -350,7 +355,7 @@ angular.module('myApp.mainController', [])
                     }
 
                     if(callback)
-                        callback($scope.active.encounterId)
+                        callback()
 
                     $scope.retraining = false;
 
