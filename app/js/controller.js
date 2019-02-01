@@ -8,7 +8,7 @@ angular.module('myApp.mainController', [])
     function($scope, $window, $document, $timeout,
         $rootScope, backend, truncateFilter, $filter) {
         /*
-         * Debug
+         * Debug: remove in prod
          */
 
         $window.appCtrl = $scope;
@@ -55,14 +55,10 @@ angular.module('myApp.mainController', [])
          */
 
         $scope.loadEncounter = function(encounter){
-
-            if ($scope.active.feedback.list.length){
-                $scope.retrainFeedback(false, function(){ 
-                        return $scope.loadEncounter(encounter); 
-                    });
-                return;
+            if ($scope.active.encounterData != null){
+                retrainWithFeedback(false);
             }
-
+        
             startLoading();
 
             if(encounter)
@@ -282,7 +278,7 @@ angular.module('myApp.mainController', [])
             }
             else {
                 setTimeout(function() {
-                    $scope.retrainFeedback(override, function(){ 
+                    retrainWithFeedback(override, function(){ 
                         return $scope.loadEncounter($scope.active.encounterId); 
                     });
                 });
@@ -350,7 +346,7 @@ angular.module('myApp.mainController', [])
         $scope.retraining = false;
         
 
-        $scope.retrainFeedback = function(override=false, callback=null) {
+        function retrainWithFeedback(override=false, callback=null) {
             // alert('Re-training!');
             if($scope.retraining == true)
                 return;
@@ -364,7 +360,22 @@ angular.module('myApp.mainController', [])
             //     $scope.feedback.list[i].$hidden_id = i.toString();
             // }
 
-            backend.putFeedback($scope.active.feedback.list, "current", override)
+
+            //Create feedback object to label negative examples
+            let feedbackObj = {
+                encounter_id: $scope.active.encounterId,
+                list: $scope.active.feedback.list,
+                pos_reports: $scope.active.encounterData.pos_reports,
+                pos_sections: $scope.active.encounterData.pos_sections,
+                pos_sentences: $scope.active.encounterData.pos_sentences
+            }
+
+            if ($scope.active.encounterData.class)
+                feedbackObj["pos_encounters"] = [$scope.active.encounterId];
+            else
+                feedbackObj["pos_encounters"] = [];
+
+            backend.putFeedback(feedbackObj, "current", override)
                 .then(function(data) {
                     if(data.status == "OK"){
                         backend.putLogEvent("putFeedback", "OK");
