@@ -33,7 +33,7 @@
 
           let stored = localStorage.getItem('activeEncounter');
 
-          if (self.enc_list.indexOf(parseInt(stored)) != -1)
+          if (self.enc_list.indexOf(stored) != -1)
             self.eid = stored;
           else{
             self.eid = self.enc_list[0].toString();
@@ -42,7 +42,7 @@
         });
 
       self.showNextEncounter = function(reverse) {
-        let idx = self.enc_list.indexOf(parseInt(self.eid));
+        let idx = self.enc_list.indexOf(self.eid);
 
         if (!reverse){
           if(idx < self.enc_list.length - 1)

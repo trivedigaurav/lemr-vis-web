@@ -465,12 +465,19 @@ angular.module('myApp.mainController', [])
                 $scope.loaderCount = 0;
         }
 
-        $scope.keypressCallback = function($event, reverse) {
-            if (! $($event.target.nodeName).is("input")){
-                $event.preventDefault();
-                $scope.showNextEncounter(reverse);
-            }
-        }
+        $scope.keypressCallback = function($event) {
 
-        return true;
+            if ($($event.target.nodeName).is("input,button,select"))
+                return true;
+
+            $event.preventDefault();
+
+            if($event.keyCode==39)
+                $scope.showNextEncounter();
+            else if ($event.keyCode==37)
+                $scope.showNextEncounter(true);
+
+            return true;
+        }
+        
     }])

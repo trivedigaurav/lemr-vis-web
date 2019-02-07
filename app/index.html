@@ -43,8 +43,7 @@
 
 </head>
 
-<body class="ng-cloak" ng-controller="appCtrl"
- ui-keypress="{'right':'keypressCallback($event, false)', 'left':'keypressCallback($event, true)'}">
+<body class="ng-cloak" ng-controller="appCtrl" ng-keyup="keypressCallback($event)">
   <canvas id="map"></canvas>
 
 <!-- <div ng-show="appDisabled" class="coverall"></div> -->
