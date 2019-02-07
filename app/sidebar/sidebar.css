@@ -15,7 +15,12 @@
   margin: 10px 0px 10px 0px;
   display: flex;
   flex-direction: column;
-  max-height: 415px;
+  max-height: 350px;
+}
+
+
+.panel-body{
+  overflow: scroll;
 }
 
 #searchKeyword {
@@ -47,7 +52,6 @@
 
 #panel-last .panel-body {
 	flex-grow: 1;
-	overflow: scroll;
 }
 
 .tags{
