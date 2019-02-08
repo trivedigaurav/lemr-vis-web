@@ -127,9 +127,9 @@ angular.module('highlightedReport.directive', [])
                         if ($(selection.anchorNode).parent().data("report") == scope.recordId) {
                             selection.expand("word", {
                                 trim: true,
-                                // wordOptions: {
-                                //     wordRegex: /[a-z0-9]+(['\-][a-z0-9]+)*/gi
-                                // }
+                                wordOptions: {
+                                    wordRegex: /\b\w+\b/gi
+                                }
                             });
 
                             var text = selection.toString().trim();
