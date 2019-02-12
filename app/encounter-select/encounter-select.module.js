@@ -26,6 +26,12 @@
 
       self.enc_list = [];
 
+      backend.getAnnotationMap()
+        .then(function(data){
+          self.map_annot = data;
+          console.log(self.map_annot);
+        });
+
       backend.getEncounterList()
         .then(function(data){
           
