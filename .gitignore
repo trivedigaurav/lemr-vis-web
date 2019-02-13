@@ -55,3 +55,4 @@ docs/_build/
 app/bower_components/
 node_modules/
 app/bower_components
+app/encounter-select/encounters.json
