@@ -111,7 +111,7 @@ angular.module('myApp.services', [])
         },
 
         getEncounterList: function(){
-            return $http.get('encounter-select/enc_166.json').then(function(result) {
+            return $http.get('encounter-select/encounters.json').then(function(result) {
                 return result.data;
             });
         },
