@@ -464,6 +464,20 @@ angular.module('myApp.mainController', [])
                 $scope.loaderCount = 0;
         }
 
+        $scope.studyPaused = true;
+
+        function toggleStudyPause(){
+            if($scope.studyPaused){
+                backend.putLogEvent("resumeStudy", "OK");
+                $scope.studyPaused = false;
+            }
+            else{
+                backend.putLogEvent("pauseStudy", "OK");
+                $scope.studyPaused = true;
+            }
+
+        }
+
         $scope.keypressCallback = function($event) {
 
             if ($($event.target.nodeName).is("input,button,select"))
@@ -475,6 +489,8 @@ angular.module('myApp.mainController', [])
                 $scope.showNextEncounter();
             else if ($event.keyCode==37)
                 $scope.showNextEncounter(true);
+            else if ($event.keyCode=32)
+                toggleStudyPause();
 
             return true;
         }

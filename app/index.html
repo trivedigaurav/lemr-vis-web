@@ -53,6 +53,13 @@
     <login user="active.username" load="loadEncounter()"></login>
   </div>
   
+
+  <div ng-if="active.username && studyPaused" class="coverall" id="studyPaused">
+    <h1>Paused <br />
+      <small>Press [space] to continue</small>
+    </h1>
+  </div>
+
   <div ng-show="loaderCount > 0" id="appLoading" class="alert alert-warning">
     <strong>Loading!</strong> Please wait.
   </div>
