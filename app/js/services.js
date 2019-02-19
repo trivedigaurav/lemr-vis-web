@@ -116,7 +116,7 @@ angular.module('myApp.services', [])
             return $http.get('encounter-select/encounters.json?cacheBust='+cacheBust).then(function(result) {
                 return result.data;
             });
-        }
+        },
 
         getAnnotationMap: function(){
             return $http.get('encounter-select/map_annot.json').then(function(result) {
