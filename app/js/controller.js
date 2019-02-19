@@ -490,7 +490,7 @@ angular.module('myApp.mainController', [])
                 $scope.showNextEncounter();
             else if ($event.keyCode==37)
                 $scope.showNextEncounter(true);
-            else if ($event.keyCode=32)
+            else if ($event.keyCode==32)
                 toggleStudyPause();
 
             return true;
