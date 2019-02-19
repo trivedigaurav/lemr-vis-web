@@ -111,10 +111,12 @@ angular.module('myApp.services', [])
         },
 
         getEncounterList: function(){
-            return $http.get('encounter-select/encounters.json').then(function(result) {
+            let cacheBust = Date.now('U');
+
+            return $http.get('encounter-select/encounters.json?cacheBust='+cacheBust).then(function(result) {
                 return result.data;
             });
-        },
+        }
 
         getAnnotationMap: function(){
             return $http.get('encounter-select/map_annot.json').then(function(result) {
