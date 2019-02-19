@@ -414,7 +414,7 @@ angular.module('myApp.mainController', [])
         /*
          * Helper Terms
          */
-        $scope.search_list = ["mass", "note", "nod", "adenoma"
+        $scope.search_list = ["mass", "note", "nod", "adenoma",
                         "cyst", "lesion", "aneurysm", "meta", "incidental"];
 
         $scope.addTag = function(input){
