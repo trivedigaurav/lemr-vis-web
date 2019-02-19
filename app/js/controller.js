@@ -42,15 +42,13 @@ angular.module('myApp.mainController', [])
             $scope.studyPaused = true;
 
             if($scope.active.feedback.list.length > 0){
-                confirm = $window.confirm("You have made unsaved changes. Would you still like to leave this page?");
+                retrainWithFeedback(false);
             }
-
-            if(confirm) {
-                backend.putLogEvent("endSession", "OK");
-                backend.logout();
-                $scope.active.username = null;
-                $window.location.reload(true);
-            }
+            
+            backend.putLogEvent("endSession", "OK");
+            backend.logout();
+            $scope.active.username = null;
+            $window.location.reload(true);
         }
 
         /*
@@ -416,8 +414,8 @@ angular.module('myApp.mainController', [])
         /*
          * Helper Terms
          */
-        $scope.search_list = ["mass", "note", "nod", "adenoma",
-                        "cyst", "lesion", "aneurysm", "meta"];
+        $scope.search_list = ["mass", "note", "nod", "adenoma"
+                        "cyst", "lesion", "aneurysm", "meta", "incidental"];
 
         $scope.addTag = function(input){
             input = input.trim();
