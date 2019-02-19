@@ -38,6 +38,9 @@ angular.module('myApp.mainController', [])
         $scope.doLogout = function() {
             var confirm = true;
 
+            backend.putLogEvent("pauseStudy", "OK");
+            $scope.studyPaused = true;
+
             if($scope.active.feedback.list.length > 0){
                 confirm = $window.confirm("You have made unsaved changes. Would you still like to leave this page?");
             }
