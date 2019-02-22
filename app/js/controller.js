@@ -130,20 +130,45 @@ angular.module('myApp.mainController', [])
 
         $scope.showFeedbackMenu = null; //define in directive
 
+
+        function checkFeedback(type, id){
+
+            let label = null;
+
+           
+
+            return label;
+
+        }
+
         $scope.getLabel = function(type, id){
             
             if (!$scope.active.encounterData)
                 return
 
-            type = type + "s";
+            let pred = null;
 
-            if (type == "encounters")
-                return $scope.active.encounterData.class == 1
-            else if (type in $scope.active.encounterData)
-                return $scope.active.encounterData[type][id].class == 1;
+            // Check predictions
+            if (type == "encounter")
+                pred = $scope.active.encounterData.class == 1
+            else if (type+"s" in $scope.active.encounterData)
+                pred = $scope.active.encounterData[type+"s"][id].class == 1;
             else
-                return false;
+                pred = false;
 
+
+            if (type == "text")
+                return pred;
+
+            //Check feedback list
+            for (let feedback of $scope.active.feedback.list){
+                if (feedback[type]){
+                    if (feedback[type]["id"] == id)
+                        pred = feedback[type]["class"] == 1
+                }
+            }
+
+            return pred;
         }
 
         $scope.checkLevelSingle = function(type, id){
@@ -166,6 +191,24 @@ angular.module('myApp.mainController', [])
 
         }
 
+        function addToPos(list, id){
+
+            if (list.indexOf(id) == -1)
+                list.push(id)
+
+            return list;
+        }
+
+        function removeFromPos(list, id){
+            let index = list.indexOf(id);
+
+            if (index > -1){
+                list.splice(index, 1);
+            }
+
+            return list;
+        }
+
         $scope.addFeedback = function(feedback){
 
             // console.log(feedback);
@@ -174,14 +217,42 @@ angular.module('myApp.mainController', [])
             $scope.active.feedback.list.push(feedback);
 
 
-            // for (let level of levels){
-            //     if (feedback[level]){
-            //         if (level == "text")
-            //             $scope.active.feedback.texts[feedback["report"].id] = feedback.text.id;
-            //         else
-            //             $scope.active.feedback[level+"s"][feedback[level].id] = feedback[level].class;
-            //     }
-            // }
+            // Add to positives list, if needed
+
+            for (let level of ["sentence", "section", "report"]){
+                if (feedback[level]){
+                    
+                    let modFunction = null;
+                    
+                    if (feedback[level]["class"] == 1)
+                        modFunction = addToPos
+                    else
+                        modFunction = removeFromPos
+
+                    let id = null;
+                    switch(level){
+                        case "sentence":
+                            id = $scope.active.encounterData.sentences[feedback[level]["id"]].section_id;
+                            $scope.active.encounterData["sections"][id]["pos_sentences"] = 
+                                modFunction($scope.active.encounterData["sections"][id]["pos_sentences"],
+                                    feedback[level]["id"]);
+                                break;
+
+                        case "section":
+                            id = $scope.active.encounterData.sections[feedback[level]["id"]].report_id;
+                            $scope.active.encounterData["reports"][id]["pos_sections"] = 
+                                modFunction($scope.active.encounterData["reports"][id]["pos_sections"],
+                                    feedback[level]["id"]);
+                                break;
+
+                        case "report":
+                            $scope.active.encounterData["pos_reports"] = 
+                                modFunction($scope.active.encounterData["pos_reports"],
+                                    feedback[level]["id"]);
+                                break;
+                    }
+                }
+            }
         }
 
         //TODO: Move this to report.directive
