@@ -131,16 +131,6 @@ angular.module('myApp.mainController', [])
         $scope.showFeedbackMenu = null; //define in directive
 
 
-        function checkFeedback(type, id){
-
-            let label = null;
-
-           
-
-            return label;
-
-        }
-
         $scope.getLabel = function(type, id){
             
             if (!$scope.active.encounterData)
