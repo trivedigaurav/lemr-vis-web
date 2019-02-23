@@ -130,45 +130,19 @@ angular.module('myApp.mainController', [])
 
         $scope.showFeedbackMenu = null; //define in directive
 
-
-        function checkFeedback(type, id){
-
-            let label = null;
-
-           
-
-            return label;
-
-        }
-
         $scope.getLabel = function(type, id){
             
             if (!$scope.active.encounterData)
                 return
 
-            let pred = null;
-
             // Check predictions
             if (type == "encounter")
-                pred = $scope.active.encounterData.class == 1
+                return $scope.active.encounterData.class == 1
             else if (type+"s" in $scope.active.encounterData)
-                pred = $scope.active.encounterData[type+"s"][id].class == 1;
+                return $scope.active.encounterData[type+"s"][id].class == 1;
             else
-                pred = false;
+                return false;
 
-
-            if (type == "text")
-                return pred;
-
-            //Check feedback list
-            for (let feedback of $scope.active.feedback.list){
-                if (feedback[type]){
-                    if (feedback[type]["id"] == id)
-                        pred = feedback[type]["class"] == 1
-                }
-            }
-
-            return pred;
         }
 
         $scope.checkLevelSingle = function(type, id){
@@ -217,11 +191,15 @@ angular.module('myApp.mainController', [])
             $scope.active.feedback.list.push(feedback);
 
 
-            // Add to positives list, if needed
-
+            // Fix active data classes
             for (let level of ["sentence", "section", "report"]){
                 if (feedback[level]){
                     
+                    $scope.active.encounterData[level+"s"][feedback[level]["id"]].class 
+                                = feedback[level]["class"];
+
+
+                    // Add to positives list, if needed
                     let modFunction = null;
                     
                     if (feedback[level]["class"] == 1)
@@ -253,6 +231,11 @@ angular.module('myApp.mainController', [])
                     }
                 }
             }
+
+
+            if ("encounter" in feedback)
+                $scope.active.encounterData.class == feedback["encounter"]["class"];
+
         }
 
         //TODO: Move this to report.directive
